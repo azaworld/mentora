@@ -1,0 +1,12 @@
+# Local development database
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: mentora
+      POSTGRES_PASSWORD: mentora
+      POSTGRES_DB: mentora
+    ports: ["5432:5432"]
+    volumes: ["pgdata:/var/lib/postgresql/data"]
+volumes:
+  pgdata:
