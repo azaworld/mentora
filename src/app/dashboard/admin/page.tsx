@@ -2,6 +2,8 @@ import { desc, eq, sql } from "drizzle-orm";
 import Link from "next/link";
 import {
   markProgramPaid,
+  markRefunded,
+  revokeCertificate,
   markSpeakerPaid,
   quoteSpeakerRequest,
   recordPayout,
@@ -64,6 +66,7 @@ export default async function AdminDashboard({ searchParams }: { searchParams: R
         <a href="#programs">AI for Leaders</a>
         <a href="#sponsorship">Sponsorship</a>
         <a href="#payouts">Payouts</a>
+        <a href="#certificates">Certificates</a>
         <a href="#ledger">Ledger</a>
         <a href="#settings">Fees &amp; split</a>
       </nav>
@@ -105,7 +108,18 @@ export default async function AdminDashboard({ searchParams }: { searchParams: R
               <p className="small muted" style={{ margin: "10px 0 0" }}>Current rate {formatBps(rates.techPartnerBps)} to the tech partner. Each entry keeps the rate it was posted with.</p>
             </div>
           </div>
-          {refunds.length ? <div className="flash error" style={{ marginTop: 16 }}>{refunds.length} paid order(s) need a refund: {refunds.map((o) => o.tranId).join(", ")}</div> : null}
+          {refunds.length ? (
+            <div className="panel" style={{ marginTop: 16, borderColor: "var(--bad)" }}>
+              <h3 style={{ color: "var(--bad)" }}>Refunds to make ({refunds.length})</h3>
+              <div className="tw"><table className="t">
+                <thead><tr><th>Reference</th><th>Buyer</th><th>Reason</th><th className="r">Amount</th><th>Record refund</th></tr></thead>
+                <tbody>{refunds.map((o) => (
+                  <tr key={o.id}><td className="code">{o.tranId}</td><td>{o.email}</td><td className="small">{o.failReason}</td><td className="r"><Taka minor={o.amountMinor} /></td>
+                    <td><form action={markRefunded} className="inline-form"><input type="hidden" name="id" value={o.id} /><input className="input" name="reference" placeholder="Refund reference" required aria-label="Refund reference" /><button className="btn btn-primary btn-sm" type="submit">Mark refunded</button></form></td></tr>
+                ))}</tbody>
+              </table></div>
+            </div>
+          ) : null}
         </section>
 
         <section id="approvals">
@@ -200,6 +214,16 @@ export default async function AdminDashboard({ searchParams }: { searchParams: R
               ))}</tbody>
             </table></div>
           ) : <Empty>Nothing owed right now.</Empty>}
+        </section>
+
+        <section id="certificates">
+          <div className="dash-head"><h2>Certificates</h2></div>
+          <form action={revokeCertificate} className="panel inline-form">
+            <label className="flabel" htmlFor="revokeCode" style={{ margin: 0 }}>Revoke a certificate</label>
+            <input className="input" id="revokeCode" name="code" placeholder="MN-2026-XXXXXXXX" required style={{ fontFamily: "ui-monospace, Menlo, monospace" }} />
+            <button className="btn btn-ghost btn-sm" type="submit">Revoke</button>
+            <span className="small muted">Revoked certificates show as revoked on the public verification page.</span>
+          </form>
         </section>
 
         <section id="ledger">

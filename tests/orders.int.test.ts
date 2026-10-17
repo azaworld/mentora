@@ -98,3 +98,14 @@ d("order fulfilment", () => {
     expect(cert!.holderName).toBe("Jane Doe");
   });
 });
+
+d("rate limits", () => {
+  it("allows up to the limit in a window, then blocks", async () => {
+    process.env.DATABASE_URL = url;
+    const { allow } = await import("@/lib/rate-limit");
+    const key = `test:${Math.random()}`;
+    const results = [];
+    for (let i = 0; i < 4; i++) results.push(await allow(key, 3, 60));
+    expect(results).toEqual([true, true, true, false]);
+  });
+});

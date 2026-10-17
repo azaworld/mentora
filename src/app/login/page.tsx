@@ -28,7 +28,7 @@ export default function LoginPage({ searchParams }: { searchParams: Record<strin
         <LoginForm next={next} />
       </div>
       <p className="small muted" style={{ marginTop: 14 }}>
-        New to Mentora? <Link className="lnk" href="/signup">Create an account</Link>
+        <Link className="lnk" href="/forgot-password">Forgot your password?</Link> · New to Mentora? <Link className="lnk" href="/signup">Create an account</Link>
       </p>
     </div>
   );

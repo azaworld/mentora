@@ -1,9 +1,9 @@
 import { and, desc, eq, isNull, or, sql } from "drizzle-orm";
 import Link from "next/link";
-import { buyBoost, buyExpertPlan, createWorkshop, downgradeToStarter, issueCertificate, sendQuote } from "@/app/actions/expert";
+import { addPackage, buyBoost, buyExpertPlan, createWorkshop, downgradeToStarter, issueCertificate, removePackage, sendQuote, updateProfile } from "@/app/actions/expert";
 import { Empty, Field, Flash, fmtDate, FORMAT_LABEL, Stat, Status, Taka } from "@/components/ui";
 import { getDb } from "@/db";
-import { certificates, experts, ledger, needs, organizations, payouts, quotes, workshops } from "@/db/schema";
+import { certificates, experts, ledger, needs, organizations, packages, payouts, quotes, workshops } from "@/db/schema";
 import { formatBps } from "@/lib/money";
 import { canSellAndCertify, commissionBps, expertPlanFee, STREAM_LABELS } from "@/lib/revenue";
 import { requireRole } from "@/lib/session";
@@ -19,7 +19,7 @@ export default async function ExpertDashboard({ searchParams }: { searchParams: 
 
   const rates = await getSettings(db);
   const myCom = commissionBps(me.plan, rates);
-  const [openNeeds, myQuotes, myWorkshops, myCerts, myLedger, [paid]] = await Promise.all([
+  const [openNeeds, myQuotes, myWorkshops, myCerts, myLedger, [paid], myPackages] = await Promise.all([
     db
       .select({ need: needs, orgName: organizations.name })
       .from(needs)
@@ -31,6 +31,7 @@ export default async function ExpertDashboard({ searchParams }: { searchParams: 
     db.select().from(certificates).where(eq(certificates.issuedById, me.id)).orderBy(desc(certificates.issuedAt)),
     db.select().from(ledger).where(eq(ledger.expertId, me.id)).orderBy(desc(ledger.createdAt)),
     db.select({ v: sql<number>`coalesce(sum(${payouts.amountMinor}),0)::int` }).from(payouts).where(eq(payouts.expertId, me.id)),
+    db.select().from(packages).where(eq(packages.expertId, me.id)).orderBy(packages.sortOrder),
   ]);
   const earned = myLedger.reduce((s, t) => s + t.payoutMinor, 0);
   const balance = earned - (paid?.v ?? 0);
@@ -42,6 +43,7 @@ export default async function ExpertDashboard({ searchParams }: { searchParams: 
     <div className="dash">
       <nav className="side" aria-label="Dashboard sections">
         <a href="#overview">Overview</a>
+        <a href="#profile">Profile</a>
         <a href="#leads">Leads &amp; proposals</a>
         <a href="#workshops">Workshops</a>
         <a href="#certificates">Certificates</a>
@@ -62,6 +64,55 @@ export default async function ExpertDashboard({ searchParams }: { searchParams: 
             <Stat value={openNeeds.filter((n) => !quoted.has(n.need.id)).length} label="open leads" />
             <Stat value={myCerts.length} label="certificates issued" />
           </div>
+        </section>
+
+        <section id="profile">
+          <div className="dash-head"><h2>Profile</h2>{me.consentToList ? <span className="tag ok">Listed publicly when approved</span> : <span className="st bad">Hidden from the public</span>}</div>
+          <form action={updateProfile} className="panel">
+            <Field label="Headline" name="headline"><input id="headline" name="headline" defaultValue={me.headline} required minLength={5} maxLength={160} /></Field>
+            <Field label="About you" name="bio"><textarea id="bio" name="bio" rows={5} defaultValue={me.bio} required minLength={20} maxLength={3000} /></Field>
+            <div className="row2">
+              <Field label="City" name="city"><input id="city" name="city" defaultValue={me.city} required /></Field>
+              <Field label="Years of experience" name="yearsExperience"><input id="yearsExperience" name="yearsExperience" type="number" min={0} max={60} defaultValue={me.yearsExperience} required /></Field>
+            </div>
+            <Field label="Topics" name="topics" hint="Separate with commas, up to 8"><input id="topics" name="topics" defaultValue={me.topics.join(", ")} required /></Field>
+            <div className="row2">
+              <fieldset className="field" style={{ border: 0, padding: 0, margin: 0 }}>
+                <legend className="flabel">Languages</legend>
+                {["Bangla", "English", "Hindi", "Arabic"].map((l) => (
+                  <label key={l} className="check"><input type="checkbox" name={`lang_${l}`} defaultChecked={me.languages.includes(l)} /> {l}</label>
+                ))}
+              </fieldset>
+              <fieldset className="field" style={{ border: 0, padding: 0, margin: 0 }}>
+                <legend className="flabel">Formats</legend>
+                <label className="check"><input type="checkbox" name="online" defaultChecked={me.formats.includes("ONLINE")} /> Online</label>
+                <label className="check"><input type="checkbox" name="onsite" defaultChecked={me.formats.includes("ONSITE")} /> Onsite</label>
+              </fieldset>
+            </div>
+            <label className="check" style={{ margin: "8px 0 14px" }}><input type="checkbox" name="consentToList" defaultChecked={me.consentToList} /> Show my profile publicly on Mentora (you can withdraw this any time)</label>
+            <button className="btn btn-primary btn-sm" type="submit">Save profile</button>
+          </form>
+          <h3 style={{ marginTop: 18 }}>Packages</h3>
+          {myPackages.length ? (
+            <div className="tw"><table className="t">
+              <thead><tr><th>Package</th><th>Unit</th><th className="r">Price</th><th></th></tr></thead>
+              <tbody>{myPackages.map((p) => (
+                <tr key={p.id}><td>{p.title}</td><td>{p.unit}</td><td className="r"><Taka minor={p.priceMinor} /></td>
+                  <td><form action={removePackage}><input type="hidden" name="id" value={p.id} /><button className="btn btn-ghost btn-sm" type="submit">Remove</button></form></td></tr>
+              ))}</tbody>
+            </table></div>
+          ) : <Empty>No packages yet. Packages show your starting prices on your profile.</Empty>}
+          <details className="form panel" style={{ marginTop: 12 }}>
+            <summary>Add a package</summary>
+            <form action={addPackage}>
+              <Field label="Title" name="pkgTitle"><input id="pkgTitle" name="title" required minLength={3} placeholder="Full-day workshop" /></Field>
+              <div className="row2">
+                <Field label="Price (৳)" name="pkgPrice"><input id="pkgPrice" name="price" type="number" min={100} required /></Field>
+                <Field label="Unit" name="pkgUnit"><input id="pkgUnit" name="unit" required placeholder="Per day" /></Field>
+              </div>
+              <button className="btn btn-primary btn-sm" type="submit">Add package</button>
+            </form>
+          </details>
         </section>
 
         <section id="leads">

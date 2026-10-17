@@ -34,7 +34,7 @@ export const bookingStatusEnum = pgEnum("booking_status", ["CONFIRMED", "COMPLET
 export const stageEnum = pgEnum("pipeline_stage", ["REQUESTED", "QUOTED", "CONFIRMED", "PAID", "DECLINED"]);
 export const aiPackageEnum = pgEnum("ai_package", ["EXECUTIVE_BRIEFING", "ONE_DAY_INTENSIVE"]);
 export const orderKindEnum = pgEnum("order_kind", ["TICKET", "BOOKING", "EXPERT_PLAN", "BOOST", "ORG_PLAN", "CERTIFICATE"]);
-export const orderStatusEnum = pgEnum("order_status", ["PENDING", "PAID", "FAILED", "NEEDS_REFUND"]);
+export const orderStatusEnum = pgEnum("order_status", ["PENDING", "PAID", "FAILED", "NEEDS_REFUND", "REFUNDED"]);
 export const streamEnum = pgEnum("stream", [
   "BOOKING_COMMISSION",
   "WORKSHOP_TICKETS",
@@ -166,6 +166,8 @@ export const orders = pgTable("orders", {
   failReason: text("fail_reason"),
   result: jsonb("result").$type<Record<string, unknown>>(),
   paidAt: timestamp("paid_at", { withTimezone: true }),
+  refundedAt: timestamp("refunded_at", { withTimezone: true }),
+  refundReference: text("refund_reference"),
   createdAt: createdAt(),
 });
 
@@ -303,6 +305,23 @@ export const settings = pgTable("settings", {
   aiOneDayPriceMinor: integer("ai_one_day_price_minor").notNull().default(25_000_000),
   techPartnerBps: integer("tech_partner_bps").notNull().default(3000),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
+/** Password reset tokens. Only a SHA-256 hash of the token is stored. */
+export const passwordResets = pgTable("password_resets", {
+  id: id(),
+  userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  tokenHash: text("token_hash").notNull().unique(),
+  expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+  usedAt: timestamp("used_at", { withTimezone: true }),
+  createdAt: createdAt(),
+});
+
+/** Fixed-window rate limits shared by every app instance. */
+export const rateLimits = pgTable("rate_limits", {
+  key: text("key").primaryKey(),
+  windowStart: timestamp("window_start", { withTimezone: true }).notNull(),
+  count: integer("count").notNull(),
 });
 
 export type Expert = typeof experts.$inferSelect;

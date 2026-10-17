@@ -5,6 +5,8 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { z } from "zod";
 import { getDb } from "@/db";
 import { experts, users } from "@/db/schema";
+import { log } from "./log";
+import { allow } from "./rate-limit";
 
 let DUMMY_HASH: string | undefined;
 
@@ -23,6 +25,11 @@ export const authOptions: NextAuthOptions = {
       async authorize(raw) {
         const parsed = credentials.safeParse(raw);
         if (!parsed.success) return null;
+        // 10 attempts per email per 15 minutes slows password guessing.
+        if (!(await allow(`login:${parsed.data.email}`, 10, 900))) {
+          log("warn", "auth.rate_limited", { email: parsed.data.email });
+          return null;
+        }
         const db = getDb();
         const [user] = await db.select().from(users).where(eq(users.email, parsed.data.email));
         // Compare against a dummy hash when the user doesn't exist, so timing doesn't reveal accounts.

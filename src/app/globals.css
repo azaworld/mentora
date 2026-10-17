@@ -229,3 +229,6 @@ details.form[open] summary { margin-bottom: 10px; }
 footer.site { border-top: 1px solid var(--line); padding-block: 26px 40px; color: var(--muted); font-size: 13px; }
 footer.site .wrap { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; }
 footer.site a { text-decoration: none; }
+
+.legal h3 { margin-top: 22px; }
+.legal p { color: var(--text); }

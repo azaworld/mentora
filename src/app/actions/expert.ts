@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { getDb } from "@/db";
-import { experts, needs, quotes, workshops } from "@/db/schema";
+import { experts, needs, packages, quotes, workshops } from "@/db/schema";
 import { back, firstError, parseForm, zFormat, zInt, zTaka, zText } from "@/lib/forms";
 import { checkoutUrl, createOrder } from "@/lib/orders";
 import { canSellAndCertify, expertPlanFee } from "@/lib/revenue";
@@ -130,4 +130,68 @@ export async function buyBoost() {
   const rates = await getSettings(db);
   const order = await createOrder(db, { kind: "BOOST", amountMinor: rates.boostFeeMinor, email: user.email, userId: user.id, meta: { expertId: me.id } });
   redirect(await checkoutUrl(order, { name: user.name, email: user.email }, "Featured listing — 30 days"));
+}
+
+const LANGS = ["Bangla", "English", "Hindi", "Arabic"] as const;
+
+const profileForm = z.object({
+  headline: zText(5, 160),
+  bio: zText(20, 3000),
+  city: zText(2, 80),
+  topics: zText(2, 300),
+  yearsExperience: zInt(0, 60),
+  online: z.string().optional(),
+  onsite: z.string().optional(),
+  consentToList: z.string().optional(),
+});
+
+export async function updateProfile(form: FormData) {
+  const { me } = await myProfile();
+  const parsed = parseForm(profileForm, form);
+  if (!parsed.success) back(`${DASH}#profile`, "error", firstError(parsed.error));
+  const v = parsed.data;
+  const languages = LANGS.filter((l) => form.get(`lang_${l}`) === "on");
+  const formats = [v.online === "on" ? "ONLINE" : null, v.onsite === "on" ? "ONSITE" : null].filter(Boolean) as ("ONLINE" | "ONSITE")[];
+  if (!languages.length) back(`${DASH}#profile`, "error", "Choose at least one language.");
+  if (!formats.length) back(`${DASH}#profile`, "error", "Choose online, onsite or both.");
+  const consent = v.consentToList === "on";
+  await getDb()
+    .update(experts)
+    .set({
+      headline: v.headline,
+      bio: v.bio,
+      city: v.city,
+      topics: v.topics.split(",").map((t) => t.trim()).filter(Boolean).slice(0, 8),
+      yearsExperience: v.yearsExperience,
+      languages,
+      formats,
+      consentToList: consent,
+      consentAt: consent ? (me.consentAt ?? new Date()) : null,
+    })
+    .where(eq(experts.id, me.id));
+  revalidatePath(DASH);
+  revalidatePath(`/experts/${me.slug}`);
+  back(`${DASH}#profile`, "ok", consent ? "Profile saved." : "Profile saved. It is now hidden from the public.");
+}
+
+const packageForm = z.object({ title: zText(3, 120), price: zTaka(100, 100_000_000), unit: zText(2, 60) });
+
+export async function addPackage(form: FormData) {
+  const { me } = await myProfile();
+  const parsed = parseForm(packageForm, form);
+  if (!parsed.success) back(`${DASH}#profile`, "error", firstError(parsed.error));
+  const db = getDb();
+  const existing = await db.select({ id: packages.id }).from(packages).where(eq(packages.expertId, me.id));
+  if (existing.length >= 6) back(`${DASH}#profile`, "error", "You can list up to 6 packages.");
+  await db.insert(packages).values({ expertId: me.id, title: parsed.data.title, priceMinor: parsed.data.price, unit: parsed.data.unit, sortOrder: existing.length });
+  revalidatePath(DASH);
+  back(`${DASH}#profile`, "ok", "Package added.");
+}
+
+export async function removePackage(form: FormData) {
+  const { me } = await myProfile();
+  const id = String(form.get("id") ?? "");
+  await getDb().delete(packages).where(and(eq(packages.id, id), eq(packages.expertId, me.id)));
+  revalidatePath(DASH);
+  back(`${DASH}#profile`, "ok", "Package removed.");
 }

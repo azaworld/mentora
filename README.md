@@ -21,7 +21,11 @@
 | Payments | SSLCommerz (bKash, Nagad, Rocket, cards) with server-side validation and IPN; a test gateway for development |
 | Revenue ledger | One entry per paid order, with gross, payout, platform, operator and tech-partner amounts; CSV export |
 | Admin | Approvals, speaker and program pipelines, sponsorship sales, expert payouts, fee and split settings |
-| Accounts | Email and password sign-in, three roles (expert, organization, admin), protected dashboards |
+| Accounts | Email and password sign-in, password reset by email, three roles (expert, organization, admin), protected dashboards |
+| Expert profiles | Experts edit their profile and packages, and can hide their listing at any time |
+| Email | Payment receipts with e-ticket or certificate codes, refund notices and password resets (Resend) |
+| Refunds & revocation | Admins record refunds for orders that couldn't be completed and revoke certificates |
+| Legal & SEO | Terms, privacy and refund pages; sitemap and robots; per-page titles |
 
 ### Revenue streams (default rates, editable in Admin → Fees & split)
 
@@ -46,6 +50,10 @@ Platform revenue is split between the operator and the technology partner (defau
 - **Payments are verified server-side.** A browser redirect alone never marks an order paid; SSLCommerz callbacks are re-validated with the gateway, and the amount must match.
 - **Fulfilment happens exactly once.** The order row is locked, only a pending order is processed, and the ledger has one entry per order. If seats run out or a proposal is gone after payment, the order is flagged for refund rather than over-booked.
 - **No test gateway in production** unless `ALLOW_MOCK_PAYMENTS=true` is set on purpose.
+- **Fails fast on bad configuration.** On start-up in production the server checks that it has an https `APP_URL`, a strong `NEXTAUTH_SECRET`, real payment credentials and a real email provider, and refuses to start otherwise.
+- **Abuse limits.** Sign-in, sign-up, password reset, checkout and enquiry forms are rate-limited per email or network, with limits stored in Postgres so they hold across servers.
+- **Security headers.** Content Security Policy, HSTS, frame blocking, no-sniff and a strict referrer policy on every response.
+- **Structured logs** for payments, refunds, emails and rate-limit events.
 
 ## Tech stack
 
@@ -72,6 +80,8 @@ With `SEED_SAMPLE_DATA=true` the seed creates two demo logins (password from `DE
 
 Sample profiles are marked "Sample" on screen. Set `SHOW_SAMPLE_DATA=false` in production to hide them.
 
+To try a production build on your own machine (`npm run build && npm start`) with local settings, set `SKIP_ENV_CHECK=true` for that run only. Never set it on a real server.
+
 ### Scripts
 
 | Command | Does |
@@ -86,7 +96,7 @@ Sample profiles are marked "Sample" on screen. Set `SHOW_SAMPLE_DATA=false` in p
 ## Deploying
 
 1. Create a PostgreSQL database (for example Neon, Supabase, AWS RDS or Railway).
-2. Set the environment variables from `.env.example`. Use `PAYMENT_PROVIDER=sslcommerz` with your store credentials, `SSLCOMMERZ_LIVE=true` once approved, a strong `NEXTAUTH_SECRET`, and `SHOW_SAMPLE_DATA=false`.
+2. Set the environment variables from `.env.example`. Use `PAYMENT_PROVIDER=sslcommerz` with your store credentials, `SSLCOMMERZ_LIVE=true` once approved, `EMAIL_PROVIDER=resend` with an API key and a verified sender domain, a strong `NEXTAUTH_SECRET` (`openssl rand -base64 32`), and `SHOW_SAMPLE_DATA=false`.
 3. Run `npm run db:migrate`, then `npm run db:seed` once with `SEED_SAMPLE_DATA=false`.
 4. Deploy with the included `Dockerfile` (any container host) or to Vercel. Point SSLCommerz's IPN URL at `https://<your-domain>/api/payments/sslcommerz/ipn`.
 5. Health check: `GET /api/health`.
@@ -108,12 +118,14 @@ docs/             static clickable prototype (GitHub Pages)
 ## Before launch
 
 - Get written consent from every real expert and speaker before turning on their listing. The seed includes a **draft** profile for Quazi M. Ahmed, built from his public website, that stays hidden until he consents.
-- Add terms of service, a privacy policy and a refund policy.
-- Add email delivery for tickets, receipts and password reset (not built yet).
-- Have a security review and load test done before taking real payments.
+- Have a lawyer in Bangladesh review the terms, privacy and refund pages (they are drafts) and add your company's legal name and contact address.
+- Complete SSLCommerz merchant onboarding and test a few real low-value payments in sandbox, then live.
+- Verify your sending domain with Resend so receipts don't land in spam.
+- Turn on daily database backups at your database host.
+- Have an independent security review and a load test before a big launch.
 
-## Built by
+## Developed by
 
-[Upward](https://www.upwardbd.com) and [AZAI Labs](https://azailabs.dev) · Arifuzzaman Antor ([azantor.xyz](https://azantor.xyz))
+**[Azantor](https://azantor.xyz)** — Arifuzzaman Antor, Founder & CEO of [AZAI Labs](https://azailabs.dev) and Co-Founder & CTO of [Upward](https://www.upwardbd.com).
 
 © 2026 Arifuzzaman Antor. All rights reserved.

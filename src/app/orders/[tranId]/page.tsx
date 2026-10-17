@@ -24,7 +24,7 @@ export default async function OrderPage({ params }: { params: { tranId: string }
     <div style={{ maxWidth: 560, margin: "0 auto" }}>
       <div className="eyebrow">{KIND_LABEL[order.kind]}</div>
       <h2>
-        {order.status === "PAID" ? "Payment confirmed" : order.status === "PENDING" ? "Waiting for payment" : order.status === "NEEDS_REFUND" ? "Payment received — we’ll refund you" : "Payment not completed"}
+        {order.status === "PAID" ? "Payment confirmed" : order.status === "PENDING" ? "Waiting for payment" : order.status === "NEEDS_REFUND" ? "Payment received — we’ll refund you" : order.status === "REFUNDED" ? "Payment refunded" : "Payment not completed"}
       </h2>
       <div className="panel">
         <dl style={{ display: "grid", gridTemplateColumns: "130px 1fr", gap: "6px 12px", margin: 0, fontSize: 14 }}>

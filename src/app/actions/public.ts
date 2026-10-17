@@ -7,6 +7,7 @@ import { getDb } from "@/db";
 import { experts, programRequests, speakerRequests, speakers, workshops } from "@/db/schema";
 import { back, firstError, parseForm, zEmail, zInt, zText } from "@/lib/forms";
 import { checkoutUrl, createOrder } from "@/lib/orders";
+import { allow, clientIp } from "@/lib/rate-limit";
 import { currentUser } from "@/lib/session";
 
 const ticketForm = z.object({
@@ -20,6 +21,7 @@ const ticketForm = z.object({
 export async function startTicketCheckout(form: FormData) {
   const workshopId = String(form.get("workshopId") ?? "");
   const page = `/workshops/${encodeURIComponent(workshopId)}`;
+  if (!(await allow(`checkout:${clientIp()}`, 20, 600))) back(page, "error", "Too many attempts. Please wait a few minutes and try again.");
   const parsed = parseForm(ticketForm, form);
   if (!parsed.success) back(page, "error", firstError(parsed.error));
   const v = parsed.data;
@@ -59,6 +61,7 @@ export async function requestSpeaker(form: FormData) {
   const speakerId = String(form.get("speakerId") ?? "");
   const slug = String(form.get("slug") ?? "");
   const page = `/speakers/${encodeURIComponent(slug)}`;
+  if (!(await allow(`speaker:${clientIp()}`, 5, 3600))) back(page, "error", "Too many enquiries from this network. Please try again later.");
   const parsed = parseForm(speakerForm, form);
   if (!parsed.success) back(page, "error", firstError(parsed.error));
   const db = getDb();
@@ -76,6 +79,7 @@ const programForm = z.object({
 });
 
 export async function requestProgram(form: FormData) {
+  if (!(await allow(`program:${clientIp()}`, 5, 3600))) back("/ai-for-leaders", "error", "Too many requests from this network. Please try again later.");
   const parsed = parseForm(programForm, form);
   if (!parsed.success) back("/ai-for-leaders", "error", firstError(parsed.error));
   await getDb().insert(programRequests).values(parsed.data);

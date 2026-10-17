@@ -5,6 +5,10 @@ import { currentUser } from "@/lib/session";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.APP_URL ?? "http://localhost:3000"),
+  authors: [{ name: "Azantor", url: "https://azantor.xyz" }],
+  creator: "Azantor",
+  openGraph: { siteName: "Mentora", type: "website" },
   title: { default: "Mentora — Find trainers, coaches, consultants and speakers", template: "%s · Mentora" },
   description: "Book vetted trainers, facilitators, coaches, consultants and keynote speakers. Paid workshops, AI for Leaders, and verifiable certificates.",
 };
@@ -68,7 +72,13 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           <div className="wrap">
             <span>© {new Date().getFullYear()} Mentora · Learning &amp; leadership marketplace</span>
             <span>
-              <Link href="/pricing">Pricing</Link> · <Link href="/signup?type=expert">Become an expert</Link> · Built by Upward &amp; AZAI Labs
+              <Link href="/pricing">Pricing</Link> · <Link href="/terms">Terms</Link> · <Link href="/privacy">Privacy</Link> · <Link href="/refunds">Refunds</Link> · <Link href="/signup?type=expert">Become an expert</Link>
+            </span>
+            <span>
+              Developed by{" "}
+              <a className="lnk" href="https://azantor.xyz" rel="noopener" target="_blank">
+                Azantor
+              </a>
             </span>
           </div>
         </footer>

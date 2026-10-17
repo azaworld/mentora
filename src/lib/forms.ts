@@ -24,8 +24,11 @@ function label(field: string): string {
 
 /** Redirects back to a page with a one-line message shown by <Flash>. */
 export function back(path: string, kind: "ok" | "error", message: string): never {
-  const sep = path.includes("?") ? "&" : "?";
-  redirect(`${path}${sep}${kind}=${encodeURIComponent(message.slice(0, 300))}`);
+  const hashAt = path.indexOf("#");
+  const base = hashAt === -1 ? path : path.slice(0, hashAt);
+  const hash = hashAt === -1 ? "" : path.slice(hashAt);
+  const sep = base.includes("?") ? "&" : "?";
+  redirect(`${base}${sep}${kind}=${encodeURIComponent(message.slice(0, 300))}${hash}`);
 }
 
 export const zText = (min = 1, max = 200) => z.string().min(min, "is required").max(max, `must be ${max} characters or fewer`);

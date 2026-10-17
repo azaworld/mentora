@@ -4,6 +4,7 @@
   "private": true,
   "description": "Mentora \u2014 expert marketplace for trainers, facilitators, coaches, consultants and speakers.",
   "license": "UNLICENSED",
+  "author": "Azantor (Arifuzzaman Antor) <https://azantor.xyz>",
   "engines": {
     "node": ">=20"
   },

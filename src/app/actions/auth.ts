@@ -8,6 +8,7 @@ import { experts, organizations, users } from "@/db/schema";
 import { hashPassword, PASSWORD_MIN } from "@/lib/auth";
 import { slugify, randomCode } from "@/lib/codes";
 import { back, firstError, parseForm, zEmail, zInt, zText } from "@/lib/forms";
+import { allow, clientIp } from "@/lib/rate-limit";
 
 const base = z.object({
   name: zText(2, 120),
@@ -32,6 +33,7 @@ const signup = z.discriminatedUnion("accountType", [orgSignup, expertSignup]);
 export async function signupAction(form: FormData) {
   const type = form.get("accountType") === "EXPERT" ? "EXPERT" : "ORG";
   const page = `/signup?type=${type.toLowerCase()}`;
+  if (!(await allow(`signup:${clientIp()}`, 10, 3600))) back(page, "error", "Too many sign-ups from this network. Please try again later.");
   const parsed = parseForm(signup, form);
   if (!parsed.success) back(page, "error", firstError(parsed.error));
   const v = parsed.data;

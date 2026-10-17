@@ -1,10 +1,11 @@
 "use server";
 
-import { and, eq, sql } from "drizzle-orm";
+import { and, eq, isNull, sql } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { getDb } from "@/db";
-import { experts, ledger, payouts, programRequests, settings, speakerRequests, speakers, sponsorships, workshops } from "@/db/schema";
+import { certificates, experts, ledger, orders, payouts, programRequests, settings, speakerRequests, speakers, sponsorships, workshops } from "@/db/schema";
+import { normalizeCertificateCode } from "@/lib/codes";
 import { back, firstError, parseForm, zTaka, zText } from "@/lib/forms";
 import { postLedger } from "@/lib/ledger";
 import { aiPackagePrice, platformRevenue, splitByPayoutShare, splitByPlatformFee } from "@/lib/revenue";
@@ -156,4 +157,31 @@ export async function saveSettings(form: FormData) {
   };
   await getDb().insert(settings).values({ id: 1, ...values }).onConflictDoUpdate({ target: settings.id, set: values });
   done("Settings saved. New rates apply to new transactions.");
+}
+
+const refundForm = z.object({ id: z.string().min(1), reference: zText(2, 120) });
+
+/** Record that a NEEDS_REFUND order was refunded at the gateway or by bank transfer. */
+export async function markRefunded(form: FormData) {
+  await requireRole("ADMIN");
+  const parsed = parseForm(refundForm, form);
+  if (!parsed.success) back(DASH, "error", firstError(parsed.error));
+  const done_ = await getDb()
+    .update(orders)
+    .set({ status: "REFUNDED", refundedAt: new Date(), refundReference: parsed.data.reference })
+    .where(and(eq(orders.id, parsed.data.id), eq(orders.status, "NEEDS_REFUND")))
+    .returning();
+  if (!done_.length) back(DASH, "error", "That order is not waiting for a refund.");
+  done("Refund recorded.");
+}
+
+export async function revokeCertificate(form: FormData) {
+  await requireRole("ADMIN");
+  const parsed = parseForm(z.object({ code: z.string().min(1) }), form);
+  if (!parsed.success) back(DASH, "error", firstError(parsed.error));
+  const code = normalizeCertificateCode(parsed.data.code);
+  if (!code) back(DASH, "error", "Enter a valid certificate code.");
+  const rows = await getDb().update(certificates).set({ revokedAt: new Date() }).where(and(eq(certificates.code, code), isNull(certificates.revokedAt))).returning();
+  if (!rows.length) back(DASH, "error", "No active certificate with that code.");
+  done(`Certificate ${code} revoked.`);
 }

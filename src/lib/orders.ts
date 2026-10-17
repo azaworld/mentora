@@ -17,7 +17,10 @@ import {
   type Order,
 } from "@/db/schema";
 import { certificateCode, ticketCode, tranId as newTranId } from "./codes";
+import { emailText, sendEmail } from "./email";
 import { postLedger } from "./ledger";
+import { log } from "./log";
+import { formatTaka } from "./money";
 import { appUrl, getPaymentProvider } from "./payments";
 import {
   commissionBps,
@@ -109,7 +112,8 @@ export async function completePayment(
   tranId: string,
   payment: { amountMinor: number; providerRef: string },
 ): Promise<Order> {
-  return db.transaction(async (tx) => {
+  let outcome: "paid" | "refund" | "none" = "none";
+  const final = await db.transaction(async (tx) => {
     const [order] = await tx.select().from(orders).where(eq(orders.tranId, tranId)).for("update");
     if (!order) throw new FulfilmentError(`Unknown order ${tranId}`);
     if (order.status !== "PENDING") return order;
@@ -120,6 +124,7 @@ export async function completePayment(
         .set({ status: "NEEDS_REFUND", failReason: "Paid amount does not match the order", providerRef: payment.providerRef })
         .where(eq(orders.id, order.id))
         .returning();
+      outcome = "refund";
       return failed!;
     }
 
@@ -133,6 +138,7 @@ export async function completePayment(
         .set({ status: "NEEDS_REFUND", failReason: err.message, providerRef: payment.providerRef, paidAt: new Date() })
         .where(eq(orders.id, order.id))
         .returning();
+      outcome = "refund";
       return needsRefund!;
     }
 
@@ -141,8 +147,51 @@ export async function completePayment(
       .set({ status: "PAID", paidAt: new Date(), providerRef: payment.providerRef, result })
       .where(eq(orders.id, order.id))
       .returning();
+    outcome = "paid";
     return paid!;
   });
+
+  if (outcome !== "none") {
+    log(outcome === "paid" ? "info" : "warn", `order.${outcome}`, { tranId: final.tranId, kind: final.kind, amountMinor: final.amountMinor, reason: final.failReason });
+    await sendEmail(receipt(final));
+  }
+  return final;
+}
+
+const KIND_NAME: Record<Order["kind"], string> = {
+  TICKET: "workshop registration",
+  BOOKING: "program booking",
+  EXPERT_PLAN: "expert plan",
+  BOOST: "featured listing",
+  ORG_PLAN: "organization plan",
+  CERTIFICATE: "verified certificate",
+};
+
+function receipt(order: Order) {
+  const r = (order.result ?? {}) as Record<string, string | undefined>;
+  const base = appUrl();
+  if (order.status === "NEEDS_REFUND") {
+    return {
+      to: order.email,
+      subject: "We received your payment but couldn't complete your order",
+      text: emailText([
+        `We received ${formatTaka(order.amountMinor)} for your ${KIND_NAME[order.kind]}, but couldn't complete it: ${order.failReason ?? "unknown reason"}.`,
+        "We'll refund you in full within 7 working days.",
+        `Reference: ${order.tranId}`,
+      ]),
+    };
+  }
+  return {
+    to: order.email,
+    subject: `Payment confirmed — your ${KIND_NAME[order.kind]}`,
+    text: emailText([
+      `Thank you. We received ${formatTaka(order.amountMinor)} for your ${KIND_NAME[order.kind]}.`,
+      r.ticketCode ? `E-ticket: ${r.ticketCode} (show this at check-in).` : "",
+      r.certificateCode ? `Certificate: ${r.certificateCode} — verify at ${base}/verify?code=${r.certificateCode}` : "",
+      `Reference: ${order.tranId}`,
+      `Details: ${base}/orders/${order.tranId}`,
+    ].filter(Boolean)),
+  };
 }
 
 export async function failPayment(db: DB, tranId: string, reason: string): Promise<void> {
