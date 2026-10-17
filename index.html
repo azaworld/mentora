@@ -1,0 +1,1024 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elevra Expert Marketplace</title>
+<meta name="description" content="Elevra: expert marketplace, speakers bureau, paid workshops, AI for Leaders and certification portal, with expert, organization and admin dashboards and a built-in revenue ledger.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#14213D; --ink-2:#2B3A5C; --text:#1F2933; --muted:#5F6B76; --line:#E3E6EA;
+  --bg:#FBFAF7; --card:#FFFFFF; --soft:#F3F1EC; --on-ink:#FBFAF7;
+  --gold:#B57A12; --gold-soft:#FBF1E1; --teal:#0F7C7E; --teal-soft:#E3F2F1;
+  --ok:#1E7B4C; --ok-soft:#E5F4EC; --bad:#A3361F; --bad-soft:#FBEAE5; --warn:#8A5A14; --warn-soft:#FBF1E1;
+  --bar:#14213D; --bar-2:#0F7C7E;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#E9EDF5; --ink-2:#C9D3E0; --text:#E4E7EB; --muted:#A3ADB8; --line:#2C3442;
+    --bg:#0F1420; --card:#161D2B; --soft:#1C2433; --on-ink:#0F1420;
+    --gold:#E6A94A; --gold-soft:#2E2414; --teal:#4CC2C4; --teal-soft:#12302F;
+    --ok:#5BC48E; --ok-soft:#14301F; --bad:#F08A70; --bad-soft:#341A14; --warn:#E6A94A; --warn-soft:#2E2414;
+    --bar:#C9D3E0; --bar-2:#4CC2C4;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#E9EDF5; --ink-2:#C9D3E0; --text:#E4E7EB; --muted:#A3ADB8; --line:#2C3442;
+  --bg:#0F1420; --card:#161D2B; --soft:#1C2433; --on-ink:#0F1420;
+  --gold:#E6A94A; --gold-soft:#2E2414; --teal:#4CC2C4; --teal-soft:#12302F;
+  --ok:#5BC48E; --ok-soft:#14301F; --bad:#F08A70; --bad-soft:#341A14; --warn:#E6A94A; --warn-soft:#2E2414;
+  --bar:#C9D3E0; --bar-2:#4CC2C4;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{margin:0;background:var(--bg);color:var(--text);font:400 15px/1.6 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;color:var(--ink);font-weight:600;line-height:1.15;margin:0 0 .45em}
+h1{font-size:clamp(30px,5vw,50px);letter-spacing:-.01em}
+h2{font-size:clamp(23px,3.2vw,32px)}
+h3{font-size:17px;font-family:Inter,sans-serif;font-weight:600}
+h4{margin:0 0 8px;font-size:14px;color:var(--ink)}
+p{margin:0 0 1em}
+a{color:inherit}
+a.lnk{color:var(--teal);text-decoration:none;font-weight:500}
+a.lnk:hover{text-decoration:underline}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+.demo-bar{background:var(--gold-soft);color:var(--ink);font-size:13px;text-align:center;padding:7px 16px;border-bottom:1px solid var(--line)}
+.demo-bar button{background:none;border:0;text-decoration:underline;cursor:pointer;font-weight:600;padding:0 2px}
+header{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;gap:14px;height:64px}
+.logo{display:flex;align-items:baseline;gap:6px;text-decoration:none;font-family:Fraunces,serif;font-size:22px;font-weight:600;color:var(--ink);white-space:nowrap}
+.logo span{font-family:Inter,sans-serif;font-size:11px;font-weight:600;letter-spacing:.14em;color:var(--gold);text-transform:uppercase}
+.links{display:flex;gap:2px;margin-left:auto}
+.links a{text-decoration:none;font-size:14px;font-weight:500;color:var(--muted);padding:8px 9px;border-radius:8px;white-space:nowrap}
+.links a:hover,.links a.active{color:var(--ink);background:var(--soft)}
+.tools{display:flex;gap:8px;align-items:center}
+.role{border:1px solid var(--line);background:var(--card);border-radius:9px;padding:7px 9px;font-size:13px;font-weight:500;max-width:150px}
+.icon-btn{background:none;border:1px solid var(--line);border-radius:9px;padding:7px 10px;cursor:pointer;font-size:13px;color:var(--muted)}
+.menu-btn{display:none}
+.view-lab{white-space:nowrap}
+@media (max-width:480px){.view-lab{display:none}}
+@media (max-width:1060px){
+  .links{display:none;position:absolute;top:64px;left:0;right:0;flex-direction:column;background:var(--bg);border-bottom:1px solid var(--line);padding:8px 16px 16px}
+  .links.open{display:flex}
+  .menu-btn{display:inline-block}
+  .tools{margin-left:auto}
+}
+@media (max-width:480px){.theme-btn{display:none}.role{max-width:118px}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid transparent;border-radius:10px;padding:10px 16px;font-weight:600;font-size:14px;cursor:pointer;text-decoration:none;transition:background .15s;white-space:nowrap}
+.btn-primary{background:var(--ink);color:var(--on-ink)}
+.btn-primary:hover{background:var(--ink-2)}
+.btn-gold{background:#C98A1E;color:#1a1205}
+.btn-gold:hover{background:#D99A2E}
+.btn-ghost{background:transparent;border-color:var(--line);color:var(--ink)}
+.btn-ghost:hover{background:var(--soft)}
+.btn-ok{background:var(--ok);color:var(--on-ink)}
+.btn-sm{padding:7px 11px;font-size:13px;border-radius:8px}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+main{padding:32px 0 64px;min-height:70vh}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.lead{font-size:17px;color:var(--muted);max-width:700px}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+.hero{padding:16px 0 8px;display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center}
+@media (max-width:900px){.hero{grid-template-columns:1fr;gap:24px}}
+.search{display:flex;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px;margin:22px 0 14px;max-width:620px}
+.search input{flex:1;border:0;background:transparent;padding:10px 12px;min-width:0;outline:none}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:7px 14px;font-size:13px;font-weight:500;cursor:pointer;color:var(--ink);text-decoration:none}
+.chip.on{background:var(--ink);color:var(--on-ink);border-color:var(--ink)}
+.dark-card{background:#14213D;color:#E9EDF5;border-radius:18px;padding:24px}
+:root[data-theme="dark"] .dark-card{background:#1E2940}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .dark-card{background:#1E2940}}
+.dark-card h3{color:#fff;font-family:Fraunces,serif;font-size:21px}
+.dark-card .row{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-top:1px solid rgba(255,255,255,.12);font-size:14px}
+.dark-card .row b{color:#F2C574;font-weight:600;white-space:nowrap}
+.sec{margin-top:48px}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.sec-head h2{margin:0}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:36px}
+@media (max-width:900px){.pillars{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.pillars{grid-template-columns:1fr}}
+.pillar{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;text-decoration:none;display:block;transition:border-color .15s}
+.pillar:hover{border-color:var(--gold)}
+.pillar .k{font-size:11px;font-weight:600;color:var(--teal);letter-spacing:.1em;text-transform:uppercase}
+.pillar h3{margin:6px 0 4px}
+.pillar p{color:var(--muted);font-size:14px;margin:0}
+.layout{display:grid;grid-template-columns:230px 1fr;gap:26px;margin-top:22px}
+@media (max-width:900px){.layout{grid-template-columns:1fr}}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px}
+.filters{align-self:start;position:sticky;top:84px}
+@media (max-width:900px){.filters{position:static}}
+.filters label,.flabel{display:block;font-size:11px;font-weight:600;color:var(--muted);margin:12px 0 6px;text-transform:uppercase;letter-spacing:.07em}
+.filters label:first-child{margin-top:0}
+.inp,.filters select,.filters input,.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);background:var(--bg);border-radius:9px;padding:9px 11px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;display:flex;flex-direction:column;min-width:0}
+.avatar{width:50px;height:50px;border-radius:50%;display:grid;place-items:center;font-weight:600;font-size:16px;color:#fff;flex-shrink:0}
+.avatar.lg{width:84px;height:84px;font-size:28px}
+.who{display:flex;gap:12px;align-items:center;margin-bottom:10px;min-width:0}
+.who h3{margin:0;font-size:16px}
+.who h3 a{text-decoration:none}
+.who h3 a:hover{text-decoration:underline}
+.who small{color:var(--muted);font-size:13px;line-height:1.4;display:block}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 8px}
+.tag{font-size:12px;background:var(--soft);color:var(--ink-2);border-radius:6px;padding:3px 8px;white-space:nowrap}
+.tag.role{background:var(--teal-soft);color:var(--teal);font-weight:600}
+.tag.gold{background:var(--gold-soft);color:var(--gold);font-weight:600}
+.tag.ok{background:var(--ok-soft);color:var(--ok);font-weight:600}
+.sample{font-size:11px;font-weight:600;color:var(--muted);border:1px dashed var(--line);border-radius:6px;padding:2px 6px;white-space:nowrap}
+.meta{display:flex;justify-content:space-between;gap:8px;font-size:13px;color:var(--muted);margin-top:auto;padding-top:12px;border-top:1px solid var(--line)}
+.meta b{color:var(--ink);font-weight:600}
+.count{color:var(--muted);font-size:14px;margin-bottom:12px}
+.empty{padding:28px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0 26px}
+@media (max-width:800px){.tiers{grid-template-columns:1fr}}
+.tier{border-radius:12px;padding:18px;border:1px solid var(--line);background:var(--card)}
+.seg{display:inline-flex;flex-wrap:wrap;background:var(--soft);border-radius:10px;padding:4px;gap:4px;margin:14px 0 18px}
+.seg button,.seg a{border:0;background:transparent;border-radius:7px;padding:7px 13px;font-weight:600;font-size:13px;cursor:pointer;color:var(--muted);text-decoration:none}
+.seg .on{background:var(--card);color:var(--ink);box-shadow:0 0 0 1px var(--line)}
+.ws{display:grid;grid-template-columns:84px 1fr auto;gap:18px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:12px}
+@media (max-width:680px){.ws{grid-template-columns:64px 1fr}.ws .act{grid-column:1/-1;justify-content:space-between!important}}
+.date{text-align:center;border-right:1px solid var(--line);padding-right:12px}
+.date b{display:block;font-family:Fraunces,serif;font-size:28px;color:var(--ink);line-height:1}
+.date span{font-size:12px;text-transform:uppercase;color:var(--muted);letter-spacing:.08em}
+.ws h3{margin:0 0 3px;font-size:16px}
+.ws h3 a{text-decoration:none}
+.ws h3 a:hover{text-decoration:underline}
+.price{font-family:Fraunces,serif;font-size:22px;color:var(--ink);text-align:right;white-space:nowrap}
+.price small{display:block;font-family:Inter;font-size:12px;color:var(--muted)}
+.low{font-size:12px;color:var(--bad);font-weight:600}
+.split{display:grid;grid-template-columns:1.15fr .85fr;gap:32px;align-items:start}
+@media (max-width:900px){.split{grid-template-columns:1fr}}
+.sticky{position:sticky;top:84px}
+@media (max-width:900px){.sticky{position:static}}
+.list{list-style:none;padding:0;margin:0}
+.list li{padding:9px 0 9px 26px;border-bottom:1px solid var(--line);position:relative}
+.list li:last-child{border-bottom:0}
+.list li::before{content:"";position:absolute;left:4px;top:17px;width:9px;height:9px;border-radius:3px;background:var(--gold)}
+.modules{counter-reset:m;display:grid;gap:10px;margin:14px 0}
+.module{display:flex;gap:14px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px}
+.module::before{counter-increment:m;content:counter(m,decimal-leading-zero);font-family:Fraunces,serif;font-size:20px;color:var(--gold);min-width:30px}
+.module b{color:var(--ink);display:block}
+.module span{font-size:14px;color:var(--muted)}
+.pkgs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0 22px}
+@media (max-width:700px){.pkgs{grid-template-columns:1fr}}
+.pkg{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--card);display:flex;flex-direction:column}
+.pkg b{color:var(--ink)}
+.pkg .amt{font-family:Fraunces,serif;font-size:24px;color:var(--ink);margin:6px 0}
+.verify{display:flex;gap:8px;margin:14px 0}
+.verify input{flex:1;min-width:0;border:1px solid var(--line);background:var(--bg);border-radius:10px;padding:12px;font-family:ui-monospace,Menlo,monospace;letter-spacing:.04em}
+.result{border-radius:12px;padding:16px;margin-top:10px}
+.result.ok{background:var(--ok-soft);border:1px solid var(--ok)}
+.result.bad{background:var(--bad-soft);border:1px solid var(--bad)}
+.result h3{margin:0 0 6px}
+.result.ok h3{color:var(--ok)} .result.bad h3{color:var(--bad)}
+.kv{display:grid;grid-template-columns:130px 1fr;gap:4px 12px;font-size:14px;margin:0}
+.kv dt{color:var(--muted)} .kv dd{margin:0;color:var(--ink);font-weight:500;min-width:0;overflow-wrap:anywhere}
+.cert{border:1px solid var(--line);border-radius:14px;padding:26px;background:var(--card);text-align:center;position:relative}
+.cert::before{content:"";position:absolute;inset:8px;border:1px solid var(--gold);border-radius:9px;pointer-events:none}
+.cert .t{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.cert .n{font-family:Fraunces,serif;font-size:26px;color:var(--ink);margin:10px 0 4px}
+.qr{width:64px;height:64px;margin:14px auto 6px;background:repeating-linear-gradient(90deg,var(--ink) 0 4px,transparent 4px 8px),repeating-linear-gradient(0deg,var(--ink) 0 4px,transparent 4px 8px);opacity:.75;border-radius:4px}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0}
+@media (max-width:860px){.plans{grid-template-columns:1fr}}
+.plan{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;display:flex;flex-direction:column}
+.plan.pop{border:2px solid var(--gold)}
+.plan.cur{border:2px solid var(--teal)}
+.plan .amt{font-family:Fraunces,serif;font-size:30px;color:var(--ink);margin:6px 0 2px}
+.plan .amt small{font-family:Inter;font-size:14px;color:var(--muted)}
+.plan .com{font-size:13px;color:var(--teal);font-weight:600;margin-bottom:10px}
+.plan .list{margin-bottom:14px;font-size:14px}
+.plan .btn{margin-top:auto}
+.band{background:var(--soft);border-radius:18px;padding:26px;margin-top:40px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
+@media (max-width:760px){.stats{grid-template-columns:1fr 1fr}}
+.stat{background:var(--card);border-radius:12px;padding:14px 16px;border:1px solid var(--line);min-width:0}
+.stat b{font-family:Fraunces,serif;font-size:24px;color:var(--ink);display:block;line-height:1.2;overflow-wrap:anywhere}
+.stat span{font-size:13px;color:var(--muted)}
+.stat.hl{background:#14213D;border-color:#14213D}
+.stat.hl b{color:#fff}.stat.hl span{color:#C9D3E0}
+:root[data-theme="dark"] .stat.hl{background:#1E2940;border-color:#2C3A57}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .stat.hl{background:#1E2940;border-color:#2C3A57}}
+.dash{display:grid;grid-template-columns:210px 1fr;gap:26px}
+@media (max-width:900px){.dash{grid-template-columns:1fr}}
+.side{display:flex;flex-direction:column;gap:2px;align-self:start;position:sticky;top:84px}
+.side .who-box{padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--card);margin-bottom:10px}
+.side a{text-decoration:none;padding:9px 12px;border-radius:9px;color:var(--muted);font-weight:500;font-size:14px;display:flex;justify-content:space-between;gap:8px}
+.side a:hover{background:var(--soft);color:var(--ink)}
+.side a.on{background:var(--ink);color:var(--on-ink)}
+.side .n{font-size:12px;background:var(--gold-soft);color:var(--gold);border-radius:999px;padding:0 7px;font-weight:600}
+.side a.on .n{background:rgba(255,255,255,.2);color:inherit}
+@media (max-width:900px){.side{position:static;flex-direction:row;overflow-x:auto;padding-bottom:6px}.side .who-box{display:none}.side a{white-space:nowrap}}
+.dash-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+.dash-head h2{margin:0}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--card)}
+table.t{width:100%;border-collapse:collapse;font-size:14px}
+table.t th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:600;padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap;background:var(--soft)}
+table.t td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+table.t tr:last-child td{border-bottom:0}
+table.t td.num,table.t th.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+table.t tfoot td{font-weight:600;color:var(--ink);background:var(--soft)}
+.st{display:inline-block;font-size:12px;font-weight:600;border-radius:999px;padding:2px 9px;white-space:nowrap}
+.st.ok{background:var(--ok-soft);color:var(--ok)}
+.st.warn{background:var(--warn-soft);color:var(--warn)}
+.st.bad{background:var(--bad-soft);color:var(--bad)}
+.st.info{background:var(--teal-soft);color:var(--teal)}
+.st.mute{background:var(--soft);color:var(--muted)}
+.bars{display:grid;gap:10px;margin-top:6px}
+.bar-row{display:grid;grid-template-columns:170px 1fr 96px;gap:12px;align-items:center;font-size:13px}
+@media (max-width:560px){.bar-row{grid-template-columns:110px 1fr 80px}}
+.bar-row .lab{color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar-row .trk{height:14px;background:var(--soft);border-radius:4px;overflow:hidden}
+.bar-row .fill{height:100%;background:var(--bar);border-radius:4px}
+.bar-row .val{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink);font-weight:600}
+.cols{display:flex;align-items:flex-end;gap:14px;height:150px;padding-top:10px;border-bottom:1px solid var(--line)}
+.col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:4px;min-width:0}
+.col .v{font-size:12px;font-weight:600;color:var(--ink);white-space:nowrap}
+.col .b{width:100%;max-width:56px;background:var(--bar-2);border-radius:4px 4px 0 0}
+.col-labs{display:flex;gap:14px;margin-top:6px}
+.col-labs span{flex:1;text-align:center;font-size:12px;color:var(--muted)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:820px){.g2{grid-template-columns:1fr}}
+.splitbar{display:flex;height:16px;border-radius:5px;overflow:hidden;margin:10px 0 8px}
+.splitbar div{height:100%}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.need{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:14px}
+.need-h{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.need-h h3{margin:0 0 4px}
+.prog{height:6px;background:var(--soft);border-radius:999px;overflow:hidden;margin:6px 0}
+.prog div{height:100%;background:var(--teal)}
+.fm-mod{margin-top:26px}
+.ph{font-size:11px;font-weight:600;border-radius:999px;padding:2px 8px;white-space:nowrap}
+.ph.mvp{background:var(--ink);color:var(--on-ink)}
+.ph.p2{background:var(--teal-soft);color:var(--teal)}
+.ph.p3{background:var(--soft);color:var(--muted)}
+.settings{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.settings .field{margin:0}
+.modal{position:fixed;inset:0;z-index:50;background:rgba(10,14,24,.55);display:none;justify-content:center;align-items:flex-start;padding:60px 16px 40px;overflow-y:auto}
+.modal.open{display:flex}
+.dialog{background:var(--card);border-radius:16px;max-width:520px;width:100%;padding:24px;border:1px solid var(--line)}
+.dialog h3{font-family:Fraunces,serif;font-size:21px;margin-bottom:4px;padding-right:28px}
+.dialog .x{float:right;background:none;border:0;font-size:24px;cursor:pointer;color:var(--muted);line-height:1;padding:0 4px}
+.field{margin:12px 0}
+.field label{display:block;font-size:13px;font-weight:500;margin-bottom:5px;color:var(--ink)}
+.hint{font-size:12px;color:var(--muted);margin-top:4px}
+.err{color:var(--bad);font-size:13px;margin-top:4px;display:none}
+.pay{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.pay label{border:1px solid var(--line);border-radius:9px;padding:10px;text-align:center;font-size:13px;cursor:pointer;margin:0}
+.pay input{position:absolute;opacity:0;pointer-events:none}
+.pay label:has(input:checked){border-color:var(--gold);color:var(--gold);font-weight:600}
+.sumbox{background:var(--soft);border-radius:10px;padding:12px 14px;font-size:14px;margin:12px 0}
+.sumbox div{display:flex;justify-content:space-between;gap:10px}
+.sumbox .tot{border-top:1px solid var(--line);margin-top:6px;padding-top:6px;font-weight:600;color:var(--ink)}
+.done{text-align:center;padding:6px 0}
+.tick{width:54px;height:54px;border-radius:50%;background:var(--ok-soft);color:var(--ok);display:grid;place-items:center;margin:0 auto 12px;font-size:26px}
+.code{font-family:ui-monospace,Menlo,monospace;background:var(--soft);border-radius:6px;padding:2px 6px;font-size:13px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#14213D;color:#fff;padding:11px 18px;border-radius:10px;font-size:14px;z-index:60;opacity:0;transition:opacity .2s;pointer-events:none;max-width:calc(100% - 32px);text-align:center}
+.toast.show{opacity:1}
+footer{border-top:1px solid var(--line);padding:26px 0 40px;color:var(--muted);font-size:13px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
+footer a{text-decoration:none}
+.note{background:var(--teal-soft);border-radius:10px;padding:12px 14px;font-size:14px;color:var(--ink);margin:14px 0}
+.note.gold{background:var(--gold-soft)}
+.review{border-top:1px solid var(--line);padding:12px 0}
+.stars{color:var(--gold);letter-spacing:1px}
+</style>
+</head>
+<body>
+<div class="demo-bar"><b>Elevra MVP</b> · built by Upward &amp; AZAI Labs · all people, prices and records are sample data except Arifuzzaman Antor · your clicks are saved only in this browser · <button type="button" data-act="reset">Reset demo</button></div>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#/home">Elevra <span>Experts</span></a>
+    <nav class="links" id="links" aria-label="Main">
+      <a href="#/experts" data-r="experts">Find experts</a>
+      <a href="#/speakers" data-r="speakers">Speakers</a>
+      <a href="#/workshops" data-r="workshops">Workshops</a>
+      <a href="#/ai" data-r="ai">AI for Leaders</a>
+      <a href="#/certify" data-r="certify">Certifications</a>
+      <a href="#/pricing" data-r="pricing">Pricing</a>
+      <a href="#/features" data-r="features">Feature map</a>
+    </nav>
+    <div class="tools">
+      <label for="roleSel" class="small muted view-lab">View as</label>
+      <select class="role" id="roleSel" aria-label="View the platform as">
+        <option value="visitor">Visitor</option>
+        <option value="expert">Expert</option>
+        <option value="org">Organization</option>
+        <option value="admin">Elevra admin</option>
+      </select>
+      <button class="icon-btn theme-btn" data-act="theme" aria-label="Toggle colour theme">Theme</button>
+      <button class="icon-btn menu-btn" id="menuBtn" data-act="menu" aria-expanded="false" aria-controls="links">Menu</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap" id="app" tabindex="-1"></main>
+
+<footer>
+  <div class="wrap">
+    <span>Elevra · learning &amp; leadership marketplace · MVP demo with sample data</span>
+    <span><a href="#/features">Feature map &amp; revenue model</a> · Designed &amp; built by Upward · AZAI Labs</span>
+  </div>
+</footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle"><div class="dialog" id="dialog"></div></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ---------- helpers ---------- */
+const KEY='elevra-mvp-v1';
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt=n=>'৳'+Math.round(n||0).toLocaleString('en-IN');
+const pct=x=>Math.round(x*1000)/10+'%';
+const today=()=>new Date().toISOString().slice(0,10);
+const ini=n=>n.replace(/\(.*?\)/g,'').trim().split(/\s+/).map(w=>w[0]).slice(0,2).join('').toUpperCase();
+const COLORS=['#14213D','#0F7C7E','#B57A12','#6B4C9A','#A3361F','#2E6B3E','#2B5D8A'];
+const color=id=>{let h=0;for(const c of id)h=(h*31+c.charCodeAt(0))%9973;return COLORS[h%COLORS.length];};
+const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const sum=(a,f)=>a.reduce((s,x)=>s+(f?f(x):x),0);
+
+/* ---------- seed data ---------- */
+const ROLE_PKG={
+ Trainer:[['Half-day workshop',35000,'per session'],['Full-day workshop',60000,'per day'],['3-day program',160000,'per program']],
+ Coach:[['Single coaching session',12000,'per session'],['6-session program',60000,'per leader'],['Team coaching (quarter)',180000,'per team']],
+ Consultant:[['Diagnostic assessment',150000,'fixed scope'],['Monthly advisory retainer',200000,'per month'],['Transformation project',600000,'from']],
+ Facilitator:[['Half-day facilitation',40000,'per session'],['Full-day facilitation',75000,'per day'],['Strategy offsite (2 days)',180000,'per event']]
+};
+function seed(){
+ const X=(id,n,r,t,f,l,y,city,plan,o={})=>Object.assign({id,n,r,t,f,l,y,city,plan,featured:false,verified:plan!=='Starter',rating:4.7,reviews:12,
+   bio:`${n} works with leadership and frontline teams across banking, telecom and development organizations. Sessions are practical, interactive and tailored to each client's context.`},o);
+ return {
+  role:'visitor', me:'e1', seq:300,
+  config:{plans:{Starter:{fee:0,com:.20},Professional:{fee:1500,com:.15},Premier:{fee:4000,com:.10}},
+    workshopFee:.15, speakerFee:.20, certFee:500, boostFee:2000, aiShare:.60, techShare:.30,
+    orgPlans:{'Pay as you go':0,'L&D Partner':150000,'Enterprise academy':400000}},
+  ai:[{n:'Executive briefing',d:'2 hours · board or leadership team',p:80000},
+      {n:'One-day intensive',d:'In-house · up to 30 leaders',p:250000},
+      {n:'Leadership cohort seat',d:'4 weeks · open enrolment',p:12000,ws:'w1'}],
+  org:{name:'Sample Bank PLC',plan:'Pay as you go'},
+  experts:[
+   X('aa','Arifuzzaman Antor','Trainer',['AI & Digital','Project management','Leadership'],['Online','Onsite'],['Bangla','English'],6,'Dhaka','Premier',
+     {real:true,featured:true,rating:5.0,reviews:23,bio:'Founder & CEO of AZAI Labs and Co-Founder & CTO of Upward. Technical Project Manager leading a 30+ person cross-functional team; QA and automation work for Mastercard, Grameenphone and US healthcare. Lead facilitator of AI for Leaders.',
+      pk:[['AI for Leaders — executive briefing',80000,'per session'],['AI for Leaders — one-day intensive',250000,'up to 30 leaders'],['AI & delivery advisory',150000,'per month']]}),
+   X('e1','Nusrat Jahan','Trainer',['Leadership','Communication','Emotional intelligence'],['Onsite','Online'],['Bangla','English'],14,'Dhaka','Professional',{featured:true,rating:4.9,reviews:38}),
+   X('e2','Tanvir Rahman','Consultant',['AI & Digital','Strategy'],['Online','Onsite'],['English'],11,'Dhaka','Premier',{featured:true,rating:4.8,reviews:21}),
+   X('e3','Sabrina Chowdhury','Coach',['Executive coaching','Wellbeing'],['Online'],['Bangla','English'],12,'Dhaka','Professional',{rating:4.9,reviews:44}),
+   X('e4','Mahmudul Hasan','Facilitator',['Team building','Strategy'],['Onsite'],['Bangla'],18,'Chattogram','Starter',{rating:4.6,reviews:17}),
+   X('e5','Farzana Akter','Trainer',['Sales','Customer service'],['Onsite','Online'],['Bangla'],9,'Dhaka','Starter',{rating:4.5,reviews:9}),
+   X('e6','Imran Kabir','Consultant',['HR & OD','Leadership'],['Onsite'],['Bangla','English'],16,'Dhaka','Professional',{rating:4.8,reviews:26}),
+   X('e7','Rumana Islam','Coach',['Career coaching','Communication'],['Online'],['English'],8,'Sylhet','Starter',{rating:4.7,reviews:11}),
+   X('e8','Shafiqul Alam','Trainer',['AI & Digital','Project management'],['Online','Onsite'],['Bangla','English'],10,'Dhaka','Professional',{rating:4.7,reviews:19}),
+   X('e9','Lamia Haque','Facilitator',['Design thinking','Team building'],['Onsite','Online'],['English'],7,'Dhaka','Professional',{rating:4.8,reviews:15}),
+   X('e10','Arif Mahmud','Coach',['Executive coaching','Leadership'],['Online','Onsite'],['Bangla','English'],13,'Dhaka','Premier',{rating:4.9,reviews:31})
+  ],
+  speakers:[
+   {id:'s1',n:'Icon speaker (sample)',tier:'Icon',role:'Laureate / national icon',topics:['Social business','Leadership'],fee:0},
+   {id:'s2',n:'Global thought leader (sample)',tier:'Icon',role:'Author & international advisor',topics:['Future of work','Innovation'],fee:0},
+   {id:'s3',n:'Rafiq Hossain',tier:'Executive',role:'Managing Director, sample bank',topics:['Banking transformation','Digital finance'],fee:150000},
+   {id:'s4',n:'Nadia Karim',tier:'Executive',role:'CEO, sample telecom company',topics:['Customer-first growth','Women in leadership'],fee:150000},
+   {id:'s5',n:'Zahid Hasan',tier:'Executive',role:'Group CEO, sample FMCG group',topics:['Scaling teams','Brand building'],fee:120000},
+   {id:'s6',n:'Sharmin Akhter',tier:'Expert',role:'Author & wellbeing expert',topics:['Mental wellbeing at work'],fee:50000},
+   {id:'s7',n:'Arifuzzaman Antor',tier:'Expert',role:'Founder & CEO, AZAI Labs',topics:['AI for leaders','Execution'],fee:0,real:true},
+   {id:'s8',n:'Mehedi Hasan',tier:'Expert',role:'Sales strategist',topics:['B2B sales','Negotiation'],fee:40000}
+  ],
+  workshops:[
+   {id:'w1',t:'AI for Leaders — Executive Cohort',ex:'aa',f:'Online',date:'2026-11-07',dur:'4 Saturdays · 3 hrs each',p:12000,seats:25,sold:16,status:'Published'},
+   {id:'w2',t:'Facilitation Mastery: Running Workshops That Work',ex:'e9',f:'Onsite',date:'2026-11-14',dur:'1 day · Gulshan, Dhaka',p:8500,seats:20,sold:14,status:'Published'},
+   {id:'w3',t:'Emotional Intelligence for Managers',ex:'e1',f:'Onsite',date:'2026-11-21',dur:'1 day · Banani, Dhaka',p:7500,seats:30,sold:12,status:'Published'},
+   {id:'w4',t:'AI-Ready Workforce: Daily Work with AI Tools',ex:'e8',f:'Online',date:'2026-11-28',dur:'2 evenings · 2.5 hrs',p:3500,seats:60,sold:31,status:'Published'},
+   {id:'w5',t:'Coaching Skills for Team Leads',ex:'e10',f:'Online',date:'2026-12-05',dur:'3 sessions · 2 hrs',p:5000,seats:25,sold:9,status:'Published'},
+   {id:'w6',t:'Sales Conversations That Convert',ex:'e5',f:'Onsite',date:'2026-12-12',dur:'1 day · Dhaka',p:6000,seats:25,sold:0,status:'Pending review'}
+  ],
+  needs:[
+   {id:'n1',org:'Sample Bank PLC',title:'Leadership program for 40 branch managers',detail:'Three-day blended program on coaching, delegation and performance conversations.',people:40,budget:400000,format:'Onsite',status:'Open',target:null,date:'2026-10-09'},
+   {id:'n2',org:'Sample Telecom Ltd',title:'Sales coaching for B2B account team',detail:'Monthly coaching for 12 account managers over one quarter.',people:12,budget:250000,format:'Either',status:'Open',target:null,date:'2026-10-12'},
+   {id:'n3',org:'Sample Bank PLC',title:'AI-Ready Workforce for 60 operations staff',detail:'Practical AI tools for daily work, with data-privacy rules for banking.',people:60,budget:300000,format:'Online',status:'Open',target:null,date:'2026-10-14'}
+  ],
+  quotes:[
+   {id:'q1',need:'n1',ex:'e6',amt:380000,msg:'3-day program with pre-assessment and manager coaching follow-up.',status:'Sent'},
+   {id:'q2',need:'n1',ex:'e10',amt:410000,msg:'Blended program: 2 onsite days + 4 virtual coaching circles.',status:'Sent'},
+   {id:'q3',need:'n3',ex:'e8',amt:280000,msg:'Two cohorts of 30, hands-on with banking-safe AI use cases.',status:'Sent'}
+  ],
+  bookings:[{id:'b1',need:null,ex:'e3',org:'Sample Bank PLC',title:'Executive coaching program (3 leaders)',amt:60000,status:'Completed',date:'2026-09-12'}],
+  sreqs:[
+   {id:'r1',sp:'s4',org:'Sample Insurance Co.',event:'Conference keynote',aud:400,date:'2026-12-10',stage:'Enquiry',quote:0},
+   {id:'r2',sp:'s3',org:'Sample FMCG Group',event:'Leadership retreat',aud:80,date:'2026-11-29',stage:'Quoted',quote:150000}
+  ],
+  preqs:[{id:'p1',org:'Sample NBFI Ltd',pkg:1,leaders:24,stage:'Requested',date:'2026-10-15'}],
+  certs:[
+   {id:'EL-DEMO-2026-0142',name:'Sample Participant',prog:'AI for Leaders — One-day Intensive',org:'Sample Bank PLC',by:'aa',date:'2026-10-03'},
+   {id:'EL-DEMO-2026-0087',name:'Second Sample',prog:'Emotional Intelligence for Managers',org:'Sample Bank PLC',by:'e1',date:'2026-08-14'}
+  ],
+  apps:[{id:'a1',n:'Tasnim Ferdous',email:'tasnim@example.com',r:'Coach',topics:'Career coaching, Women in leadership',plan:'Professional',status:'Pending'}],
+  tickets:[],
+  payouts:[{ex:'e1',amt:200000,date:'2026-08-31'},{ex:'aa',amt:150000,date:'2026-09-30'}],
+  spons:[{n:'Trainers Fest — title sponsor',p:500000,sold:false},{n:'Trainers Fest — gold sponsor',p:200000,sold:true},{n:'Monthly newsletter feature',p:25000,sold:false},{n:'AZA Execution Podcast — Elevra series sponsor',p:60000,sold:false}],
+  ledger:[
+   L('2026-10-11','Expert subscriptions','Premier plan — Arif Mahmud',4000,0,'e10'),
+   L('2026-10-08','Workshop tickets','AI for Leaders cohort — 16 seats',192000,163200,'aa'),
+   L('2026-10-03','AI for Leaders','Executive briefing — Sample Bank PLC board',80000,48000,'aa','Sample Bank PLC'),
+   L('2026-09-26','Sponsorship','Trainers Fest — gold sponsor',200000,0),
+   L('2026-09-19','Workshop tickets','Facilitation Mastery — 14 seats',119000,101150,'e9'),
+   L('2026-09-12','Booking commission','Executive coaching program — Sample Bank PLC',60000,51000,'e3','Sample Bank PLC'),
+   L('2026-09-04','Organization plans','L&D Partner annual — Sample Telecom Ltd',150000,0,null,'Sample Telecom Ltd'),
+   L('2026-08-30','Featured listings','30-day boost — Tanvir Rahman',2000,0,'e2'),
+   L('2026-08-21','AI for Leaders','One-day intensive — Sample NBFI Ltd',250000,150000,'aa','Sample NBFI Ltd'),
+   L('2026-08-14','Certificates','18 certificates — EI for Managers',9000,0,'e1'),
+   L('2026-08-05','Speaker fees','Keynote — Sample FMCG annual conference',150000,120000,null,'Sample FMCG Group'),
+   L('2026-07-28','Expert subscriptions','Professional plan — Imran Kabir',1500,0,'e6'),
+   L('2026-07-20','Workshop tickets','Emotional Intelligence for Managers — 18 seats',135000,114750,'e1'),
+   L('2026-07-12','Booking commission','Leadership program — Sample Bank PLC',300000,255000,'e1','Sample Bank PLC')
+  ]
+ };
+}
+function L(date,type,desc,gross,payout,ex=null,org=null,id){return {id:id||('TX'+date.replace(/-/g,'').slice(2)+Math.floor(gross%997)),date,type,desc,gross,payout,platform:gross-payout,ex,org};}
+
+/* ---------- state ---------- */
+let S;
+function load(){try{const v=localStorage.getItem(KEY);if(v)return JSON.parse(v);}catch(e){}return seed();}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+S=load();
+const nid=p=>p+(++S.seq);
+const ex=id=>S.experts.find(e=>e.id===id)||{n:'Unknown',id:'x',r:'',t:[],f:[],l:[]};
+const ws=id=>S.workshops.find(w=>w.id===id);
+const sp=id=>S.speakers.find(s=>s.id===id);
+const pk=e=>e.pk||ROLE_PKG[e.r]||[];
+const planOf=e=>S.config.plans[e.plan]||S.config.plans.Starter;
+function rec(type,desc,gross,payout,exId=null,org=null){const t=L(today(),type,desc,gross,payout,exId,org,nid('TX'));S.ledger.unshift(t);save();return t;}
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('show'),2600);}
+const STREAMS=['Booking commission','Workshop tickets','Speaker fees','AI for Leaders','Certificates','Expert subscriptions','Featured listings','Organization plans','Sponsorship'];
+
+/* ---------- shared components ---------- */
+const avatar=(e,cls='')=>`<div class="avatar ${cls}" style="background:${color(e.id)}" aria-hidden="true">${e.tier==='Icon'?'★':ini(e.n)}</div>`;
+const stars=r=>'★'.repeat(Math.round(r))+'☆'.repeat(5-Math.round(r));
+const status=s=>{const m={Open:'info',Sent:'info',Booked:'ok',Accepted:'ok',Confirmed:'ok',Published:'ok',Completed:'ok',Approved:'ok',Paid:'ok',Valid:'ok','Pending review':'warn',Pending:'warn',Enquiry:'warn',Requested:'warn',Quoted:'info',Declined:'mute',Rejected:'bad',Sold:'mute',Available:'info'};return `<span class="st ${m[s]||'mute'}">${esc(s)}</span>`;};
+const minPrice=e=>Math.min(...pk(e).map(p=>p[1]));
+function sortedExperts(){return [...S.experts].sort((a,b)=>(b.featured-a.featured)||(b.rating-a.rating)||(b.reviews-a.reviews));}
+function expertCard(e){
+ return `<article class="card">
+  <div class="who">${avatar(e)}<div style="min-width:0"><h3><a href="#/expert/${e.id}">${esc(e.n)}</a></h3><small>${e.r} · ${e.y} yrs · ${esc(e.city)}</small></div></div>
+  <div class="tags">${e.featured?'<span class="tag gold">Featured</span>':''}${e.verified?'<span class="tag ok">Verified</span>':''}${e.real?'':'<span class="sample">Sample</span>'}</div>
+  <div class="tags">${e.t.map(x=>`<span class="tag">${esc(x)}</span>`).join('')}</div>
+  <div class="meta"><span><span class="stars" aria-hidden="true">★</span> ${e.rating.toFixed(1)} (${e.reviews})</span><b>From ${fmt(minPrice(e))}</b></div>
+  <div class="btns"><a class="btn btn-ghost btn-sm" href="#/expert/${e.id}">View profile</a><button class="btn btn-primary btn-sm" data-act="need" data-arg="${e.id}">Request proposal</button></div>
+ </article>`;}
+function wsRow(w){const d=new Date(w.date+'T00:00');const left=w.seats-w.sold;const e=ex(w.ex);
+ return `<article class="ws">
+  <div class="date"><b>${String(d.getDate()).padStart(2,'0')}</b><span>${MON[d.getMonth()]}</span></div>
+  <div style="min-width:0"><h3><a href="#/workshop/${w.id}">${esc(w.t)}</a></h3><div class="small muted">${esc(e.n)} · ${w.f} · ${esc(w.dur)}</div>${left<=0?'<div class="low">Sold out</div>':left<10?`<div class="low">Only ${left} seats left</div>`:`<div class="small muted">${left} seats available</div>`}</div>
+  <div class="act" style="display:flex;align-items:center;gap:14px;justify-content:flex-end"><div class="price">${fmt(w.p)}<small>per seat</small></div><button class="btn btn-gold btn-sm" data-act="register" data-arg="${w.id}" ${left<=0?'disabled':''}>Register</button></div>
+ </article>`;}
+function spCard(s){
+ return `<article class="card">
+  <div class="who"><div class="avatar" style="background:${s.tier==='Icon'?'#B57A12':s.tier==='Executive'?'#14213D':'#0F7C7E'}" aria-hidden="true">${s.tier==='Icon'?'★':ini(s.n)}</div><div style="min-width:0"><h3><a href="#/speaker/${s.id}">${esc(s.n)}</a></h3><small>${esc(s.role)}</small></div></div>
+  <div class="tags"><span class="tag gold">${s.tier} tier</span>${s.real?'':'<span class="sample">Sample</span>'}</div>
+  <div class="tags">${s.topics.map(x=>`<span class="tag">${esc(x)}</span>`).join('')}</div>
+  <div class="meta"><span>Keynote · panel · fireside</span><b>${s.fee?'From '+fmt(s.fee):'On request'}</b></div>
+  <div class="btns"><a class="btn btn-ghost btn-sm" href="#/speaker/${s.id}">Profile</a><button class="btn btn-primary btn-sm" data-act="speaker" data-arg="${s.id}">Check availability</button></div>
+ </article>`;}
+const table=(heads,rows,foot)=>`<div class="tw"><table class="t"><thead><tr>${heads.map(h=>`<th class="${h.startsWith('#')?'num':''}">${esc(h.replace(/^#/,''))}</th>`).join('')}</tr></thead><tbody>${rows.length?rows.join(''):`<tr><td colspan="${heads.length}" class="muted" style="text-align:center;padding:22px">Nothing here yet</td></tr>`}</tbody>${foot||''}</table></div>`;
+const kpi=(v,l,hl)=>`<div class="stat ${hl?'hl':''}"><b>${v}</b><span>${l}</span></div>`;
+
+/* ---------- public views ---------- */
+let F={role:'',topic:'',format:'',lang:'',q:''}, SPT='', WSF='', FMF='';
+function home(){
+ const feat=sortedExperts().slice(0,4), up=S.workshops.filter(w=>w.status==='Published').slice(0,3);
+ return `<div class="hero"><div>
+   <div class="eyebrow">Learning &amp; development marketplace</div>
+   <h1>Find the right trainer, coach, consultant or speaker — for any team, in any format.</h1>
+   <p class="lead">Book vetted experts, invite keynote speakers, join paid workshops online or onsite, and verify every certificate — all through Elevra.</p>
+   <form class="search" data-form="heroSearch" role="search"><input name="q" type="search" placeholder="Try “leadership”, “AI”, “sales coaching”…" aria-label="Search experts by topic"><button class="btn btn-primary" type="submit">Search</button></form>
+   <div class="chips">${['Trainer','Facilitator','Coach','Consultant'].map(r=>`<button class="chip" data-act="roleFilter" data-arg="${r}">${r==='Coach'?'Coaches':r+'s'}</button>`).join('')}<a class="chip" href="#/speakers">Speakers</a></div>
+  </div>
+  <div class="dark-card"><h3>How it works for organizations</h3>
+   <div class="row"><span>1. Post your training need</span><b>2 min</b></div>
+   <div class="row"><span>2. Matched experts send proposals</span><b>48 hrs</b></div>
+   <div class="row"><span>3. Accept, pay securely, get one invoice</span><b>bKash · card</b></div>
+   <div class="row"><span>4. Outcome report &amp; verified certificates</span><b>QR verified</b></div>
+   <button class="btn btn-gold" style="width:100%;margin-top:12px" data-act="need">Post a training need</button></div>
+ </div>
+ <div class="pillars">
+  ${[['experts','Marketplace','Trainers & facilitators','Vetted experts for in-house programs, matched to your brief.'],
+     ['experts','Marketplace','Coaches & consultants','1:1 coaching and advisory engagements for leaders.'],
+     ['speakers','Speakers bureau','Keynote speakers','Icons, CEOs and MDs for conferences and leadership events.'],
+     ['workshops','Workshops','Paid workshops','Online and onsite sessions with instant registration.'],
+     ['ai','Flagship','AI for Leaders','Turn AI into a 90-day plan for your leadership team.'],
+     ['certify','Certification','Verify certificates','Unique IDs and QR codes employers check in seconds.']]
+   .map(p=>`<a class="pillar" href="#/${p[0]}"><div class="k">${p[1]}</div><h3>${p[2]}</h3><p>${p[3]}</p></a>`).join('')}
+ </div>
+ <div class="sec"><div class="sec-head"><h2>Featured experts</h2><a class="lnk" href="#/experts">See all ${S.experts.length} experts →</a></div><div class="grid">${feat.map(expertCard).join('')}</div></div>
+ <div class="sec"><div class="sec-head"><h2>Upcoming workshops</h2><a class="lnk" href="#/workshops">All workshops →</a></div>${up.map(wsRow).join('')}</div>
+ <div class="band"><div class="g2" style="align-items:center">
+  <div><div class="eyebrow">For experts</div><h2>Grow your practice with Elevra</h2><p class="muted" style="margin:0">Get discovered, receive proposal requests, sell workshops and issue verified certificates. Start free.</p></div>
+  <div class="btns" style="justify-content:flex-end"><a class="btn btn-primary" href="#/pricing">See expert plans</a><button class="btn btn-ghost" data-act="join" data-arg="Starter">Apply free</button></div>
+ </div></div>`;}
+
+function experts(){
+ const topics=[...new Set(S.experts.flatMap(e=>e.t))].sort();
+ const opt=(v,a,cur)=>`<option value="${esc(v)}" ${v===cur?'selected':''}>${esc(a)}</option>`;
+ return `<div class="eyebrow">Marketplace</div><h2>Trainers, facilitators, coaches &amp; consultants</h2>
+ <p class="lead">Every profile is reviewed by Elevra. Request a proposal, compare quotes, and pay through one secure invoice.</p>
+ <div class="layout"><aside class="panel filters" aria-label="Filters">
+   <label for="fRole">Role</label><select id="fRole" data-f="role">${opt('','All roles',F.role)}${['Trainer','Facilitator','Coach','Consultant'].map(r=>opt(r,r,F.role)).join('')}</select>
+   <label for="fTopic">Topic</label><select id="fTopic" data-f="topic">${opt('','All topics',F.topic)}${topics.map(t=>opt(t,t,F.topic)).join('')}</select>
+   <label for="fFormat">Format</label><select id="fFormat" data-f="format">${opt('','Online or onsite',F.format)}${opt('Online','Online',F.format)}${opt('Onsite','Onsite',F.format)}</select>
+   <label for="fLang">Language</label><select id="fLang" data-f="lang">${opt('','Any',F.lang)}${opt('Bangla','Bangla',F.lang)}${opt('English','English',F.lang)}</select>
+   <label for="fQ">Keyword</label><input id="fQ" data-f="q" value="${esc(F.q)}" placeholder="Name or skill">
+   <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:14px" data-act="clearF">Clear filters</button>
+ </aside><div><div class="count" id="expCount"></div><div class="grid" id="expGrid"></div></div></div>`;}
+function fillExperts(){
+ const q=F.q.trim().toLowerCase();
+ const list=sortedExperts().filter(e=>(!F.role||e.r===F.role)&&(!F.topic||e.t.includes(F.topic))&&(!F.format||e.f.includes(F.format))&&(!F.lang||e.l.includes(F.lang))&&(!q||(e.n+' '+e.t.join(' ')+' '+e.r).toLowerCase().includes(q)));
+ const c=$('#expCount'),g=$('#expGrid'); if(!g)return;
+ c.textContent=`${list.length} expert${list.length===1?'':'s'} · featured experts shown first`;
+ g.innerHTML=list.length?list.map(expertCard).join(''):`<div class="empty">No experts match these filters. <button class="btn btn-ghost btn-sm" data-act="clearF">Clear filters</button></div>`;
+}
+function expertDetail(id){
+ const e=S.experts.find(x=>x.id===id); if(!e)return `<div class="empty">Expert not found. <a class="lnk" href="#/experts">Back to experts</a></div>`;
+ const mine=S.workshops.filter(w=>w.ex===e.id&&w.status==='Published');
+ return `<p class="small"><a class="lnk" href="#/experts">← All experts</a></p>
+ <div class="split"><div>
+  <div class="who" style="gap:18px">${avatar(e,'lg')}<div><h1 style="font-size:clamp(28px,4vw,40px);margin:0">${esc(e.n)}</h1><div class="muted">${e.r} · ${e.y} years · ${esc(e.city)} · ${e.l.join(', ')}</div>
+   <div class="tags" style="margin-top:8px"><span class="tag role">${e.r}</span>${e.featured?'<span class="tag gold">Featured</span>':''}${e.verified?'<span class="tag ok">Verified by Elevra</span>':''}${e.real?'':'<span class="sample">Sample profile</span>'}</div></div></div>
+  <h3 style="margin-top:22px">About</h3><p>${esc(e.bio)}</p>
+  <h3>Topics</h3><div class="tags">${e.t.map(x=>`<span class="tag">${esc(x)}</span>`).join('')}<span class="tag">${e.f.join(' & ')}</span></div>
+  <h3 style="margin-top:22px">Packages</h3>
+  <div class="pkgs">${pk(e).map((p,i)=>`<div class="pkg"><b>${esc(p[0])}</b><div class="amt">${fmt(p[1])}</div><div class="small muted" style="margin-bottom:12px">${esc(p[2])} · sample price</div><button class="btn btn-ghost btn-sm" style="margin-top:auto" data-act="need" data-arg="${e.id}|${i}">Request this</button></div>`).join('')}</div>
+  ${mine.length?`<h3>Upcoming workshops</h3>${mine.map(wsRow).join('')}`:''}
+  <h3 style="margin-top:22px">Reviews <span class="muted small">(${e.reviews})</span></h3>
+  ${['Practical, well-prepared and tailored to our team. Participants used the tools the next week.','Clear communication, on time, and strong follow-up after the program.'].map((r,i)=>`<div class="review"><span class="stars">${stars(e.rating)}</span> <span class="small muted">· ${i?'HR Manager, sample telecom':'Head of L&D, sample bank'} · sample review</span><p style="margin:6px 0 0">${r}</p></div>`).join('')}
+ </div>
+ <aside class="panel sticky"><div class="eyebrow">Book through Elevra</div>
+  <dl class="kv"><dt>Rating</dt><dd><span class="stars">${stars(e.rating)}</span> ${e.rating.toFixed(1)}</dd><dt>Starting at</dt><dd>${fmt(minPrice(e))}</dd><dt>Formats</dt><dd>${e.f.join(', ')}</dd><dt>Response</dt><dd>Within 48 hours</dd></dl>
+  <button class="btn btn-primary" style="width:100%;margin-top:16px" data-act="need" data-arg="${e.id}">Request a proposal</button>
+  <div class="note small">Contracts, invoicing and payment are handled by Elevra. You pay one invoice; Elevra pays the expert.</div>
+ </aside></div>`;}
+
+function speakers(){
+ const list=S.speakers.filter(s=>!SPT||s.tier===SPT);
+ return `<div class="eyebrow">Speakers bureau</div><h2>Keynote speakers for conferences, town halls and leadership retreats</h2>
+ <p class="lead">From national icons to sitting CEOs and MDs. Elevra manages briefing, contracts, travel and on-the-day coordination.</p>
+ <div class="tiers">
+  <div class="tier dark-card" style="padding:18px"><div class="eyebrow">Icon tier</div><h3 style="font-family:Inter;font-size:17px">National &amp; global icons</h3><p style="margin:0;font-size:14px">Laureates, national leaders and internationally recognized thinkers — by invitation, with their consent.</p></div>
+  <div class="tier"><div class="eyebrow">Executive tier</div><h3>CEOs, MDs &amp; board leaders</h3><p class="muted small" style="margin:0">Leaders of banks, telcos, FMCG and tech companies sharing lessons from the top.</p></div>
+  <div class="tier"><div class="eyebrow">Expert tier</div><h3>Industry experts &amp; authors</h3><p class="muted small" style="margin:0">Specialists in AI, leadership, sales and wellbeing for keynotes and panels.</p></div>
+ </div>
+ <div class="seg">${[['','All speakers'],['Icon','Icon tier'],['Executive','CEOs & MDs'],['Expert','Experts']].map(x=>`<button class="${SPT===x[0]?'on':''}" data-act="spt" data-arg="${x[0]}">${x[1]}</button>`).join('')}</div>
+ <div class="grid">${list.map(spCard).join('')}</div>`;}
+function speakerDetail(id){
+ const s=sp(id); if(!s)return `<div class="empty">Speaker not found. <a class="lnk" href="#/speakers">Back</a></div>`;
+ return `<p class="small"><a class="lnk" href="#/speakers">← All speakers</a></p>
+ <div class="split"><div>
+  <div class="who" style="gap:18px"><div class="avatar lg" style="background:${s.tier==='Icon'?'#B57A12':s.tier==='Executive'?'#14213D':'#0F7C7E'}">${s.tier==='Icon'?'★':ini(s.n)}</div><div><h1 style="font-size:clamp(28px,4vw,40px);margin:0">${esc(s.n)}</h1><div class="muted">${esc(s.role)}</div><div class="tags" style="margin-top:8px"><span class="tag gold">${s.tier} tier</span>${s.real?'':'<span class="sample">Sample profile</span>'}</div></div></div>
+  <h3 style="margin-top:22px">Signature talks</h3><ul class="list">${s.topics.map(t=>`<li><b>${esc(t)}</b><div class="small muted">Keynote, 30–45 minutes, with audience Q&amp;A</div></li>`).join('')}</ul>
+  <h3 style="margin-top:22px">Formats</h3><div class="tags"><span class="tag">Keynote</span><span class="tag">Panel</span><span class="tag">Fireside chat</span><span class="tag">Leadership retreat</span><span class="tag">Online session</span></div>
+  ${s.tier==='Icon'?'<div class="note gold">Icon-tier speakers are listed only with their written consent. Requests are passed to their office by Elevra.</div>':''}
+ </div><aside class="panel sticky"><div class="eyebrow">Book this speaker</div>
+  <dl class="kv"><dt>Fee</dt><dd>${s.fee?'From '+fmt(s.fee):'On request'}</dd><dt>Managed by</dt><dd>Elevra speakers bureau</dd><dt>Includes</dt><dd>Briefing, contract, coordination</dd></dl>
+  <button class="btn btn-primary" style="width:100%;margin-top:16px" data-act="speaker" data-arg="${s.id}">Check availability</button></aside></div>`;}
+
+function workshops(){
+ const list=S.workshops.filter(w=>w.status==='Published'&&(!WSF||w.f===WSF));
+ return `<div class="eyebrow">Paid workshops</div><h2>Upcoming workshops — online and onsite</h2>
+ <p class="lead">Open-enrolment sessions led by vetted experts. Pay by bKash, Nagad or card, get an e-ticket, and receive a verifiable certificate on completion.</p>
+ <div class="seg">${[['','All'],['Online','Online'],['Onsite','Onsite · Dhaka']].map(x=>`<button class="${WSF===x[0]?'on':''}" data-act="wsf" data-arg="${x[0]}">${x[1]}</button>`).join('')}</div>
+ ${list.length?list.map(wsRow).join(''):'<div class="empty">No workshops in this format yet.</div>'}`;}
+function workshopDetail(id){
+ const w=ws(id); if(!w)return `<div class="empty">Workshop not found. <a class="lnk" href="#/workshops">Back</a></div>`;
+ const e=ex(w.ex),left=w.seats-w.sold,d=new Date(w.date+'T00:00');
+ return `<p class="small"><a class="lnk" href="#/workshops">← All workshops</a></p>
+ <div class="split"><div>
+  <div class="eyebrow">${w.f} workshop</div><h1 style="font-size:clamp(28px,4vw,42px)">${esc(w.t)}</h1>
+  <p class="lead">${esc(w.dur)} · starts ${d.getDate()} ${MON[d.getMonth()]} ${d.getFullYear()}</p>
+  <h3>What you'll do</h3><div class="modules">
+   <div class="module"><div><b>Core concepts</b><span>Short, practical frameworks you can use immediately.</span></div></div>
+   <div class="module"><div><b>Hands-on practice</b><span>Exercises on real situations from participants' own work.</span></div></div>
+   <div class="module"><div><b>Action plan</b><span>Leave with a personal plan and templates.</span></div></div>
+  </div>
+  <h3>Facilitator</h3><div class="who">${avatar(e)}<div><h3><a href="#/expert/${e.id}">${esc(e.n)}</a></h3><small>${e.r} · ${e.y} yrs experience</small></div></div>
+ </div><aside class="panel sticky"><div class="price" style="text-align:left;font-size:32px">${fmt(w.p)}<small>per seat · sample price</small></div>
+  <div class="prog" style="margin-top:14px"><div style="width:${Math.round(w.sold/w.seats*100)}%"></div></div>
+  <div class="small muted">${w.sold} of ${w.seats} seats taken${left<10&&left>0?` · <span class="low">${left} left</span>`:''}</div>
+  <ul class="list small" style="margin:12px 0"><li>E-ticket and reminders by email</li><li>${w.f==='Online'?'Live online room link':'Venue details and lunch'}</li><li>Elevra verified certificate</li></ul>
+  <button class="btn btn-gold" style="width:100%" data-act="register" data-arg="${w.id}" ${left<=0?'disabled':''}>${left<=0?'Sold out':'Register now'}</button>
+  <p class="small muted" style="margin:10px 0 0">Group of 5+? <button class="lnk" style="background:none;border:0;padding:0;cursor:pointer" data-act="need">Ask for an in-house version</button></p>
+ </aside></div>`;}
+
+function ai(){
+ return `<div class="split"><div>
+  <div class="eyebrow">Flagship program</div><h1 style="font-size:clamp(30px,4.4vw,46px)">AI for Leaders</h1>
+  <p class="lead">A practical program for CXOs, heads of department and managers: where AI creates real value, the risks, and how to start — with a 90-day AI plan for your team by the end.</p>
+  <div class="pkgs">${S.ai.map((p,i)=>`<div class="pkg"><b>${esc(p.n)}</b><div class="small muted">${esc(p.d)}</div><div class="amt">${fmt(p.p)}</div><div class="small muted" style="margin-bottom:12px">${p.ws?'per seat':'per program'} · sample price</div>${p.ws?`<button class="btn btn-gold btn-sm" style="margin-top:auto" data-act="register" data-arg="${p.ws}">Join next cohort</button>`:`<button class="btn btn-primary btn-sm" style="margin-top:auto" data-act="aireq" data-arg="${i}">Request in-house</button>`}</div>`).join('')}</div>
+  <h3>What leaders work through</h3><div class="modules">
+   <div class="module"><div><b>AI in plain language</b><span>What today's AI can and cannot do, without the hype.</span></div></div>
+   <div class="module"><div><b>Finding the value</b><span>Mapping your team's work to high-return AI use cases.</span></div></div>
+   <div class="module"><div><b>Risk, data &amp; policy</b><span>Data privacy, accuracy, and a simple AI usage policy.</span></div></div>
+   <div class="module"><div><b>Hands-on with AI tools</b><span>Leaders use AI on their own reports, emails and analysis.</span></div></div>
+   <div class="module"><div><b>Your 90-day AI plan</b><span>Owners, pilots, metrics — ready to present to your board.</span></div></div>
+  </div>
+  <div class="note">Every participant receives the <b>Certified AI-Ready Leader</b> certificate, verifiable on this platform.</div>
+ </div><aside class="panel sticky"><div class="eyebrow">Lead facilitator</div>
+  <div class="who">${avatar(ex('aa'))}<div><h3><a href="#/expert/aa">Arifuzzaman Antor</a></h3><small>Founder &amp; CEO, AZAI Labs · Co-Founder &amp; CTO, Upward</small></div></div>
+  <ul class="list small"><li>Technical Project Manager leading a 30+ person team</li><li>QA and automation for Mastercard, Grameenphone and US healthcare</li><li>Builds AI agents and automation in production</li></ul>
+  <button class="btn btn-primary" style="width:100%;margin-top:14px" data-act="aireq" data-arg="1">Request an in-house program</button>
+ </aside></div>`;}
+
+function certify(r){
+ return `<div class="eyebrow">Certification portal</div><h2>Elevra certifications — earned, issued and verifiable</h2>
+ <p class="lead">Every certificate carries a unique ID and QR code. Employers can confirm it here in seconds.</p>
+ <div class="split" style="margin-top:20px"><div>
+  <div class="panel"><h3>Verify a certificate</h3><p class="small muted" style="margin:0">Enter the certificate ID printed below the QR code.</p>
+   <form class="verify" data-form="verify"><input name="id" id="certId" placeholder="e.g. EL-DEMO-2026-0142" aria-label="Certificate ID" autocomplete="off" value="${esc(r||'')}"><button class="btn btn-primary" type="submit">Verify</button></form>
+   <div class="err" id="certErr">Enter a certificate ID first.</div><div id="certResult" role="status" aria-live="polite"></div>
+   <p class="small muted" style="margin:12px 0 0">Try <span class="code">EL-DEMO-2026-0142</span> · ${S.certs.length} certificates issued on this demo</p></div>
+  <h3 style="margin-top:26px">Certification programs</h3>
+  <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))">${[['Certified AI-Ready Leader','Leaders','AI for Leaders + assessment'],['Certified Professional Trainer','Trainers','5 days + practicum'],['Certified Workplace Coach','Coaches','40 hrs + mentoring'],['Certified Facilitator','Facilitators','3 days + observed session']].map(c=>`<div class="card"><span class="tag role" style="align-self:flex-start">${c[1]}</span><h3 style="margin:10px 0 4px;font-size:15px">${c[0]}</h3><div class="small muted">${c[2]}</div></div>`).join('')}</div>
+ </div><div class="cert" aria-label="Sample certificate design"><div class="t">Certificate of completion</div><div class="small muted" style="margin-top:10px">This certifies that</div><div class="n">Sample Participant</div><div class="small muted">has successfully completed</div><div style="font-weight:600;color:var(--ink);margin-top:6px">AI for Leaders — One-day Intensive</div><div class="qr" aria-hidden="true"></div><div class="code" style="background:none">EL-DEMO-2026-0142</div><div class="small muted" style="margin-top:8px">Elevra · sample design</div></div></div>`;}
+function verifyResult(id){
+ const c=S.certs.find(x=>x.id===id.trim().toUpperCase()),box=$('#certResult');
+ box.className='result '+(c?'ok':'bad');
+ box.innerHTML=c?`<h3>Valid certificate</h3><dl class="kv"><dt>Holder</dt><dd>${esc(c.name)}</dd><dt>Program</dt><dd>${esc(c.prog)}</dd><dt>Issued</dt><dd>${c.date}</dd><dt>Organization</dt><dd>${esc(c.org||'Open enrolment')}</dd><dt>Issued by</dt><dd>${esc(ex(c.by).n)} via Elevra</dd><dt>Certificate ID</dt><dd>${c.id}</dd></dl>`
+  :`<h3>No certificate found</h3><p style="margin:0;font-size:14px">Check the ID and try again, or contact Elevra to confirm.</p>`;}
+
+function pricing(){
+ const P=S.config.plans,O=S.config.orgPlans,C=S.config;
+ return `<div class="eyebrow">Pricing</div><h2>Simple, transparent pricing</h2><p class="lead">Experts start free and pay a commission only when they earn. Organizations pay as they go or save with an annual plan.</p>
+ <h3 style="margin-top:28px">For experts</h3>
+ <div class="plans">${Object.entries(P).map(([n,p])=>`<div class="plan ${n==='Professional'?'pop':''}">${n==='Professional'?'<span class="tag gold" style="align-self:flex-start">Most popular</span>':''}<h3 style="margin-top:6px">${n}</h3><div class="amt">${fmt(p.fee)} <small>/ month</small></div><div class="com">${pct(p.com)} commission on bookings</div>
+   <ul class="list">${({Starter:['Reviewed public profile','Receive proposal requests','Listed in search'],Professional:['Verified badge','Sell your own workshops','Issue Elevra certificates','Priority in search'],Premier:['Featured placement included','Speakers bureau listing','Personal brand website','Dedicated account manager']})[n].map(x=>`<li>${x}</li>`).join('')}</ul>
+   <button class="btn ${n==='Professional'?'btn-primary':'btn-ghost'}" data-act="join" data-arg="${n}">${p.fee?'Apply as '+n:'Apply free'}</button></div>`).join('')}</div>
+ <h3 style="margin-top:28px">For organizations</h3>
+ <div class="plans">${Object.entries(O).map(([n,f])=>`<div class="plan ${n==='L&D Partner'?'pop':''}"><h3>${esc(n)}</h3><div class="amt">${f?fmt(f):'৳0'} <small>${f?'/ year':'/ month'}</small></div><div class="com">${({'Pay as you go':'Standard prices','L&D Partner':'10% off all bookings & seats','Enterprise academy':'Custom pricing from this amount'})[n]}</div>
+   <ul class="list">${({'Pay as you go':['Post training needs','Compare proposals','Book seats and speakers'],'L&D Partner':['Dedicated account manager','Quarterly training calendar','Learning dashboard for HR','Bulk certificates'],'Enterprise academy':['Your own branded learning portal','Custom certification tracks','AI training-needs analysis']})[n].map(x=>`<li>${x}</li>`).join('')}</ul>
+   <button class="btn ${n==='L&D Partner'?'btn-primary':'btn-ghost'}" data-act="orgplan" data-arg="${esc(n)}">${f?'Choose '+esc(n):'Start free'}</button></div>`).join('')}</div>
+ <h3 style="margin-top:28px">Fees &amp; add-ons</h3>
+ ${table(['Item','Who pays','#Price'],[
+  ['Workshop platform fee','Included in ticket price — deducted from expert payout',pct(C.workshopFee)+' of ticket'],
+  ['Speakers bureau agency fee','Included in speaker fee',pct(C.speakerFee)+' of fee'],
+  ['Verified certificate','Issuing expert or organization',fmt(C.certFee)+' each'],
+  ['Featured listing boost','Expert',fmt(C.boostFee)+' / 30 days'],
+  ['Event & newsletter sponsorship','Sponsor brand','From '+fmt(25000)]
+ ].map(r=>`<tr><td><b>${r[0]}</b></td><td class="muted">${r[1]}</td><td class="num">${r[2]}</td></tr>`))}
+ <p class="small muted" style="margin-top:10px">All prices are sample figures for discussion with Elevra.</p>`;}
+
+const FEATURES=[
+ ['Expert marketplace',[
+  ['Expert profiles with packages, ratings and reviews','MVP','Drives bookings'],['Search and filters by role, topic, format, language','MVP',''],
+  ['Request a proposal / post a training need','MVP','Lead generation'],['Quotes, compare and accept-and-pay','MVP','10–20% booking commission'],
+  ['Expert subscription plans (Starter / Professional / Premier)','MVP','Monthly subscription'],['Featured listing boost','MVP','Fee per 30 days'],
+  ['Verified badge after Elevra review','MVP','Included in paid plans'],['In-platform messaging','Phase 2',''],['AI matching of training needs to experts','Phase 2','Premium for organizations'],['Calendar availability sync','Phase 3','']]],
+ ['Speakers bureau',[
+  ['Tiered speaker profiles (Icon, Executive, Expert)','MVP',''],['Availability enquiry form','MVP','Lead generation'],
+  ['Admin pipeline: enquiry → quoted → confirmed','MVP','20% agency fee'],['Contracts and e-signature','Phase 2',''],['Speaker video reels','Phase 2','']]],
+ ['Paid workshops',[
+  ['Online and onsite listings with seat limits','MVP',''],['Registration and checkout (bKash, Nagad, card)','MVP','15% platform fee'],
+  ['E-tickets and email reminders','MVP',''],['Experts create workshops, Elevra approves','MVP','More inventory'],
+  ['Early-bird pricing, coupons and waitlists','Phase 2','Higher conversion'],['Recorded workshops on demand','Phase 3','Digital product sales']]],
+ ['AI for Leaders',[
+  ['Program page with three packages','MVP','Program fees'],['In-house request → confirm → invoice','MVP','Program fees'],
+  ['Open cohort enrolment','MVP','Seat sales'],['AI readiness self-assessment','Phase 2','Lead generation'],['90-day AI plan template builder','Phase 3','Premium add-on']]],
+ ['Certification portal',[
+  ['Issue certificates with unique ID and QR','MVP','Fee per certificate'],['Public verification page','MVP','Trust'],
+  ['PDF download and LinkedIn sharing','Phase 2','Free marketing'],['Certification tracks with exams','Phase 2','Exam fees'],['Bulk verification API for employers','Phase 3','Subscription']]],
+ ['Organizations',[
+  ['Organization account: needs, proposals, bookings','MVP',''],['Spend, invoices and certificates view','MVP',''],
+  ['Annual plans (L&D Partner, Enterprise)','MVP','Annual contracts'],['Learning dashboard for HR','Phase 2','Plan upsell'],['Branded academy portal','Phase 3','Enterprise contracts']]],
+ ['Elevra admin',[
+  ['Approvals: expert applications and workshops','MVP','Quality control'],['Revenue ledger with automatic fee splits','MVP','All streams'],
+  ['Partner revenue split (Elevra vs tech partner)','MVP','Partnership model'],['Payouts to experts','MVP','Manual → automated in Phase 2'],
+  ['Fee and commission settings','MVP',''],['Sponsorship inventory','MVP','Sponsorship sales'],['Advanced analytics','Phase 2','']]],
+ ['Platform',[
+  ['Mobile-first responsive design, light and dark','MVP',''],['SEO-ready pages','MVP','Organic leads'],['Email and SMS notifications','MVP',''],
+  ['Bangla interface','Phase 2','Wider reach'],['iOS and Android app','Phase 3','']]]
+];
+function features(){
+ const all=FEATURES.flatMap(m=>m[1]),n=k=>all.filter(f=>f[1]===k).length;
+ const C=S.config;
+ return `<div class="eyebrow">Feature map &amp; revenue model</div><h2>Everything the platform does — and how each part earns</h2>
+ <p class="lead">${all.length} features across ${FEATURES.length} modules. Everything marked MVP is clickable in this prototype.</p>
+ <div class="stats">${kpi(n('MVP'),'MVP features — built in this prototype',true)}${kpi(n('Phase 2'),'Phase 2 features')}${kpi(n('Phase 3'),'Phase 3 features')}${kpi(STREAMS.length,'revenue streams')}</div>
+ <h3 style="margin-top:32px">Revenue model</h3>
+ ${table(['Stream','Who pays','Rate (sample)','Where to try it'],[
+  ['Booking commission','Deducted from expert payout',`${pct(C.plans.Premier.com)}–${pct(C.plans.Starter.com)} by plan`,'<a class="lnk" href="#/experts">Request proposal</a> → org dashboard → accept'],
+  ['Workshop tickets','Participant (fee inside ticket)',pct(C.workshopFee)+' of ticket','<a class="lnk" href="#/workshops">Register</a>'],
+  ['Speaker fees','Organization (agency fee inside fee)',pct(C.speakerFee)+' of fee','<a class="lnk" href="#/speakers">Check availability</a> → admin'],
+  ['AI for Leaders','Organization',`Elevra keeps ${pct(1-C.aiShare)}, facilitator ${pct(C.aiShare)}`,'<a class="lnk" href="#/ai">Request in-house</a> → admin'],
+  ['Certificates','Issuer',fmt(C.certFee)+' each','Expert dashboard → Certificates'],
+  ['Expert subscriptions','Expert',`${fmt(C.plans.Professional.fee)}–${fmt(C.plans.Premier.fee)} / month`,'Expert dashboard → Plan'],
+  ['Featured listings','Expert',fmt(C.boostFee)+' / 30 days','Expert dashboard → Plan'],
+  ['Organization plans','Organization',`${fmt(C.orgPlans['L&D Partner'])}+ / year`,'<a class="lnk" href="#/pricing">Pricing</a>'],
+  ['Sponsorship','Sponsor brand','From '+fmt(25000),'Admin → Sponsorship']
+ ].map(r=>`<tr><td><b>${r[0]}</b></td><td class="muted">${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`))}
+ <div class="note gold">Platform revenue is split between Elevra and the technology partner (Upward / AZAI Labs) at the rate set in Admin → Settings — currently <b>${pct(1-C.techShare)} Elevra / ${pct(C.techShare)} tech partner</b> (sample, to be agreed in writing).</div>
+ <div class="seg" style="margin-top:28px">${[['','All'],['MVP','MVP'],['Phase 2','Phase 2'],['Phase 3','Phase 3']].map(x=>`<button class="${FMF===x[0]?'on':''}" data-act="fmf" data-arg="${x[0]}">${x[1]}</button>`).join('')}</div>
+ ${FEATURES.map(([mod,list])=>{const l=list.filter(f=>!FMF||f[1]===FMF);if(!l.length)return '';return `<div class="fm-mod"><h3>${mod}</h3>${table(['Feature','Phase','Monetization'],l.map(f=>`<tr><td>${esc(f[0])}</td><td><span class="ph ${f[1]==='MVP'?'mvp':f[1]==='Phase 2'?'p2':'p3'}">${f[1]}</span></td><td class="muted">${esc(f[2]||'—')}</td></tr>`))}</div>`;}).join('')}
+ <h3 style="margin-top:32px">Recommended build stack</h3>
+ ${table(['Layer','Choice'],[['Web app','Next.js + TypeScript, mobile-first'],['Database','PostgreSQL with role-based access'],['Payments','bKash, Nagad and card via a Bangladesh payment gateway'],['Hosting','AWS with automated backups and monitoring'],['Quality','Automated end-to-end tests, security and load testing before each release']].map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td></tr>`))}`;}
+
+/* ---------- dashboards ---------- */
+function dashShell(tabs,cur,body,box){
+ return `<div class="dash"><nav class="side" aria-label="Dashboard">${box?`<div class="who-box">${box}</div>`:''}${tabs.map(t=>`<a href="#/dash/${t[0]}" class="${t[0]===cur?'on':''}">${t[1]}${t[2]?`<span class="n">${t[2]}</span>`:''}</a>`).join('')}</nav><div style="min-width:0">${body}</div></div>`;}
+function dash(tab){
+ if(S.role==='expert')return expertDash(tab||'overview');
+ if(S.role==='org')return orgDash(tab||'overview');
+ if(S.role==='admin')return adminDash(tab||'overview');
+ return `<div class="eyebrow">Dashboards</div><h2>Choose who you are</h2><p class="lead">Each role has its own dashboard. Switch any time from “View as” in the header.</p>
+ <div class="plans">${[['expert','Expert','Leads, quotes, workshops, certificates, earnings and plan.'],['org','Organization','Post needs, compare proposals, pay, and track spend and certificates.'],['admin','Elevra admin','Approvals, pipelines, payouts, full revenue ledger and fee settings.']].map(r=>`<div class="plan"><h3>${r[1]}</h3><p class="muted">${r[2]}</p><button class="btn btn-primary" data-act="setrole" data-arg="${r[0]}">Open ${r[0]==='admin'?'admin':r[1].toLowerCase()} dashboard</button></div>`).join('')}</div>`;}
+
+function expertDash(tab){
+ const e=ex(S.me),p=planOf(e),E=S.ledger.filter(t=>t.ex===e.id);
+ const paid=sum(S.payouts.filter(x=>x.ex===e.id),x=>x.amt),earned=sum(E,t=>t.payout),bal=earned-paid;
+ const leads=S.needs.filter(n=>n.status==='Open'&&(!n.target||n.target===e.id));
+ const myQ=S.quotes.filter(q=>q.ex===e.id), myW=S.workshops.filter(w=>w.ex===e.id), myC=S.certs.filter(c=>c.by===e.id);
+ const tabs=[['overview','Overview'],['leads','Leads & quotes',leads.filter(n=>!myQ.some(q=>q.need===n.id)).length||''],['workshops','My workshops'],['certificates','Certificates'],['earnings','Earnings'],['plan','Plan & boost']];
+ const box=`<div class="who" style="margin:0">${avatar(e)}<div style="min-width:0"><b style="color:var(--ink);font-size:14px">${esc(e.n)}</b><small>${e.plan} plan</small></div></div>
+  <label class="flabel" for="meSel">Demo expert</label><select class="inp" id="meSel" style="padding:6px 8px;font-size:13px">${S.experts.map(x=>`<option value="${x.id}" ${x.id===e.id?'selected':''}>${esc(x.n)}</option>`).join('')}</select>`;
+ let b='';
+ if(tab==='overview'){
+  b=`<div class="dash-head"><div><div class="eyebrow">Expert dashboard</div><h2>Welcome, ${esc(e.n.split(' ')[0])}</h2></div><a class="btn btn-ghost btn-sm" href="#/expert/${e.id}">View public profile</a></div>
+  <div class="stats">${kpi(fmt(earned),'total earnings (after fees)',true)}${kpi(fmt(bal),'balance due from Elevra')}${kpi(leads.length,'open leads for you')}${kpi(myC.length,'certificates issued')}</div>
+  <div class="g2" style="margin-top:16px"><div class="panel"><h4>Your plan</h4><p style="margin:0"><b style="color:var(--ink)">${e.plan}</b> · ${pct(p.com)} commission on bookings${e.featured?' · <span class="tag gold">Featured</span>':''}</p><div class="btns"><a class="btn btn-primary btn-sm" href="#/dash/plan">${e.plan==='Premier'?'Manage plan':'Upgrade to cut commission'}</a></div></div>
+  <div class="panel"><h4>Next steps</h4><ul class="list small"><li><a class="lnk" href="#/dash/leads">Reply to open leads</a></li><li><a class="lnk" href="#/dash/workshops">Publish a workshop</a></li><li><a class="lnk" href="#/dash/certificates">Issue certificates to participants</a></li></ul></div></div>
+  <h3 style="margin-top:24px">Recent activity</h3>${ledgerTable(E.slice(0,5),'expert')}`;
+ }
+ if(tab==='leads'){
+  b=`<div class="dash-head"><div><div class="eyebrow">Leads</div><h2>Training needs you can quote on</h2></div></div>
+  ${leads.length?leads.map(n=>{const q=myQ.find(x=>x.need===n.id);return `<div class="need"><div class="need-h"><div><h3>${esc(n.title)}</h3><div class="small muted">${esc(n.org)} · ${n.people} people · ${n.format} · budget ${fmt(n.budget)}${n.target?' · <span class="tag gold">Requested you directly</span>':''}</div></div><div>${q?status(q.status):`<button class="btn btn-primary btn-sm" data-act="quote" data-arg="${n.id}">Send quote</button>`}</div></div><p class="small" style="margin:8px 0 0">${esc(n.detail)}</p>${q?`<p class="small muted" style="margin:6px 0 0">Your quote: <b style="color:var(--ink)">${fmt(q.amt)}</b> · you receive ${fmt(q.amt*(1-p.com))} after ${pct(p.com)} commission</p>`:''}</div>`;}).join(''):'<div class="empty">No open leads right now.</div>'}
+  <h3 style="margin-top:20px">All your quotes</h3>${table(['Need','Organization','#Quote','Status'],myQ.map(q=>{const n=S.needs.find(x=>x.id===q.need)||{};return `<tr><td>${esc(n.title)}</td><td>${esc(n.org)}</td><td class="num">${fmt(q.amt)}</td><td>${status(q.status)}</td></tr>`;}))}`;
+ }
+ if(tab==='workshops'){
+  b=`<div class="dash-head"><div><div class="eyebrow">Workshops</div><h2>Your workshops</h2></div><button class="btn btn-primary btn-sm" data-act="newws" ${e.plan==='Starter'?'disabled title="Professional or Premier plan needed"':''}>Create workshop</button></div>
+  ${e.plan==='Starter'?'<div class="note gold">Selling your own workshops is part of the Professional and Premier plans. <a class="lnk" href="#/dash/plan">Upgrade</a></div>':''}
+  ${table(['Workshop','Date','Status','#Seats sold','#Your revenue'],myW.map(w=>`<tr><td>${w.status==='Published'?`<a class="lnk" href="#/workshop/${w.id}">${esc(w.t)}</a>`:esc(w.t)}</td><td>${w.date}</td><td>${status(w.status)}</td><td class="num">${w.sold} / ${w.seats}</td><td class="num">${fmt(sum(E.filter(t=>t.type==='Workshop tickets'&&t.desc.startsWith(w.t.split(' —')[0])),t=>t.payout))}</td></tr>`))}`;
+ }
+ if(tab==='certificates'){
+  b=`<div class="dash-head"><div><div class="eyebrow">Certificates</div><h2>Certificates you've issued</h2></div><button class="btn btn-primary btn-sm" data-act="cert" ${e.plan==='Starter'?'disabled':''}>Issue certificate</button></div>
+  <div class="note">Each verified certificate costs ${fmt(S.config.certFee)} and can be checked publicly on the certification portal.${e.plan==='Starter'?' Available on Professional and Premier plans.':''}</div>
+  ${table(['Certificate ID','Holder','Program','Issued'],myC.map(c=>`<tr><td><a class="lnk code" href="#/certify/${c.id}">${c.id}</a></td><td>${esc(c.name)}</td><td>${esc(c.prog)}</td><td>${c.date}</td></tr>`))}`;
+ }
+ if(tab==='earnings'){
+  b=`<div class="dash-head"><div><div class="eyebrow">Earnings</div><h2>What you've earned</h2></div></div>
+  <div class="stats">${kpi(fmt(sum(E,t=>t.gross)),'gross value of your work')}${kpi(fmt(sum(E,t=>t.platform)),'Elevra fees and plan costs')}${kpi(fmt(earned),'your earnings',true)}${kpi(fmt(bal),'balance due')}</div>
+  <h3 style="margin-top:22px">Transactions</h3>${ledgerTable(E,'expert')}
+  <h3 style="margin-top:22px">Payouts received</h3>${table(['Date','#Amount'],S.payouts.filter(x=>x.ex===e.id).map(x=>`<tr><td>${x.date}</td><td class="num">${fmt(x.amt)}</td></tr>`))}`;
+ }
+ if(tab==='plan'){
+  const P=S.config.plans;
+  b=`<div class="dash-head"><div><div class="eyebrow">Plan</div><h2>Your plan &amp; visibility</h2></div></div>
+  <div class="plans">${Object.entries(P).map(([n,x])=>`<div class="plan ${n===e.plan?'cur':''}">${n===e.plan?'<span class="tag ok" style="align-self:flex-start">Current plan</span>':''}<h3 style="margin-top:6px">${n}</h3><div class="amt">${fmt(x.fee)} <small>/ month</small></div><div class="com">${pct(x.com)} commission</div>${n===e.plan?'<button class="btn btn-ghost" disabled>Current</button>':`<button class="btn btn-primary" data-act="upgrade" data-arg="${n}">Switch to ${n}</button>`}</div>`).join('')}</div>
+  <div class="panel"><div class="need-h"><div><h3>Featured listing boost</h3><p class="small muted" style="margin:0">Appear first in search and on the home page for 30 days.</p></div><div style="text-align:right"><div class="price">${fmt(S.config.boostFee)}<small>per 30 days</small></div>${e.featured?'<span class="tag gold">Active</span>':`<button class="btn btn-gold btn-sm" style="margin-top:6px" data-act="boost">Boost my profile</button>`}</div></div></div>`;
+ }
+ return dashShell(tabs,tab,b,box);
+}
+
+function orgDash(tab){
+ const o=S.org,N=S.needs.filter(n=>n.org===o.name),B=S.bookings.filter(x=>x.org===o.name),C=S.certs.filter(c=>c.org===o.name),T=S.ledger.filter(t=>t.org===o.name);
+ const props=sum(N.filter(n=>n.status==='Open'),n=>S.quotes.filter(q=>q.need===n.id&&q.status==='Sent').length);
+ const tabs=[['overview','Overview'],['needs','Needs & proposals',props||''],['bookings','Bookings'],['certificates','Certificates'],['plan','Plan']];
+ const box=`<b style="color:var(--ink);font-size:14px">${esc(o.name)}</b><div class="small muted">${esc(o.plan)}</div>`;
+ const disc=o.plan==='Pay as you go'?0:.10;
+ let b='';
+ if(tab==='overview'){
+  b=`<div class="dash-head"><div><div class="eyebrow">Organization dashboard</div><h2>${esc(o.name)}</h2></div><button class="btn btn-primary btn-sm" data-act="need">Post a training need</button></div>
+  <div class="stats">${kpi(fmt(sum(T,t=>t.gross)),'total spend through Elevra',true)}${kpi(B.length,'bookings')}${kpi(props,'proposals waiting')}${kpi(C.length,'employees certified')}</div>
+  ${props?`<div class="note gold" style="margin-top:16px">You have ${props} proposal${props>1?'s':''} to review. <a class="lnk" href="#/dash/needs">Compare proposals →</a></div>`:''}
+  <h3 style="margin-top:22px">Invoices</h3>${table(['Date','Item','#Amount','Status'],T.map(t=>`<tr><td>${t.date}</td><td>${esc(t.desc)}</td><td class="num">${fmt(t.gross)}</td><td>${status('Paid')}</td></tr>`))}`;
+ }
+ if(tab==='needs'){
+  b=`<div class="dash-head"><div><div class="eyebrow">Training needs</div><h2>Your needs &amp; proposals</h2></div><button class="btn btn-primary btn-sm" data-act="need">Post a training need</button></div>
+  ${N.length?N.map(n=>{const Q=S.quotes.filter(q=>q.need===n.id);return `<div class="need"><div class="need-h"><div><h3>${esc(n.title)}</h3><div class="small muted">Posted ${n.date} · ${n.people} people · ${n.format} · budget ${fmt(n.budget)}${n.target?` · sent to ${esc(ex(n.target).n)}`:''}</div></div>${status(n.status)}</div>
+   ${Q.length?`<div style="margin-top:12px">${table(['Expert','Proposal','#Price','Action'],Q.map(q=>{const e=ex(q.ex);return `<tr><td><a class="lnk" href="#/expert/${e.id}">${esc(e.n)}</a><div class="small muted">★ ${e.rating.toFixed(1)} · ${e.r}</div></td><td class="small">${esc(q.msg)}</td><td class="num">${fmt(q.amt)}${disc?`<div class="small muted">${fmt(q.amt*(1-disc))} with plan</div>`:''}</td><td>${q.status==='Sent'&&n.status==='Open'?`<button class="btn btn-ok btn-sm" data-act="accept" data-arg="${q.id}">Accept &amp; pay</button>`:status(q.status)}</td></tr>`;}))}</div>`:'<p class="small muted" style="margin:10px 0 0">Waiting for proposals — experts usually reply within 48 hours.</p>'}</div>`;}).join(''):'<div class="empty">No training needs yet.</div>'}`;
+ }
+ if(tab==='bookings') b=`<div class="dash-head"><div><div class="eyebrow">Bookings</div><h2>Confirmed programs</h2></div></div>${table(['Program','Expert','Date','#Amount','Status'],B.map(x=>`<tr><td>${esc(x.title)}</td><td><a class="lnk" href="#/expert/${x.ex}">${esc(ex(x.ex).n)}</a></td><td>${x.date}</td><td class="num">${fmt(x.amt)}</td><td>${status(x.status)}</td></tr>`))}`;
+ if(tab==='certificates') b=`<div class="dash-head"><div><div class="eyebrow">Certificates</div><h2>Employees certified</h2></div></div>${table(['Certificate ID','Employee','Program','Issued'],C.map(c=>`<tr><td><a class="lnk code" href="#/certify/${c.id}">${c.id}</a></td><td>${esc(c.name)}</td><td>${esc(c.prog)}</td><td>${c.date}</td></tr>`))}`;
+ if(tab==='plan') b=`<div class="dash-head"><div><div class="eyebrow">Plan</div><h2>Your organization plan</h2></div></div>
+  <div class="plans">${Object.entries(S.config.orgPlans).map(([n,f])=>`<div class="plan ${n===o.plan?'cur':''}">${n===o.plan?'<span class="tag ok" style="align-self:flex-start">Current plan</span>':''}<h3 style="margin-top:6px">${esc(n)}</h3><div class="amt">${f?fmt(f):'৳0'} <small>${f?'/ year':''}</small></div>${n===o.plan?'<button class="btn btn-ghost" disabled>Current</button>':`<button class="btn btn-primary" data-act="orgplan" data-arg="${esc(n)}">${f?'Upgrade':'Switch'}</button>`}</div>`).join('')}</div>`;
+ return dashShell(tabs,tab,b,box);
+}
+
+function ledgerTable(rows,view){
+ const heads=view==='expert'?['Date','Type','Description','#Gross','#Fee','#You receive']:['Date','Stream','Description','#Gross','#Expert payout','#Platform revenue'];
+ const foot=rows.length?`<tfoot><tr><td colspan="3">Total</td><td class="num">${fmt(sum(rows,t=>t.gross))}</td><td class="num">${fmt(sum(rows,t=>view==='expert'?t.platform:t.payout))}</td><td class="num">${fmt(sum(rows,t=>view==='expert'?t.payout:t.platform))}</td></tr></tfoot>`:'';
+ return table(heads,rows.map(t=>`<tr><td style="white-space:nowrap">${t.date}</td><td>${esc(t.type)}</td><td>${esc(t.desc)}</td><td class="num">${fmt(t.gross)}</td><td class="num">${fmt(view==='expert'?t.platform:t.payout)}</td><td class="num">${fmt(view==='expert'?t.payout:t.platform)}</td></tr>`),foot);
+}
+function adminDash(tab){
+ const C=S.config,Lg=S.ledger,plat=sum(Lg,t=>t.platform);
+ const pendApps=S.apps.filter(a=>a.status==='Pending'),pendWs=S.workshops.filter(w=>w.status==='Pending review');
+ const openSp=S.sreqs.filter(r=>r.stage!=='Confirmed'),openPr=S.preqs.filter(r=>r.stage!=='Confirmed');
+ const tabs=[['overview','Revenue overview'],['approvals','Approvals',(pendApps.length+pendWs.length)||''],['speakers','Speaker pipeline',openSp.length||''],['programs','AI for Leaders',openPr.length||''],['sponsorship','Sponsorship'],['payouts','Payouts'],['ledger','Ledger'],['settings','Fees & split']];
+ let b='';
+ if(tab==='overview'){
+  const by=STREAMS.map(s=>[s,sum(Lg.filter(t=>t.type===s),t=>t.platform)]).filter(x=>x[1]>0).sort((a,b)=>b[1]-a[1]);
+  const mx=Math.max(1,...by.map(x=>x[1]));
+  const months={};Lg.forEach(t=>{const k=t.date.slice(0,7);months[k]=(months[k]||0)+t.platform;});
+  const mk=Object.keys(months).sort().slice(-6),mm=Math.max(1,...mk.map(k=>months[k]));
+  const tech=plat*C.techShare,qz=plat-tech;
+  b=`<div class="dash-head"><div><div class="eyebrow">Elevra admin</div><h2>Revenue overview</h2></div><span class="small muted">All streams · sample data + your demo actions</span></div>
+  <div class="stats">${kpi(fmt(sum(Lg,t=>t.gross)),'gross transaction value')}${kpi(fmt(plat),'platform revenue',true)}${kpi(fmt(sum(Lg,t=>t.payout)),'paid out to experts & speakers')}${kpi(Lg.length,'transactions')}</div>
+  <div class="g2" style="margin-top:16px">
+   <div class="panel"><h4>Platform revenue by stream</h4><div class="bars">${by.map(([s,v])=>`<div class="bar-row"><span class="lab" title="${s}">${s}</span><span class="trk"><span class="fill" style="display:block;width:${Math.max(2,v/mx*100)}%"></span></span><span class="val">${fmt(v)}</span></div>`).join('')}</div></div>
+   <div class="panel"><h4>Platform revenue by month</h4><div class="cols">${mk.map(k=>`<div class="col"><span class="v">${Math.round(months[k]/1000)}k</span><span class="b" style="height:${Math.max(3,months[k]/mm*100)}%"></span></div>`).join('')}</div><div class="col-labs">${mk.map(k=>`<span>${MON[+k.slice(5)-1]}</span>`).join('')}</div></div>
+  </div>
+  <div class="panel" style="margin-top:16px"><h4>Partner revenue split (sample terms)</h4>
+   <div class="splitbar" role="img" aria-label="Elevra ${pct(1-C.techShare)}, tech partner ${pct(C.techShare)}"><div style="width:${(1-C.techShare)*100}%;background:var(--bar)"></div><div style="width:${C.techShare*100}%;background:#C98A1E"></div></div>
+   <div class="legend"><span><i style="background:var(--bar)"></i>Elevra · ${pct(1-C.techShare)} · <b style="color:var(--ink)">${fmt(qz)}</b></span><span><i style="background:#C98A1E"></i>Tech partner (Upward / AZAI Labs) · ${pct(C.techShare)} · <b style="color:var(--ink)">${fmt(tech)}</b></span></div>
+   <p class="small muted" style="margin:10px 0 0">Under the hybrid partnership option. Change the rate in <a class="lnk" href="#/dash/settings">Fees &amp; split</a>.</p></div>
+  <div class="g2" style="margin-top:16px"><div class="panel"><h4>Needs attention</h4><ul class="list small"><li><a class="lnk" href="#/dash/approvals">${pendApps.length} expert application(s), ${pendWs.length} workshop(s) to review</a></li><li><a class="lnk" href="#/dash/speakers">${openSp.length} open speaker request(s)</a></li><li><a class="lnk" href="#/dash/programs">${openPr.length} AI for Leaders request(s)</a></li></ul></div>
+  <div class="panel"><h4>Marketplace</h4><dl class="kv"><dt>Experts listed</dt><dd>${S.experts.length}</dd><dt>Open needs</dt><dd>${S.needs.filter(n=>n.status==='Open').length}</dd><dt>Live workshops</dt><dd>${S.workshops.filter(w=>w.status==='Published').length}</dd><dt>Certificates</dt><dd>${S.certs.length}</dd></dl></div></div>`;
+ }
+ if(tab==='approvals') b=`<div class="dash-head"><div><div class="eyebrow">Quality control</div><h2>Approvals</h2></div></div>
+  <h3>Expert applications</h3>${table(['Name','Role','Topics','Plan','Status','Action'],S.apps.map(a=>`<tr><td>${esc(a.n)}<div class="small muted">${esc(a.email)}</div></td><td>${esc(a.r)}</td><td class="small">${esc(a.topics)}</td><td>${esc(a.plan)}</td><td>${status(a.status)}</td><td>${a.status==='Pending'?`<div style="display:flex;gap:6px"><button class="btn btn-ok btn-sm" data-act="appok" data-arg="${a.id}">Approve</button><button class="btn btn-ghost btn-sm" data-act="appno" data-arg="${a.id}">Reject</button></div>`:''}</td></tr>`))}
+  <h3 style="margin-top:22px">Workshops submitted by experts</h3>${table(['Workshop','Expert','Date','#Price','Status','Action'],S.workshops.filter(w=>w.status!=='Published'||w.id.startsWith('w')&&+w.id.slice(1)>6).map(w=>`<tr><td>${esc(w.t)}</td><td>${esc(ex(w.ex).n)}</td><td>${w.date}</td><td class="num">${fmt(w.p)}</td><td>${status(w.status)}</td><td>${w.status==='Pending review'?`<button class="btn btn-ok btn-sm" data-act="wsok" data-arg="${w.id}">Approve &amp; publish</button>`:''}</td></tr>`))}`;
+ if(tab==='speakers') b=`<div class="dash-head"><div><div class="eyebrow">Speakers bureau</div><h2>Speaker pipeline</h2></div><span class="small muted">Agency fee ${pct(C.speakerFee)}</span></div>
+  ${table(['Organization','Speaker','Event','Date','#Fee','Stage','Action'],S.sreqs.map(r=>`<tr><td>${esc(r.org)}</td><td>${esc(sp(r.sp).n)}</td><td>${esc(r.event)}<div class="small muted">${r.aud} people</div></td><td>${r.date}</td><td class="num">${r.quote?fmt(r.quote):'—'}${r.quote?`<div class="small muted">Elevra ${fmt(r.quote*C.speakerFee)}</div>`:''}</td><td>${status(r.stage)}</td><td>${r.stage==='Enquiry'?`<button class="btn btn-primary btn-sm" data-act="spquote" data-arg="${r.id}">Send quote</button>`:r.stage==='Quoted'?`<button class="btn btn-ok btn-sm" data-act="spconfirm" data-arg="${r.id}">Confirm &amp; invoice</button>`:''}</td></tr>`))}`;
+ if(tab==='programs') b=`<div class="dash-head"><div><div class="eyebrow">Flagship</div><h2>AI for Leaders requests</h2></div><span class="small muted">Facilitator share ${pct(C.aiShare)}</span></div>
+  ${table(['Organization','Package','Leaders','#Price','Stage','Action'],S.preqs.map(r=>{const p=S.ai[r.pkg];return `<tr><td>${esc(r.org)}</td><td>${esc(p.n)}</td><td>${r.leaders}</td><td class="num">${fmt(p.p)}</td><td>${status(r.stage)}</td><td>${r.stage!=='Confirmed'?`<button class="btn btn-ok btn-sm" data-act="prconfirm" data-arg="${r.id}">Confirm &amp; invoice</button>`:''}</td></tr>`;}))}`;
+ if(tab==='sponsorship') b=`<div class="dash-head"><div><div class="eyebrow">Sponsorship</div><h2>Sponsorship inventory</h2></div></div>
+  ${table(['Package','#Price','Status','Action'],S.spons.map((s,i)=>`<tr><td>${esc(s.n)}</td><td class="num">${fmt(s.p)}</td><td>${status(s.sold?'Sold':'Available')}</td><td>${s.sold?'':`<button class="btn btn-primary btn-sm" data-act="sponsor" data-arg="${i}">Record sale</button>`}</td></tr>`))}`;
+ if(tab==='payouts'){
+  const rows=S.experts.map(e=>{const earned=sum(Lg.filter(t=>t.ex===e.id),t=>t.payout),paid=sum(S.payouts.filter(x=>x.ex===e.id),x=>x.amt);return {e,earned,paid,bal:earned-paid};}).filter(r=>r.earned>0);
+  b=`<div class="dash-head"><div><div class="eyebrow">Payouts</div><h2>Expert balances</h2></div><span class="small muted">Speaker fees are paid directly per contract</span></div>
+  ${table(['Expert','#Earned','#Paid','#Balance','Action'],rows.map(r=>`<tr><td>${esc(r.e.n)}</td><td class="num">${fmt(r.earned)}</td><td class="num">${fmt(r.paid)}</td><td class="num"><b>${fmt(r.bal)}</b></td><td>${r.bal>0?`<button class="btn btn-primary btn-sm" data-act="payout" data-arg="${r.e.id}">Mark paid</button>`:status('Paid')}</td></tr>`))}`;
+ }
+ if(tab==='ledger') b=`<div class="dash-head"><div><div class="eyebrow">Ledger</div><h2>Every transaction, with its split</h2></div><button class="btn btn-ghost btn-sm" data-act="csv">Download CSV</button></div>${ledgerTable(Lg,'admin')}`;
+ if(tab==='settings'){
+  const f=(id,l,v,h)=>`<div class="field"><label for="${id}">${l}</label><input class="inp" id="${id}" type="number" min="0" step="any" value="${v}"><div class="hint">${h}</div></div>`;
+  b=`<div class="dash-head"><div><div class="eyebrow">Settings</div><h2>Fees, commissions &amp; partner split</h2></div></div>
+  <div class="panel"><h4>Expert plans</h4><div class="settings">${Object.entries(C.plans).map(([n,p])=>f('fee_'+n,n+' fee (৳/month)',p.fee,'Monthly subscription')+f('com_'+n,n+' commission (%)',Math.round(p.com*1000)/10,'On bookings')).join('')}</div>
+  <h4 style="margin-top:18px">Other fees</h4><div class="settings">${f('workshopFee','Workshop platform fee (%)',C.workshopFee*100,'Of each ticket')}${f('speakerFee','Speaker agency fee (%)',C.speakerFee*100,'Of speaker fee')}${f('certFee','Certificate fee (৳)',C.certFee,'Per certificate')}${f('boostFee','Featured boost (৳)',C.boostFee,'Per 30 days')}${f('aiShare','AI for Leaders facilitator share (%)',C.aiShare*100,'Rest stays with platform')}</div>
+  <h4 style="margin-top:18px">Partner split</h4><div class="settings">${f('techShare','Tech partner share of platform revenue (%)',C.techShare*100,'Upward / AZAI Labs · rest to Elevra')}</div>
+  <div class="err" id="setErr">Percentages must be between 0 and 100.</div>
+  <div class="btns"><button class="btn btn-primary" data-act="saveset">Save settings</button><button class="btn btn-ghost" data-act="reset">Reset all demo data</button></div>
+  <p class="small muted" style="margin:10px 0 0">New rates apply to new transactions. Past ledger entries keep the rate charged at the time.</p></div>`;
+ }
+ return dashShell(tabs,tab,b,`<b style="color:var(--ink);font-size:14px">Elevra</b><div class="small muted">Admin</div>`);
+}
+
+/* ---------- modal forms ---------- */
+let MODAL=null;
+function openForm(c){
+ MODAL=c;
+ const fields=c.fields.map(f=>{
+  const id='mf_'+f.k,req=f.opt?'':'required';
+  let input;
+  if(f.type==='select') input=`<select id="${id}" name="${f.k}">${f.opts.map(o=>`<option ${o===f.val?'selected':''}>${esc(o)}</option>`).join('')}</select>`;
+  else if(f.type==='textarea') input=`<textarea id="${id}" name="${f.k}" rows="3" ${req}>${esc(f.val||'')}</textarea>`;
+  else input=`<input id="${id}" name="${f.k}" type="${f.type||'text'}" ${f.type==='number'?`min="${f.min||1}"`:''} ${f.max?`max="${f.max}"`:''} value="${esc(f.val??'')}" ${req}>`;
+  return `<div class="field"><label for="${id}">${esc(f.label)}${f.opt?' <span class="muted">(optional)</span>':''}</label>${input}${f.hint?`<div class="hint">${esc(f.hint)}</div>`:''}<div class="err" id="${id}_e"></div></div>`;
+ }).join('');
+ const pay=c.pay?`<div class="field"><label>Payment method</label><div class="pay"><label><input type="radio" name="pm" value="bKash" checked><span>bKash</span></label><label><input type="radio" name="pm" value="Nagad"><span>Nagad</span></label><label><input type="radio" name="pm" value="Card"><span>Card</span></label></div><div class="hint">Demo only — no real payment is taken.</div></div>`:'';
+ $('#dialog').innerHTML=`<button class="x" aria-label="Close" data-act="close">×</button><h3 id="mTitle">${esc(c.title)}</h3>${c.sub?`<p class="small muted">${c.sub}</p>`:''}<form id="mForm" novalidate>${fields}<div id="mSum">${c.summary?c.summary(readForm()):''}</div>${pay}<button class="btn btn-primary" style="width:100%;margin-top:8px" type="submit">${esc(c.btn)}</button></form>`;
+ if(c.summary) $('#mSum').innerHTML=c.summary(readForm());
+ $('#modal').classList.add('open'); document.body.style.overflow='hidden';
+ setTimeout(()=>{const f=$('#mForm input,#mForm select,#mForm textarea');f&&f.focus();},30);
+}
+function readForm(){const v={};if(!MODAL)return v;MODAL.fields.forEach(f=>{const el=$('#mf_'+f.k);v[f.k]=el?el.value.trim():'';});const pm=$('input[name=pm]:checked');if(pm)v.pm=pm.value;return v;}
+function submitForm(){
+ const c=MODAL,v=readForm();let ok=true;
+ c.fields.forEach(f=>{const el=$('#mf_'+f.k),er=$('#mf_'+f.k+'_e');let m='';const x=v[f.k];
+  if(!f.opt&&!x)m='Please fill this in.';
+  else if(x&&f.type==='email'&&!/^\S+@\S+\.\S+$/.test(x))m='Enter a valid email address.';
+  else if(x&&f.type==='number'&&(isNaN(+x)||+x<(f.min||1)))m=`Enter a number of at least ${f.min||1}.`;
+  else if(x&&f.type==='number'&&f.max&&+x>f.max)m=`Maximum is ${f.max}.`;
+  er.textContent=m;er.style.display=m?'block':'none';if(m){ok=false;el.setAttribute('aria-invalid','true');}else el.removeAttribute('aria-invalid');});
+ if(!ok){const bad=$('#mForm [aria-invalid=true]');bad&&bad.focus();return;}
+ const r=c.submit(v); if(!r)return;
+ save();
+ $('#dialog').innerHTML=`<div class="done"><div class="tick" aria-hidden="true">✓</div><h3 id="mTitle">${esc(r.title)}</h3><p class="muted">${r.msg}</p><div class="btns" style="justify-content:center">${r.link?`<a class="btn btn-ghost" href="${r.link[1]}" data-act="close-nav">${esc(r.link[0])}</a>`:''}<button class="btn btn-primary" data-act="close">Done</button></div></div>`;
+ render(true);
+}
+function closeModal(){$('#modal').classList.remove('open');document.body.style.overflow='';MODAL=null;}
+
+/* ---------- actions ---------- */
+const ACT={
+ menu(){const l=$('#links');l.classList.toggle('open');$('#menuBtn').setAttribute('aria-expanded',l.classList.contains('open'));},
+ theme(){const r=document.documentElement;const d=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;r.dataset.theme=d?'light':'dark';},
+ close:closeModal,
+ 'close-nav':(a,t)=>{closeModal();location.hash=t.getAttribute('href');},
+ reset(){S=seed();save();F={role:'',topic:'',format:'',lang:'',q:''};closeModal();$('#roleSel').value='visitor';location.hash='#/home';render();toast('Demo data reset');},
+ setrole(r){S.role=r;save();$('#roleSel').value=r;location.hash='#/dash';render();},
+ roleFilter(r){F={role:r,topic:'',format:'',lang:'',q:''};location.hash='#/experts';},
+ clearF(){F={role:'',topic:'',format:'',lang:'',q:''};render(true);},
+ spt(t){SPT=t;render(true);}, wsf(t){WSF=t;render(true);}, fmf(t){FMF=t;render(true);},
+ need(arg){
+  const [eid,pi]=(arg||'').split('|');const e=eid?ex(eid):null;const p=e&&pi!==undefined?pk(e)[+pi]:null;
+  openForm({title:e?`Request a proposal from ${e.n}`:'Post a training need',sub:e?'Goes directly to this expert. Elevra coordinates the contract and payment.':'Matched experts send proposals, usually within 48 hours.',
+   fields:[{k:'org',label:'Organization',val:S.role==='org'?S.org.name:''},{k:'email',label:'Work email',type:'email'},{k:'title',label:'What do you need?',val:p?p[0]:''},{k:'detail',label:'Details',type:'textarea',opt:true},{k:'people',label:'Participants',type:'number',val:20},{k:'budget',label:'Budget (৳)',type:'number',min:1000,val:p?p[1]:''},{k:'format',label:'Format',type:'select',opts:['Onsite','Online','Either']}],
+   btn:e?'Send request':'Post need',
+   submit(v){const n={id:nid('n'),org:v.org,title:v.title,detail:v.detail||'—',people:+v.people,budget:+v.budget,format:v.format,status:'Open',target:e?e.id:null,date:today()};S.needs.unshift(n);
+    return {title:'Request sent',msg:`${e?esc(e.n)+' has':'Matched experts have'} been notified. Proposals appear in the organization dashboard.${S.role!=='org'?' Switch “View as” to Organization (or Expert) to follow it.':''}`,link:S.role==='org'?['Open my needs','#/dash/needs']:null};}});
+ },
+ speaker(id){const s=sp(id);openForm({title:`Check availability: ${s.n}`,sub:'Elevra confirms availability, fee and logistics with the speaker.',
+   fields:[{k:'org',label:'Organization',val:S.role==='org'?S.org.name:''},{k:'email',label:'Work email',type:'email'},{k:'event',label:'Event type',type:'select',opts:['Conference keynote','Leadership retreat','Town hall','Panel discussion','Online session']},{k:'aud',label:'Audience size',type:'number',val:100},{k:'date',label:'Event date',type:'date'}],btn:'Send enquiry',
+   submit(v){S.sreqs.unshift({id:nid('r'),sp:id,org:v.org,event:v.event,aud:+v.aud,date:v.date,stage:'Enquiry',quote:0});return {title:'Enquiry received',msg:'Elevra will confirm availability and fee. In this demo it appears in Admin → Speaker pipeline.'};}});},
+ register(id){const w=ws(id),left=w.seats-w.sold,e=ex(w.ex);
+  openForm({title:`Register: ${w.t}`,sub:`${fmt(w.p)} per seat · ${left} seats left`,
+   fields:[{k:'name',label:'Full name'},{k:'email',label:'Email',type:'email'},{k:'phone',label:'Mobile number',type:'tel'},{k:'org',label:'Organization',opt:true,val:S.role==='org'?S.org.name:''},{k:'seats',label:'Seats',type:'number',val:1,max:left}],
+   summary:v=>{const n=Math.max(1,+v.seats||1);return `<div class="sumbox"><div><span>${n} × ${fmt(w.p)}</span><span>${fmt(n*w.p)}</span></div><div class="tot"><span>Total</span><span>${fmt(n*w.p)}</span></div></div>`;},
+   pay:true,btn:'Pay (demo)',
+   submit(v){const n=+v.seats;if(n>w.seats-w.sold)return false;const g=n*w.p;w.sold+=n;const tk=nid('TK-');S.tickets.unshift({id:tk,ws:id,name:v.name,seats:n,amt:g});
+    rec('Workshop tickets',`${w.t.split(' —')[0]} — ${n} seat${n>1?'s':''}`,g,g*(1-S.config.workshopFee),e.id,v.org||null);
+    return {title:'Seat reserved',msg:`E-ticket <span class="code">${tk}</span> · paid ${fmt(g)} by ${v.pm}. Elevra keeps ${pct(S.config.workshopFee)} (${fmt(g*S.config.workshopFee)}); ${esc(e.n)} receives ${fmt(g*(1-S.config.workshopFee))}.`};}});},
+ aireq(i){const p=S.ai[+i];openForm({title:`Request AI for Leaders — ${p.n}`,sub:`${fmt(p.p)} · ${p.d}`,
+   fields:[{k:'org',label:'Organization',val:S.role==='org'?S.org.name:''},{k:'email',label:'Work email',type:'email'},{k:'pkg',label:'Package',type:'select',opts:S.ai.filter(x=>!x.ws).map(x=>x.n),val:p.n},{k:'leaders',label:'Number of leaders',type:'number',val:20}],btn:'Send request',
+   submit(v){S.preqs.unshift({id:nid('p'),org:v.org,pkg:S.ai.findIndex(x=>x.n===v.pkg),leaders:+v.leaders,stage:'Requested',date:today()});return {title:'Request received',msg:'Elevra will confirm dates and send an invoice. In this demo, confirm it from Admin → AI for Leaders.'};}});},
+ join(plan){openForm({title:`Apply as an expert · ${plan}`,sub:'Elevra reviews every application before listing.',
+   fields:[{k:'n',label:'Full name'},{k:'email',label:'Email',type:'email'},{k:'r',label:'Role',type:'select',opts:['Trainer','Facilitator','Coach','Consultant']},{k:'topics',label:'Main topics',hint:'Separate with commas'},{k:'plan',label:'Plan',type:'select',opts:Object.keys(S.config.plans),val:plan}],btn:'Submit application',
+   submit(v){S.apps.unshift({id:nid('a'),n:v.n,email:v.email,r:v.r,topics:v.topics,plan:v.plan,status:'Pending'});return {title:'Application received',msg:'In this demo, approve it from Admin → Approvals and the expert goes live on the marketplace.'};}});},
+ orgplan(n){const f=S.config.orgPlans[n];
+  if(S.role!=='org'){toast('Switch “View as” to Organization to choose a plan');return;}
+  if(!f){S.org.plan=n;save();render(true);toast('Switched to '+n);return;}
+  openForm({title:`Upgrade to ${n}`,sub:`${fmt(f)} per year for ${esc(S.org.name)}`,fields:[{k:'po',label:'Purchase order reference',opt:true}],pay:true,btn:`Pay ${fmt(f)} (demo)`,
+   submit(){S.org.plan=n;rec('Organization plans',`${n} annual — ${S.org.name}`,f,0,null,S.org.name);return {title:`Welcome to ${n}`,msg:'Plan active. Discounted prices now show on proposals.'};}});},
+ quote(nidv){const n=S.needs.find(x=>x.id===nidv),e=ex(S.me),c=planOf(e).com;
+  openForm({title:`Quote: ${n.title}`,sub:`${esc(n.org)} · budget ${fmt(n.budget)}`,fields:[{k:'amt',label:'Your price (৳)',type:'number',min:1000,val:Math.round(n.budget*.95)},{k:'msg',label:'Proposal summary',type:'textarea'}],
+   summary:v=>{const a=+v.amt||0;return `<div class="sumbox"><div><span>Client pays</span><span>${fmt(a)}</span></div><div><span>Elevra commission (${pct(c)}, ${e.plan})</span><span>−${fmt(a*c)}</span></div><div class="tot"><span>You receive</span><span>${fmt(a*(1-c))}</span></div></div>`;},btn:'Send quote',
+   submit(v){S.quotes.push({id:nid('q'),need:n.id,ex:e.id,amt:+v.amt,msg:v.msg,status:'Sent'});return {title:'Quote sent',msg:`${esc(n.org)} can now compare and accept it. Switch “View as” to Organization to try.`};}});},
+ accept(qid){const q=S.quotes.find(x=>x.id===qid),n=S.needs.find(x=>x.id===q.need),e=ex(q.ex),disc=S.org.plan==='Pay as you go'?0:.10,amt=q.amt*(1-disc),c=planOf(e).com;
+  openForm({title:`Accept proposal from ${e.n}`,sub:esc(n.title),fields:[{k:'po',label:'Purchase order reference',opt:true}],
+   summary:()=>`<div class="sumbox"><div><span>Proposal price</span><span>${fmt(q.amt)}</span></div>${disc?`<div><span>${esc(S.org.plan)} discount (10%)</span><span>−${fmt(q.amt*disc)}</span></div>`:''}<div class="tot"><span>You pay</span><span>${fmt(amt)}</span></div></div>`,pay:true,btn:`Pay ${fmt(amt)} (demo)`,
+   submit(){q.status='Accepted';S.quotes.filter(x=>x.need===n.id&&x.id!==q.id).forEach(x=>x.status='Declined');n.status='Booked';
+    S.bookings.unshift({id:nid('b'),need:n.id,ex:e.id,org:n.org,title:n.title,amt,status:'Confirmed',date:today()});
+    rec('Booking commission',`${n.title} — ${n.org}`,amt,amt*(1-c),e.id,n.org);
+    return {title:'Booking confirmed',msg:`Paid ${fmt(amt)}. ${esc(e.n)} receives ${fmt(amt*(1-c))}; Elevra earns ${fmt(amt*c)} (${pct(c)} commission).`,link:['View bookings','#/dash/bookings']};}});},
+ newws(){const e=ex(S.me);openForm({title:'Create a workshop',sub:'Elevra reviews new workshops before they go live.',
+   fields:[{k:'t',label:'Workshop title'},{k:'f',label:'Format',type:'select',opts:['Online','Onsite']},{k:'date',label:'Date',type:'date'},{k:'dur',label:'Duration & place',val:'1 day · Dhaka'},{k:'p',label:'Price per seat (৳)',type:'number',min:500,val:5000},{k:'seats',label:'Seats',type:'number',val:25}],
+   summary:v=>{const p=+v.p||0;return `<div class="sumbox"><div><span>Per seat</span><span>${fmt(p)}</span></div><div><span>Platform fee (${pct(S.config.workshopFee)})</span><span>−${fmt(p*S.config.workshopFee)}</span></div><div class="tot"><span>You receive per seat</span><span>${fmt(p*(1-S.config.workshopFee))}</span></div></div>`;},btn:'Submit for review',
+   submit(v){S.workshops.push({id:nid('w'),t:v.t,ex:e.id,f:v.f,date:v.date,dur:v.dur,p:+v.p,seats:+v.seats,sold:0,status:'Pending review'});return {title:'Submitted for review',msg:'In this demo, approve it from Admin → Approvals and it appears on the Workshops page.'};}});},
+ cert(){const e=ex(S.me);openForm({title:'Issue a certificate',sub:`${fmt(S.config.certFee)} per verified certificate`,
+   fields:[{k:'name',label:'Participant name'},{k:'prog',label:'Program',type:'select',opts:[...new Set(['AI for Leaders — One-day Intensive','Certified AI-Ready Leader',...S.workshops.filter(w=>w.ex===e.id).map(w=>w.t)])]},{k:'org',label:'Organization',opt:true}],pay:true,btn:`Issue & pay ${fmt(S.config.certFee)} (demo)`,
+   submit(v){const id='EL-DEMO-2026-'+String(S.seq+1).padStart(4,'0');S.seq++;S.certs.unshift({id,name:v.name,prog:v.prog,org:v.org||null,by:e.id,date:today()});rec('Certificates',`Certificate ${id} — ${v.name}`,S.config.certFee,0,e.id);
+    return {title:'Certificate issued',msg:`ID <span class="code">${id}</span> is now publicly verifiable.`,link:['Verify it now','#/certify/'+id]};}});},
+ upgrade(n){const e=ex(S.me),p=S.config.plans[n];
+  if(!p.fee){e.plan=n;e.verified=false;save();render(true);toast('Switched to '+n);return;}
+  openForm({title:`Switch to ${n}`,sub:`${fmt(p.fee)} per month · ${pct(p.com)} commission`,fields:[],pay:true,btn:`Pay ${fmt(p.fee)} (demo)`,
+   submit(){e.plan=n;e.verified=true;if(n==='Premier')e.featured=true;rec('Expert subscriptions',`${n} plan — ${e.n}`,p.fee,0,e.id);return {title:`You're on ${n}`,msg:`Commission is now ${pct(p.com)} on new bookings.${n==='Premier'?' Featured placement included.':''}`};}});},
+ boost(){const e=ex(S.me);openForm({title:'Boost your profile',sub:'Featured placement for 30 days',fields:[],pay:true,btn:`Pay ${fmt(S.config.boostFee)} (demo)`,
+   submit(){e.featured=true;rec('Featured listings',`30-day boost — ${e.n}`,S.config.boostFee,0,e.id);return {title:'Boost active',msg:'Your profile now appears first in search and on the home page.',link:['See it in search','#/experts']};}});},
+ appok(id){const a=S.apps.find(x=>x.id===id);a.status='Approved';const p=S.config.plans[a.plan];
+  S.experts.push({id:nid('e'),n:a.n,r:a.r,t:a.topics.split(',').map(s=>s.trim()).filter(Boolean).slice(0,3),f:['Online','Onsite'],l:['Bangla','English'],y:5,city:'Dhaka',plan:a.plan,featured:a.plan==='Premier',verified:a.plan!=='Starter',rating:5.0,reviews:0,bio:`${a.n} is a ${a.r.toLowerCase()} newly approved by Elevra.`});
+  if(p.fee)rec('Expert subscriptions',`${a.plan} plan — ${a.n}`,p.fee,0,S.experts[S.experts.length-1].id);
+  save();render(true);toast(`${a.n} approved and listed`);},
+ appno(id){S.apps.find(x=>x.id===id).status='Rejected';save();render(true);},
+ wsok(id){ws(id).status='Published';save();render(true);toast('Workshop published');},
+ spquote(id){const r=S.sreqs.find(x=>x.id===id),s=sp(r.sp);openForm({title:`Quote: ${s.n}`,sub:`${esc(r.org)} · ${esc(r.event)}`,fields:[{k:'q',label:'Speaker fee to client (৳)',type:'number',min:1000,val:s.fee||300000}],
+   summary:v=>{const a=+v.q||0;return `<div class="sumbox"><div><span>Client pays</span><span>${fmt(a)}</span></div><div><span>Elevra agency fee (${pct(S.config.speakerFee)})</span><span>${fmt(a*S.config.speakerFee)}</span></div><div class="tot"><span>Speaker receives</span><span>${fmt(a*(1-S.config.speakerFee))}</span></div></div>`;},btn:'Send quote',
+   submit(v){r.quote=+v.q;r.stage='Quoted';return {title:'Quote sent',msg:'Confirm it once the client signs.'};}});},
+ spconfirm(id){const r=S.sreqs.find(x=>x.id===id),s=sp(r.sp);r.stage='Confirmed';rec('Speaker fees',`${r.event} — ${s.n} — ${r.org}`,r.quote,r.quote*(1-S.config.speakerFee),null,r.org);save();render(true);toast(`Confirmed · Elevra earns ${fmt(r.quote*S.config.speakerFee)}`);},
+ prconfirm(id){const r=S.preqs.find(x=>x.id===id),p=S.ai[r.pkg];r.stage='Confirmed';rec('AI for Leaders',`${p.n} — ${r.org}`,p.p,p.p*S.config.aiShare,'aa',r.org);save();render(true);toast(`Confirmed · platform keeps ${fmt(p.p*(1-S.config.aiShare))}`);},
+ sponsor(i){const s=S.spons[+i];s.sold=true;rec('Sponsorship',s.n,s.p,0);save();render(true);toast('Sponsorship recorded');},
+ payout(id){const earned=sum(S.ledger.filter(t=>t.ex===id),t=>t.payout),paid=sum(S.payouts.filter(x=>x.ex===id),x=>x.amt);S.payouts.push({ex:id,amt:earned-paid,date:today()});save();render(true);toast(`Paid ${fmt(earned-paid)} to ${ex(id).n}`);},
+ saveset(){const C=S.config,g=id=>+$('#'+id).value;let bad=false;const P=(id)=>{const v=g(id);if(isNaN(v)||v<0||v>100)bad=true;return v/100;};
+  const nc={...C,plans:{}};Object.keys(C.plans).forEach(n=>{nc.plans[n]={fee:Math.max(0,g('fee_'+n)||0),com:P('com_'+n)};});
+  nc.workshopFee=P('workshopFee');nc.speakerFee=P('speakerFee');nc.aiShare=P('aiShare');nc.techShare=P('techShare');nc.certFee=Math.max(0,g('certFee')||0);nc.boostFee=Math.max(0,g('boostFee')||0);
+  $('#setErr').style.display=bad?'block':'none';if(bad)return;S.config=nc;save();toast('Settings saved');render(true);},
+ csv(){const rows=[['Date','Stream','Description','Gross','Expert payout','Platform revenue','Elevra share','Tech partner share']].concat(S.ledger.map(t=>[t.date,t.type,t.desc,t.gross,Math.round(t.payout),Math.round(t.platform),Math.round(t.platform*(1-S.config.techShare)),Math.round(t.platform*S.config.techShare)]));
+  const csv=rows.map(r=>r.map(x=>`"${String(x).replace(/"/g,'""')}"`).join(',')).join('\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='elevra-ledger.csv';document.body.appendChild(a);a.click();a.remove();}
+};
+
+/* ---------- router ---------- */
+let lastRoute='';
+function render(keep){
+ const parts=location.hash.replace(/^#\/?/,'').split('/');const r=parts[0]||'home',a=parts[1];
+ const V={home,experts,expert:()=>expertDetail(a),speakers,speaker:()=>speakerDetail(a),workshops,workshop:()=>workshopDetail(a),ai,certify:()=>certify(a),pricing,features,dash:()=>dash(a)};
+ $('#app').innerHTML=(V[r]||home)();
+ $$('.links a').forEach(x=>x.classList.toggle('active',x.dataset.r===r));
+ if(r==='experts')fillExperts();
+ if(r==='certify'&&a)verifyResult(a);
+ const ms=$('#meSel');if(ms)ms.onchange=()=>{S.me=ms.value;save();render(true);};
+ $('#roleSel').value=S.role;
+ const route=parts.slice(0,2).join('/');
+ if(!keep&&route!==lastRoute){window.scrollTo(0,0);}
+ lastRoute=route;
+ $('#links').classList.remove('open');$('#menuBtn').setAttribute('aria-expanded','false');
+}
+document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(!t||t.disabled)return;e.preventDefault();(ACT[t.dataset.act]||(()=>{}))(t.dataset.arg,t);});
+document.addEventListener('submit',e=>{
+ if(e.target.id==='mForm'){e.preventDefault();submitForm();return;}
+ const k=e.target.dataset.form;if(!k)return;e.preventDefault();
+ if(k==='heroSearch'){F={role:'',topic:'',format:'',lang:'',q:e.target.q.value};location.hash='#/experts';}
+ if(k==='verify'){const v=e.target.id.value.trim();if(!v){$('#certErr').style.display='block';$('#certResult').className='';$('#certResult').innerHTML='';return;}$('#certErr').style.display='none';verifyResult(v);}
+});
+document.addEventListener('input',e=>{
+ if(e.target.dataset.f){F[e.target.dataset.f]=e.target.value;fillExperts();}
+ if(e.target.closest('#mForm')){const er=document.getElementById(e.target.id+'_e');if(er){er.style.display='none';e.target.removeAttribute('aria-invalid');}if(MODAL&&MODAL.summary)$('#mSum').innerHTML=MODAL.summary(readForm());}
+ if(e.target.id==='certId')$('#certErr').style.display='none';
+});
+document.addEventListener('change',e=>{if(e.target.dataset.f){F[e.target.dataset.f]=e.target.value;fillExperts();}});
+$('#modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&MODAL!==null||e.key==='Escape'&&$('#modal').classList.contains('open'))closeModal();});
+$('#roleSel').addEventListener('change',e=>{S.role=e.target.value;save();if(S.role==='visitor'){location.hash='#/home';}else{location.hash='#/dash';}render();});
+window.addEventListener('hashchange',()=>render());
+render();
+</script>
+</body>
+</html>
