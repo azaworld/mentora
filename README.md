@@ -1,6 +1,6 @@
-# Elevra — Expert Marketplace for Learning & Leadership
+# Mentora — Expert Marketplace for Learning & Leadership
 
-Elevra connects organizations with vetted **trainers, facilitators, coaches, consultants and keynote speakers**. In one place they can book in-house programs, register for paid workshops, run **AI for Leaders** programs and issue **verifiable certificates**. Every transaction feeds a built-in revenue ledger.
+Mentora connects organizations with vetted **trainers, facilitators, coaches, consultants and keynote speakers**. In one place they can book in-house programs, register for paid workshops, run **AI for Leaders** programs and issue **verifiable certificates**. Every transaction feeds a built-in revenue ledger.
 
 > **Status:** clickable MVP prototype (a single `index.html`, no backend). Apart from Arifuzzaman Antor's profile, every person, organization, price and record in it is sample data.
 

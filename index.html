@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Elevra Expert Marketplace</title>
-<meta name="description" content="Elevra: expert marketplace, speakers bureau, paid workshops, AI for Leaders and certification portal, with expert, organization and admin dashboards and a built-in revenue ledger.">
+<title>Mentora Expert Marketplace</title>
+<meta name="description" content="Mentora: expert marketplace, speakers bureau, paid workshops, AI for Leaders and certification portal, with expert, organization and admin dashboards and a built-in revenue ledger.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -292,11 +292,11 @@ footer a{text-decoration:none}
 </style>
 </head>
 <body>
-<div class="demo-bar"><b>Elevra MVP</b> · built by Upward &amp; AZAI Labs · all people, prices and records are sample data except Arifuzzaman Antor · your clicks are saved only in this browser · <button type="button" data-act="reset">Reset demo</button></div>
+<div class="demo-bar"><b>Mentora MVP</b> · built by Upward &amp; AZAI Labs · all people, prices and records are sample data except Arifuzzaman Antor · your clicks are saved only in this browser · <button type="button" data-act="reset">Reset demo</button></div>
 
 <header>
   <div class="wrap nav">
-    <a class="logo" href="#/home">Elevra <span>Experts</span></a>
+    <a class="logo" href="#/home">Mentora <span>Experts</span></a>
     <nav class="links" id="links" aria-label="Main">
       <a href="#/experts" data-r="experts">Find experts</a>
       <a href="#/speakers" data-r="speakers">Speakers</a>
@@ -312,7 +312,7 @@ footer a{text-decoration:none}
         <option value="visitor">Visitor</option>
         <option value="expert">Expert</option>
         <option value="org">Organization</option>
-        <option value="admin">Elevra admin</option>
+        <option value="admin">Mentora admin</option>
       </select>
       <button class="icon-btn theme-btn" data-act="theme" aria-label="Toggle colour theme">Theme</button>
       <button class="icon-btn menu-btn" id="menuBtn" data-act="menu" aria-expanded="false" aria-controls="links">Menu</button>
@@ -324,7 +324,7 @@ footer a{text-decoration:none}
 
 <footer>
   <div class="wrap">
-    <span>Elevra · learning &amp; leadership marketplace · MVP demo with sample data</span>
+    <span>Mentora · learning &amp; leadership marketplace · MVP demo with sample data</span>
     <span><a href="#/features">Feature map &amp; revenue model</a> · Designed &amp; built by Upward · AZAI Labs</span>
   </div>
 </footer>
@@ -334,7 +334,7 @@ footer a{text-decoration:none}
 
 <script>
 /* ---------- helpers ---------- */
-const KEY='elevra-mvp-v1';
+const KEY='mentora-mvp-v1';
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt=n=>'৳'+Math.round(n||0).toLocaleString('en-IN');
@@ -415,13 +415,13 @@ function seed(){
   ],
   preqs:[{id:'p1',org:'Sample NBFI Ltd',pkg:1,leaders:24,stage:'Requested',date:'2026-10-15'}],
   certs:[
-   {id:'EL-DEMO-2026-0142',name:'Sample Participant',prog:'AI for Leaders — One-day Intensive',org:'Sample Bank PLC',by:'aa',date:'2026-10-03'},
-   {id:'EL-DEMO-2026-0087',name:'Second Sample',prog:'Emotional Intelligence for Managers',org:'Sample Bank PLC',by:'e1',date:'2026-08-14'}
+   {id:'MN-DEMO-2026-0142',name:'Sample Participant',prog:'AI for Leaders — One-day Intensive',org:'Sample Bank PLC',by:'aa',date:'2026-10-03'},
+   {id:'MN-DEMO-2026-0087',name:'Second Sample',prog:'Emotional Intelligence for Managers',org:'Sample Bank PLC',by:'e1',date:'2026-08-14'}
   ],
   apps:[{id:'a1',n:'Tasnim Ferdous',email:'tasnim@example.com',r:'Coach',topics:'Career coaching, Women in leadership',plan:'Professional',status:'Pending'}],
   tickets:[],
   payouts:[{ex:'e1',amt:200000,date:'2026-08-31'},{ex:'aa',amt:150000,date:'2026-09-30'}],
-  spons:[{n:'Trainers Fest — title sponsor',p:500000,sold:false},{n:'Trainers Fest — gold sponsor',p:200000,sold:true},{n:'Monthly newsletter feature',p:25000,sold:false},{n:'AZA Execution Podcast — Elevra series sponsor',p:60000,sold:false}],
+  spons:[{n:'Trainers Fest — title sponsor',p:500000,sold:false},{n:'Trainers Fest — gold sponsor',p:200000,sold:true},{n:'Monthly newsletter feature',p:25000,sold:false},{n:'AZA Execution Podcast — Mentora series sponsor',p:60000,sold:false}],
   ledger:[
    L('2026-10-11','Expert subscriptions','Premier plan — Arif Mahmud',4000,0,'e10'),
    L('2026-10-08','Workshop tickets','AI for Leaders cohort — 16 seats',192000,163200,'aa'),
@@ -495,7 +495,7 @@ function home(){
  return `<div class="hero"><div>
    <div class="eyebrow">Learning &amp; development marketplace</div>
    <h1>Find the right trainer, coach, consultant or speaker — for any team, in any format.</h1>
-   <p class="lead">Book vetted experts, invite keynote speakers, join paid workshops online or onsite, and verify every certificate — all through Elevra.</p>
+   <p class="lead">Book vetted experts, invite keynote speakers, join paid workshops online or onsite, and verify every certificate — all through Mentora.</p>
    <form class="search" data-form="heroSearch" role="search"><input name="q" type="search" placeholder="Try “leadership”, “AI”, “sales coaching”…" aria-label="Search experts by topic"><button class="btn btn-primary" type="submit">Search</button></form>
    <div class="chips">${['Trainer','Facilitator','Coach','Consultant'].map(r=>`<button class="chip" data-act="roleFilter" data-arg="${r}">${r==='Coach'?'Coaches':r+'s'}</button>`).join('')}<a class="chip" href="#/speakers">Speakers</a></div>
   </div>
@@ -518,7 +518,7 @@ function home(){
  <div class="sec"><div class="sec-head"><h2>Featured experts</h2><a class="lnk" href="#/experts">See all ${S.experts.length} experts →</a></div><div class="grid">${feat.map(expertCard).join('')}</div></div>
  <div class="sec"><div class="sec-head"><h2>Upcoming workshops</h2><a class="lnk" href="#/workshops">All workshops →</a></div>${up.map(wsRow).join('')}</div>
  <div class="band"><div class="g2" style="align-items:center">
-  <div><div class="eyebrow">For experts</div><h2>Grow your practice with Elevra</h2><p class="muted" style="margin:0">Get discovered, receive proposal requests, sell workshops and issue verified certificates. Start free.</p></div>
+  <div><div class="eyebrow">For experts</div><h2>Grow your practice with Mentora</h2><p class="muted" style="margin:0">Get discovered, receive proposal requests, sell workshops and issue verified certificates. Start free.</p></div>
   <div class="btns" style="justify-content:flex-end"><a class="btn btn-primary" href="#/pricing">See expert plans</a><button class="btn btn-ghost" data-act="join" data-arg="Starter">Apply free</button></div>
  </div></div>`;}
 
@@ -526,7 +526,7 @@ function experts(){
  const topics=[...new Set(S.experts.flatMap(e=>e.t))].sort();
  const opt=(v,a,cur)=>`<option value="${esc(v)}" ${v===cur?'selected':''}>${esc(a)}</option>`;
  return `<div class="eyebrow">Marketplace</div><h2>Trainers, facilitators, coaches &amp; consultants</h2>
- <p class="lead">Every profile is reviewed by Elevra. Request a proposal, compare quotes, and pay through one secure invoice.</p>
+ <p class="lead">Every profile is reviewed by Mentora. Request a proposal, compare quotes, and pay through one secure invoice.</p>
  <div class="layout"><aside class="panel filters" aria-label="Filters">
    <label for="fRole">Role</label><select id="fRole" data-f="role">${opt('','All roles',F.role)}${['Trainer','Facilitator','Coach','Consultant'].map(r=>opt(r,r,F.role)).join('')}</select>
    <label for="fTopic">Topic</label><select id="fTopic" data-f="topic">${opt('','All topics',F.topic)}${topics.map(t=>opt(t,t,F.topic)).join('')}</select>
@@ -548,7 +548,7 @@ function expertDetail(id){
  return `<p class="small"><a class="lnk" href="#/experts">← All experts</a></p>
  <div class="split"><div>
   <div class="who" style="gap:18px">${avatar(e,'lg')}<div><h1 style="font-size:clamp(28px,4vw,40px);margin:0">${esc(e.n)}</h1><div class="muted">${e.r} · ${e.y} years · ${esc(e.city)} · ${e.l.join(', ')}</div>
-   <div class="tags" style="margin-top:8px"><span class="tag role">${e.r}</span>${e.featured?'<span class="tag gold">Featured</span>':''}${e.verified?'<span class="tag ok">Verified by Elevra</span>':''}${e.real?'':'<span class="sample">Sample profile</span>'}</div></div></div>
+   <div class="tags" style="margin-top:8px"><span class="tag role">${e.r}</span>${e.featured?'<span class="tag gold">Featured</span>':''}${e.verified?'<span class="tag ok">Verified by Mentora</span>':''}${e.real?'':'<span class="sample">Sample profile</span>'}</div></div></div>
   <h3 style="margin-top:22px">About</h3><p>${esc(e.bio)}</p>
   <h3>Topics</h3><div class="tags">${e.t.map(x=>`<span class="tag">${esc(x)}</span>`).join('')}<span class="tag">${e.f.join(' & ')}</span></div>
   <h3 style="margin-top:22px">Packages</h3>
@@ -557,16 +557,16 @@ function expertDetail(id){
   <h3 style="margin-top:22px">Reviews <span class="muted small">(${e.reviews})</span></h3>
   ${['Practical, well-prepared and tailored to our team. Participants used the tools the next week.','Clear communication, on time, and strong follow-up after the program.'].map((r,i)=>`<div class="review"><span class="stars">${stars(e.rating)}</span> <span class="small muted">· ${i?'HR Manager, sample telecom':'Head of L&D, sample bank'} · sample review</span><p style="margin:6px 0 0">${r}</p></div>`).join('')}
  </div>
- <aside class="panel sticky"><div class="eyebrow">Book through Elevra</div>
+ <aside class="panel sticky"><div class="eyebrow">Book through Mentora</div>
   <dl class="kv"><dt>Rating</dt><dd><span class="stars">${stars(e.rating)}</span> ${e.rating.toFixed(1)}</dd><dt>Starting at</dt><dd>${fmt(minPrice(e))}</dd><dt>Formats</dt><dd>${e.f.join(', ')}</dd><dt>Response</dt><dd>Within 48 hours</dd></dl>
   <button class="btn btn-primary" style="width:100%;margin-top:16px" data-act="need" data-arg="${e.id}">Request a proposal</button>
-  <div class="note small">Contracts, invoicing and payment are handled by Elevra. You pay one invoice; Elevra pays the expert.</div>
+  <div class="note small">Contracts, invoicing and payment are handled by Mentora. You pay one invoice; Mentora pays the expert.</div>
  </aside></div>`;}
 
 function speakers(){
  const list=S.speakers.filter(s=>!SPT||s.tier===SPT);
  return `<div class="eyebrow">Speakers bureau</div><h2>Keynote speakers for conferences, town halls and leadership retreats</h2>
- <p class="lead">From national icons to sitting CEOs and MDs. Elevra manages briefing, contracts, travel and on-the-day coordination.</p>
+ <p class="lead">From national icons to sitting CEOs and MDs. Mentora manages briefing, contracts, travel and on-the-day coordination.</p>
  <div class="tiers">
   <div class="tier dark-card" style="padding:18px"><div class="eyebrow">Icon tier</div><h3 style="font-family:Inter;font-size:17px">National &amp; global icons</h3><p style="margin:0;font-size:14px">Laureates, national leaders and internationally recognized thinkers — by invitation, with their consent.</p></div>
   <div class="tier"><div class="eyebrow">Executive tier</div><h3>CEOs, MDs &amp; board leaders</h3><p class="muted small" style="margin:0">Leaders of banks, telcos, FMCG and tech companies sharing lessons from the top.</p></div>
@@ -581,9 +581,9 @@ function speakerDetail(id){
   <div class="who" style="gap:18px"><div class="avatar lg" style="background:${s.tier==='Icon'?'#B57A12':s.tier==='Executive'?'#14213D':'#0F7C7E'}">${s.tier==='Icon'?'★':ini(s.n)}</div><div><h1 style="font-size:clamp(28px,4vw,40px);margin:0">${esc(s.n)}</h1><div class="muted">${esc(s.role)}</div><div class="tags" style="margin-top:8px"><span class="tag gold">${s.tier} tier</span>${s.real?'':'<span class="sample">Sample profile</span>'}</div></div></div>
   <h3 style="margin-top:22px">Signature talks</h3><ul class="list">${s.topics.map(t=>`<li><b>${esc(t)}</b><div class="small muted">Keynote, 30–45 minutes, with audience Q&amp;A</div></li>`).join('')}</ul>
   <h3 style="margin-top:22px">Formats</h3><div class="tags"><span class="tag">Keynote</span><span class="tag">Panel</span><span class="tag">Fireside chat</span><span class="tag">Leadership retreat</span><span class="tag">Online session</span></div>
-  ${s.tier==='Icon'?'<div class="note gold">Icon-tier speakers are listed only with their written consent. Requests are passed to their office by Elevra.</div>':''}
+  ${s.tier==='Icon'?'<div class="note gold">Icon-tier speakers are listed only with their written consent. Requests are passed to their office by Mentora.</div>':''}
  </div><aside class="panel sticky"><div class="eyebrow">Book this speaker</div>
-  <dl class="kv"><dt>Fee</dt><dd>${s.fee?'From '+fmt(s.fee):'On request'}</dd><dt>Managed by</dt><dd>Elevra speakers bureau</dd><dt>Includes</dt><dd>Briefing, contract, coordination</dd></dl>
+  <dl class="kv"><dt>Fee</dt><dd>${s.fee?'From '+fmt(s.fee):'On request'}</dd><dt>Managed by</dt><dd>Mentora speakers bureau</dd><dt>Includes</dt><dd>Briefing, contract, coordination</dd></dl>
   <button class="btn btn-primary" style="width:100%;margin-top:16px" data-act="speaker" data-arg="${s.id}">Check availability</button></aside></div>`;}
 
 function workshops(){
@@ -608,7 +608,7 @@ function workshopDetail(id){
  </div><aside class="panel sticky"><div class="price" style="text-align:left;font-size:32px">${fmt(w.p)}<small>per seat · sample price</small></div>
   <div class="prog" style="margin-top:14px"><div style="width:${Math.round(w.sold/w.seats*100)}%"></div></div>
   <div class="small muted">${w.sold} of ${w.seats} seats taken${left<10&&left>0?` · <span class="low">${left} left</span>`:''}</div>
-  <ul class="list small" style="margin:12px 0"><li>E-ticket and reminders by email</li><li>${w.f==='Online'?'Live online room link':'Venue details and lunch'}</li><li>Elevra verified certificate</li></ul>
+  <ul class="list small" style="margin:12px 0"><li>E-ticket and reminders by email</li><li>${w.f==='Online'?'Live online room link':'Venue details and lunch'}</li><li>Mentora verified certificate</li></ul>
   <button class="btn btn-gold" style="width:100%" data-act="register" data-arg="${w.id}" ${left<=0?'disabled':''}>${left<=0?'Sold out':'Register now'}</button>
   <p class="small muted" style="margin:10px 0 0">Group of 5+? <button class="lnk" style="background:none;border:0;padding:0;cursor:pointer" data-act="need">Ask for an in-house version</button></p>
  </aside></div>`;}
@@ -633,28 +633,28 @@ function ai(){
  </aside></div>`;}
 
 function certify(r){
- return `<div class="eyebrow">Certification portal</div><h2>Elevra certifications — earned, issued and verifiable</h2>
+ return `<div class="eyebrow">Certification portal</div><h2>Mentora certifications — earned, issued and verifiable</h2>
  <p class="lead">Every certificate carries a unique ID and QR code. Employers can confirm it here in seconds.</p>
  <div class="split" style="margin-top:20px"><div>
   <div class="panel"><h3>Verify a certificate</h3><p class="small muted" style="margin:0">Enter the certificate ID printed below the QR code.</p>
-   <form class="verify" data-form="verify"><input name="id" id="certId" placeholder="e.g. EL-DEMO-2026-0142" aria-label="Certificate ID" autocomplete="off" value="${esc(r||'')}"><button class="btn btn-primary" type="submit">Verify</button></form>
+   <form class="verify" data-form="verify"><input name="id" id="certId" placeholder="e.g. MN-DEMO-2026-0142" aria-label="Certificate ID" autocomplete="off" value="${esc(r||'')}"><button class="btn btn-primary" type="submit">Verify</button></form>
    <div class="err" id="certErr">Enter a certificate ID first.</div><div id="certResult" role="status" aria-live="polite"></div>
-   <p class="small muted" style="margin:12px 0 0">Try <span class="code">EL-DEMO-2026-0142</span> · ${S.certs.length} certificates issued on this demo</p></div>
+   <p class="small muted" style="margin:12px 0 0">Try <span class="code">MN-DEMO-2026-0142</span> · ${S.certs.length} certificates issued on this demo</p></div>
   <h3 style="margin-top:26px">Certification programs</h3>
   <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))">${[['Certified AI-Ready Leader','Leaders','AI for Leaders + assessment'],['Certified Professional Trainer','Trainers','5 days + practicum'],['Certified Workplace Coach','Coaches','40 hrs + mentoring'],['Certified Facilitator','Facilitators','3 days + observed session']].map(c=>`<div class="card"><span class="tag role" style="align-self:flex-start">${c[1]}</span><h3 style="margin:10px 0 4px;font-size:15px">${c[0]}</h3><div class="small muted">${c[2]}</div></div>`).join('')}</div>
- </div><div class="cert" aria-label="Sample certificate design"><div class="t">Certificate of completion</div><div class="small muted" style="margin-top:10px">This certifies that</div><div class="n">Sample Participant</div><div class="small muted">has successfully completed</div><div style="font-weight:600;color:var(--ink);margin-top:6px">AI for Leaders — One-day Intensive</div><div class="qr" aria-hidden="true"></div><div class="code" style="background:none">EL-DEMO-2026-0142</div><div class="small muted" style="margin-top:8px">Elevra · sample design</div></div></div>`;}
+ </div><div class="cert" aria-label="Sample certificate design"><div class="t">Certificate of completion</div><div class="small muted" style="margin-top:10px">This certifies that</div><div class="n">Sample Participant</div><div class="small muted">has successfully completed</div><div style="font-weight:600;color:var(--ink);margin-top:6px">AI for Leaders — One-day Intensive</div><div class="qr" aria-hidden="true"></div><div class="code" style="background:none">MN-DEMO-2026-0142</div><div class="small muted" style="margin-top:8px">Mentora · sample design</div></div></div>`;}
 function verifyResult(id){
  const c=S.certs.find(x=>x.id===id.trim().toUpperCase()),box=$('#certResult');
  box.className='result '+(c?'ok':'bad');
- box.innerHTML=c?`<h3>Valid certificate</h3><dl class="kv"><dt>Holder</dt><dd>${esc(c.name)}</dd><dt>Program</dt><dd>${esc(c.prog)}</dd><dt>Issued</dt><dd>${c.date}</dd><dt>Organization</dt><dd>${esc(c.org||'Open enrolment')}</dd><dt>Issued by</dt><dd>${esc(ex(c.by).n)} via Elevra</dd><dt>Certificate ID</dt><dd>${c.id}</dd></dl>`
-  :`<h3>No certificate found</h3><p style="margin:0;font-size:14px">Check the ID and try again, or contact Elevra to confirm.</p>`;}
+ box.innerHTML=c?`<h3>Valid certificate</h3><dl class="kv"><dt>Holder</dt><dd>${esc(c.name)}</dd><dt>Program</dt><dd>${esc(c.prog)}</dd><dt>Issued</dt><dd>${c.date}</dd><dt>Organization</dt><dd>${esc(c.org||'Open enrolment')}</dd><dt>Issued by</dt><dd>${esc(ex(c.by).n)} via Mentora</dd><dt>Certificate ID</dt><dd>${c.id}</dd></dl>`
+  :`<h3>No certificate found</h3><p style="margin:0;font-size:14px">Check the ID and try again, or contact Mentora to confirm.</p>`;}
 
 function pricing(){
  const P=S.config.plans,O=S.config.orgPlans,C=S.config;
  return `<div class="eyebrow">Pricing</div><h2>Simple, transparent pricing</h2><p class="lead">Experts start free and pay a commission only when they earn. Organizations pay as they go or save with an annual plan.</p>
  <h3 style="margin-top:28px">For experts</h3>
  <div class="plans">${Object.entries(P).map(([n,p])=>`<div class="plan ${n==='Professional'?'pop':''}">${n==='Professional'?'<span class="tag gold" style="align-self:flex-start">Most popular</span>':''}<h3 style="margin-top:6px">${n}</h3><div class="amt">${fmt(p.fee)} <small>/ month</small></div><div class="com">${pct(p.com)} commission on bookings</div>
-   <ul class="list">${({Starter:['Reviewed public profile','Receive proposal requests','Listed in search'],Professional:['Verified badge','Sell your own workshops','Issue Elevra certificates','Priority in search'],Premier:['Featured placement included','Speakers bureau listing','Personal brand website','Dedicated account manager']})[n].map(x=>`<li>${x}</li>`).join('')}</ul>
+   <ul class="list">${({Starter:['Reviewed public profile','Receive proposal requests','Listed in search'],Professional:['Verified badge','Sell your own workshops','Issue Mentora certificates','Priority in search'],Premier:['Featured placement included','Speakers bureau listing','Personal brand website','Dedicated account manager']})[n].map(x=>`<li>${x}</li>`).join('')}</ul>
    <button class="btn ${n==='Professional'?'btn-primary':'btn-ghost'}" data-act="join" data-arg="${n}">${p.fee?'Apply as '+n:'Apply free'}</button></div>`).join('')}</div>
  <h3 style="margin-top:28px">For organizations</h3>
  <div class="plans">${Object.entries(O).map(([n,f])=>`<div class="plan ${n==='L&D Partner'?'pop':''}"><h3>${esc(n)}</h3><div class="amt">${f?fmt(f):'৳0'} <small>${f?'/ year':'/ month'}</small></div><div class="com">${({'Pay as you go':'Standard prices','L&D Partner':'10% off all bookings & seats','Enterprise academy':'Custom pricing from this amount'})[n]}</div>
@@ -668,20 +668,20 @@ function pricing(){
   ['Featured listing boost','Expert',fmt(C.boostFee)+' / 30 days'],
   ['Event & newsletter sponsorship','Sponsor brand','From '+fmt(25000)]
  ].map(r=>`<tr><td><b>${r[0]}</b></td><td class="muted">${r[1]}</td><td class="num">${r[2]}</td></tr>`))}
- <p class="small muted" style="margin-top:10px">All prices are sample figures for discussion with Elevra.</p>`;}
+ <p class="small muted" style="margin-top:10px">All prices are sample figures for discussion with Mentora.</p>`;}
 
 const FEATURES=[
  ['Expert marketplace',[
   ['Expert profiles with packages, ratings and reviews','MVP','Drives bookings'],['Search and filters by role, topic, format, language','MVP',''],
   ['Request a proposal / post a training need','MVP','Lead generation'],['Quotes, compare and accept-and-pay','MVP','10–20% booking commission'],
   ['Expert subscription plans (Starter / Professional / Premier)','MVP','Monthly subscription'],['Featured listing boost','MVP','Fee per 30 days'],
-  ['Verified badge after Elevra review','MVP','Included in paid plans'],['In-platform messaging','Phase 2',''],['AI matching of training needs to experts','Phase 2','Premium for organizations'],['Calendar availability sync','Phase 3','']]],
+  ['Verified badge after Mentora review','MVP','Included in paid plans'],['In-platform messaging','Phase 2',''],['AI matching of training needs to experts','Phase 2','Premium for organizations'],['Calendar availability sync','Phase 3','']]],
  ['Speakers bureau',[
   ['Tiered speaker profiles (Icon, Executive, Expert)','MVP',''],['Availability enquiry form','MVP','Lead generation'],
   ['Admin pipeline: enquiry → quoted → confirmed','MVP','20% agency fee'],['Contracts and e-signature','Phase 2',''],['Speaker video reels','Phase 2','']]],
  ['Paid workshops',[
   ['Online and onsite listings with seat limits','MVP',''],['Registration and checkout (bKash, Nagad, card)','MVP','15% platform fee'],
-  ['E-tickets and email reminders','MVP',''],['Experts create workshops, Elevra approves','MVP','More inventory'],
+  ['E-tickets and email reminders','MVP',''],['Experts create workshops, Mentora approves','MVP','More inventory'],
   ['Early-bird pricing, coupons and waitlists','Phase 2','Higher conversion'],['Recorded workshops on demand','Phase 3','Digital product sales']]],
  ['AI for Leaders',[
   ['Program page with three packages','MVP','Program fees'],['In-house request → confirm → invoice','MVP','Program fees'],
@@ -692,9 +692,9 @@ const FEATURES=[
  ['Organizations',[
   ['Organization account: needs, proposals, bookings','MVP',''],['Spend, invoices and certificates view','MVP',''],
   ['Annual plans (L&D Partner, Enterprise)','MVP','Annual contracts'],['Learning dashboard for HR','Phase 2','Plan upsell'],['Branded academy portal','Phase 3','Enterprise contracts']]],
- ['Elevra admin',[
+ ['Mentora admin',[
   ['Approvals: expert applications and workshops','MVP','Quality control'],['Revenue ledger with automatic fee splits','MVP','All streams'],
-  ['Partner revenue split (Elevra vs tech partner)','MVP','Partnership model'],['Payouts to experts','MVP','Manual → automated in Phase 2'],
+  ['Partner revenue split (Mentora vs tech partner)','MVP','Partnership model'],['Payouts to experts','MVP','Manual → automated in Phase 2'],
   ['Fee and commission settings','MVP',''],['Sponsorship inventory','MVP','Sponsorship sales'],['Advanced analytics','Phase 2','']]],
  ['Platform',[
   ['Mobile-first responsive design, light and dark','MVP',''],['SEO-ready pages','MVP','Organic leads'],['Email and SMS notifications','MVP',''],
@@ -711,14 +711,14 @@ function features(){
   ['Booking commission','Deducted from expert payout',`${pct(C.plans.Premier.com)}–${pct(C.plans.Starter.com)} by plan`,'<a class="lnk" href="#/experts">Request proposal</a> → org dashboard → accept'],
   ['Workshop tickets','Participant (fee inside ticket)',pct(C.workshopFee)+' of ticket','<a class="lnk" href="#/workshops">Register</a>'],
   ['Speaker fees','Organization (agency fee inside fee)',pct(C.speakerFee)+' of fee','<a class="lnk" href="#/speakers">Check availability</a> → admin'],
-  ['AI for Leaders','Organization',`Elevra keeps ${pct(1-C.aiShare)}, facilitator ${pct(C.aiShare)}`,'<a class="lnk" href="#/ai">Request in-house</a> → admin'],
+  ['AI for Leaders','Organization',`Mentora keeps ${pct(1-C.aiShare)}, facilitator ${pct(C.aiShare)}`,'<a class="lnk" href="#/ai">Request in-house</a> → admin'],
   ['Certificates','Issuer',fmt(C.certFee)+' each','Expert dashboard → Certificates'],
   ['Expert subscriptions','Expert',`${fmt(C.plans.Professional.fee)}–${fmt(C.plans.Premier.fee)} / month`,'Expert dashboard → Plan'],
   ['Featured listings','Expert',fmt(C.boostFee)+' / 30 days','Expert dashboard → Plan'],
   ['Organization plans','Organization',`${fmt(C.orgPlans['L&D Partner'])}+ / year`,'<a class="lnk" href="#/pricing">Pricing</a>'],
   ['Sponsorship','Sponsor brand','From '+fmt(25000),'Admin → Sponsorship']
  ].map(r=>`<tr><td><b>${r[0]}</b></td><td class="muted">${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`))}
- <div class="note gold">Platform revenue is split between Elevra and the technology partner (Upward / AZAI Labs) at the rate set in Admin → Settings — currently <b>${pct(1-C.techShare)} Elevra / ${pct(C.techShare)} tech partner</b> (sample, to be agreed in writing).</div>
+ <div class="note gold">Platform revenue is split between Mentora and the technology partner (Upward / AZAI Labs) at the rate set in Admin → Settings — currently <b>${pct(1-C.techShare)} Mentora / ${pct(C.techShare)} tech partner</b> (sample, to be agreed in writing).</div>
  <div class="seg" style="margin-top:28px">${[['','All'],['MVP','MVP'],['Phase 2','Phase 2'],['Phase 3','Phase 3']].map(x=>`<button class="${FMF===x[0]?'on':''}" data-act="fmf" data-arg="${x[0]}">${x[1]}</button>`).join('')}</div>
  ${FEATURES.map(([mod,list])=>{const l=list.filter(f=>!FMF||f[1]===FMF);if(!l.length)return '';return `<div class="fm-mod"><h3>${mod}</h3>${table(['Feature','Phase','Monetization'],l.map(f=>`<tr><td>${esc(f[0])}</td><td><span class="ph ${f[1]==='MVP'?'mvp':f[1]==='Phase 2'?'p2':'p3'}">${f[1]}</span></td><td class="muted">${esc(f[2]||'—')}</td></tr>`))}</div>`;}).join('')}
  <h3 style="margin-top:32px">Recommended build stack</h3>
@@ -732,7 +732,7 @@ function dash(tab){
  if(S.role==='org')return orgDash(tab||'overview');
  if(S.role==='admin')return adminDash(tab||'overview');
  return `<div class="eyebrow">Dashboards</div><h2>Choose who you are</h2><p class="lead">Each role has its own dashboard. Switch any time from “View as” in the header.</p>
- <div class="plans">${[['expert','Expert','Leads, quotes, workshops, certificates, earnings and plan.'],['org','Organization','Post needs, compare proposals, pay, and track spend and certificates.'],['admin','Elevra admin','Approvals, pipelines, payouts, full revenue ledger and fee settings.']].map(r=>`<div class="plan"><h3>${r[1]}</h3><p class="muted">${r[2]}</p><button class="btn btn-primary" data-act="setrole" data-arg="${r[0]}">Open ${r[0]==='admin'?'admin':r[1].toLowerCase()} dashboard</button></div>`).join('')}</div>`;}
+ <div class="plans">${[['expert','Expert','Leads, quotes, workshops, certificates, earnings and plan.'],['org','Organization','Post needs, compare proposals, pay, and track spend and certificates.'],['admin','Mentora admin','Approvals, pipelines, payouts, full revenue ledger and fee settings.']].map(r=>`<div class="plan"><h3>${r[1]}</h3><p class="muted">${r[2]}</p><button class="btn btn-primary" data-act="setrole" data-arg="${r[0]}">Open ${r[0]==='admin'?'admin':r[1].toLowerCase()} dashboard</button></div>`).join('')}</div>`;}
 
 function expertDash(tab){
  const e=ex(S.me),p=planOf(e),E=S.ledger.filter(t=>t.ex===e.id);
@@ -745,7 +745,7 @@ function expertDash(tab){
  let b='';
  if(tab==='overview'){
   b=`<div class="dash-head"><div><div class="eyebrow">Expert dashboard</div><h2>Welcome, ${esc(e.n.split(' ')[0])}</h2></div><a class="btn btn-ghost btn-sm" href="#/expert/${e.id}">View public profile</a></div>
-  <div class="stats">${kpi(fmt(earned),'total earnings (after fees)',true)}${kpi(fmt(bal),'balance due from Elevra')}${kpi(leads.length,'open leads for you')}${kpi(myC.length,'certificates issued')}</div>
+  <div class="stats">${kpi(fmt(earned),'total earnings (after fees)',true)}${kpi(fmt(bal),'balance due from Mentora')}${kpi(leads.length,'open leads for you')}${kpi(myC.length,'certificates issued')}</div>
   <div class="g2" style="margin-top:16px"><div class="panel"><h4>Your plan</h4><p style="margin:0"><b style="color:var(--ink)">${e.plan}</b> · ${pct(p.com)} commission on bookings${e.featured?' · <span class="tag gold">Featured</span>':''}</p><div class="btns"><a class="btn btn-primary btn-sm" href="#/dash/plan">${e.plan==='Premier'?'Manage plan':'Upgrade to cut commission'}</a></div></div>
   <div class="panel"><h4>Next steps</h4><ul class="list small"><li><a class="lnk" href="#/dash/leads">Reply to open leads</a></li><li><a class="lnk" href="#/dash/workshops">Publish a workshop</a></li><li><a class="lnk" href="#/dash/certificates">Issue certificates to participants</a></li></ul></div></div>
   <h3 style="margin-top:24px">Recent activity</h3>${ledgerTable(E.slice(0,5),'expert')}`;
@@ -767,7 +767,7 @@ function expertDash(tab){
  }
  if(tab==='earnings'){
   b=`<div class="dash-head"><div><div class="eyebrow">Earnings</div><h2>What you've earned</h2></div></div>
-  <div class="stats">${kpi(fmt(sum(E,t=>t.gross)),'gross value of your work')}${kpi(fmt(sum(E,t=>t.platform)),'Elevra fees and plan costs')}${kpi(fmt(earned),'your earnings',true)}${kpi(fmt(bal),'balance due')}</div>
+  <div class="stats">${kpi(fmt(sum(E,t=>t.gross)),'gross value of your work')}${kpi(fmt(sum(E,t=>t.platform)),'Mentora fees and plan costs')}${kpi(fmt(earned),'your earnings',true)}${kpi(fmt(bal),'balance due')}</div>
   <h3 style="margin-top:22px">Transactions</h3>${ledgerTable(E,'expert')}
   <h3 style="margin-top:22px">Payouts received</h3>${table(['Date','#Amount'],S.payouts.filter(x=>x.ex===e.id).map(x=>`<tr><td>${x.date}</td><td class="num">${fmt(x.amt)}</td></tr>`))}`;
  }
@@ -789,7 +789,7 @@ function orgDash(tab){
  let b='';
  if(tab==='overview'){
   b=`<div class="dash-head"><div><div class="eyebrow">Organization dashboard</div><h2>${esc(o.name)}</h2></div><button class="btn btn-primary btn-sm" data-act="need">Post a training need</button></div>
-  <div class="stats">${kpi(fmt(sum(T,t=>t.gross)),'total spend through Elevra',true)}${kpi(B.length,'bookings')}${kpi(props,'proposals waiting')}${kpi(C.length,'employees certified')}</div>
+  <div class="stats">${kpi(fmt(sum(T,t=>t.gross)),'total spend through Mentora',true)}${kpi(B.length,'bookings')}${kpi(props,'proposals waiting')}${kpi(C.length,'employees certified')}</div>
   ${props?`<div class="note gold" style="margin-top:16px">You have ${props} proposal${props>1?'s':''} to review. <a class="lnk" href="#/dash/needs">Compare proposals →</a></div>`:''}
   <h3 style="margin-top:22px">Invoices</h3>${table(['Date','Item','#Amount','Status'],T.map(t=>`<tr><td>${t.date}</td><td>${esc(t.desc)}</td><td class="num">${fmt(t.gross)}</td><td>${status('Paid')}</td></tr>`))}`;
  }
@@ -822,15 +822,15 @@ function adminDash(tab){
   const months={};Lg.forEach(t=>{const k=t.date.slice(0,7);months[k]=(months[k]||0)+t.platform;});
   const mk=Object.keys(months).sort().slice(-6),mm=Math.max(1,...mk.map(k=>months[k]));
   const tech=plat*C.techShare,qz=plat-tech;
-  b=`<div class="dash-head"><div><div class="eyebrow">Elevra admin</div><h2>Revenue overview</h2></div><span class="small muted">All streams · sample data + your demo actions</span></div>
+  b=`<div class="dash-head"><div><div class="eyebrow">Mentora admin</div><h2>Revenue overview</h2></div><span class="small muted">All streams · sample data + your demo actions</span></div>
   <div class="stats">${kpi(fmt(sum(Lg,t=>t.gross)),'gross transaction value')}${kpi(fmt(plat),'platform revenue',true)}${kpi(fmt(sum(Lg,t=>t.payout)),'paid out to experts & speakers')}${kpi(Lg.length,'transactions')}</div>
   <div class="g2" style="margin-top:16px">
    <div class="panel"><h4>Platform revenue by stream</h4><div class="bars">${by.map(([s,v])=>`<div class="bar-row"><span class="lab" title="${s}">${s}</span><span class="trk"><span class="fill" style="display:block;width:${Math.max(2,v/mx*100)}%"></span></span><span class="val">${fmt(v)}</span></div>`).join('')}</div></div>
    <div class="panel"><h4>Platform revenue by month</h4><div class="cols">${mk.map(k=>`<div class="col"><span class="v">${Math.round(months[k]/1000)}k</span><span class="b" style="height:${Math.max(3,months[k]/mm*100)}%"></span></div>`).join('')}</div><div class="col-labs">${mk.map(k=>`<span>${MON[+k.slice(5)-1]}</span>`).join('')}</div></div>
   </div>
   <div class="panel" style="margin-top:16px"><h4>Partner revenue split (sample terms)</h4>
-   <div class="splitbar" role="img" aria-label="Elevra ${pct(1-C.techShare)}, tech partner ${pct(C.techShare)}"><div style="width:${(1-C.techShare)*100}%;background:var(--bar)"></div><div style="width:${C.techShare*100}%;background:#C98A1E"></div></div>
-   <div class="legend"><span><i style="background:var(--bar)"></i>Elevra · ${pct(1-C.techShare)} · <b style="color:var(--ink)">${fmt(qz)}</b></span><span><i style="background:#C98A1E"></i>Tech partner (Upward / AZAI Labs) · ${pct(C.techShare)} · <b style="color:var(--ink)">${fmt(tech)}</b></span></div>
+   <div class="splitbar" role="img" aria-label="Mentora ${pct(1-C.techShare)}, tech partner ${pct(C.techShare)}"><div style="width:${(1-C.techShare)*100}%;background:var(--bar)"></div><div style="width:${C.techShare*100}%;background:#C98A1E"></div></div>
+   <div class="legend"><span><i style="background:var(--bar)"></i>Mentora · ${pct(1-C.techShare)} · <b style="color:var(--ink)">${fmt(qz)}</b></span><span><i style="background:#C98A1E"></i>Tech partner (Upward / AZAI Labs) · ${pct(C.techShare)} · <b style="color:var(--ink)">${fmt(tech)}</b></span></div>
    <p class="small muted" style="margin:10px 0 0">Under the hybrid partnership option. Change the rate in <a class="lnk" href="#/dash/settings">Fees &amp; split</a>.</p></div>
   <div class="g2" style="margin-top:16px"><div class="panel"><h4>Needs attention</h4><ul class="list small"><li><a class="lnk" href="#/dash/approvals">${pendApps.length} expert application(s), ${pendWs.length} workshop(s) to review</a></li><li><a class="lnk" href="#/dash/speakers">${openSp.length} open speaker request(s)</a></li><li><a class="lnk" href="#/dash/programs">${openPr.length} AI for Leaders request(s)</a></li></ul></div>
   <div class="panel"><h4>Marketplace</h4><dl class="kv"><dt>Experts listed</dt><dd>${S.experts.length}</dd><dt>Open needs</dt><dd>${S.needs.filter(n=>n.status==='Open').length}</dd><dt>Live workshops</dt><dd>${S.workshops.filter(w=>w.status==='Published').length}</dd><dt>Certificates</dt><dd>${S.certs.length}</dd></dl></div></div>`;
@@ -839,7 +839,7 @@ function adminDash(tab){
   <h3>Expert applications</h3>${table(['Name','Role','Topics','Plan','Status','Action'],S.apps.map(a=>`<tr><td>${esc(a.n)}<div class="small muted">${esc(a.email)}</div></td><td>${esc(a.r)}</td><td class="small">${esc(a.topics)}</td><td>${esc(a.plan)}</td><td>${status(a.status)}</td><td>${a.status==='Pending'?`<div style="display:flex;gap:6px"><button class="btn btn-ok btn-sm" data-act="appok" data-arg="${a.id}">Approve</button><button class="btn btn-ghost btn-sm" data-act="appno" data-arg="${a.id}">Reject</button></div>`:''}</td></tr>`))}
   <h3 style="margin-top:22px">Workshops submitted by experts</h3>${table(['Workshop','Expert','Date','#Price','Status','Action'],S.workshops.filter(w=>w.status!=='Published'||w.id.startsWith('w')&&+w.id.slice(1)>6).map(w=>`<tr><td>${esc(w.t)}</td><td>${esc(ex(w.ex).n)}</td><td>${w.date}</td><td class="num">${fmt(w.p)}</td><td>${status(w.status)}</td><td>${w.status==='Pending review'?`<button class="btn btn-ok btn-sm" data-act="wsok" data-arg="${w.id}">Approve &amp; publish</button>`:''}</td></tr>`))}`;
  if(tab==='speakers') b=`<div class="dash-head"><div><div class="eyebrow">Speakers bureau</div><h2>Speaker pipeline</h2></div><span class="small muted">Agency fee ${pct(C.speakerFee)}</span></div>
-  ${table(['Organization','Speaker','Event','Date','#Fee','Stage','Action'],S.sreqs.map(r=>`<tr><td>${esc(r.org)}</td><td>${esc(sp(r.sp).n)}</td><td>${esc(r.event)}<div class="small muted">${r.aud} people</div></td><td>${r.date}</td><td class="num">${r.quote?fmt(r.quote):'—'}${r.quote?`<div class="small muted">Elevra ${fmt(r.quote*C.speakerFee)}</div>`:''}</td><td>${status(r.stage)}</td><td>${r.stage==='Enquiry'?`<button class="btn btn-primary btn-sm" data-act="spquote" data-arg="${r.id}">Send quote</button>`:r.stage==='Quoted'?`<button class="btn btn-ok btn-sm" data-act="spconfirm" data-arg="${r.id}">Confirm &amp; invoice</button>`:''}</td></tr>`))}`;
+  ${table(['Organization','Speaker','Event','Date','#Fee','Stage','Action'],S.sreqs.map(r=>`<tr><td>${esc(r.org)}</td><td>${esc(sp(r.sp).n)}</td><td>${esc(r.event)}<div class="small muted">${r.aud} people</div></td><td>${r.date}</td><td class="num">${r.quote?fmt(r.quote):'—'}${r.quote?`<div class="small muted">Mentora ${fmt(r.quote*C.speakerFee)}</div>`:''}</td><td>${status(r.stage)}</td><td>${r.stage==='Enquiry'?`<button class="btn btn-primary btn-sm" data-act="spquote" data-arg="${r.id}">Send quote</button>`:r.stage==='Quoted'?`<button class="btn btn-ok btn-sm" data-act="spconfirm" data-arg="${r.id}">Confirm &amp; invoice</button>`:''}</td></tr>`))}`;
  if(tab==='programs') b=`<div class="dash-head"><div><div class="eyebrow">Flagship</div><h2>AI for Leaders requests</h2></div><span class="small muted">Facilitator share ${pct(C.aiShare)}</span></div>
   ${table(['Organization','Package','Leaders','#Price','Stage','Action'],S.preqs.map(r=>{const p=S.ai[r.pkg];return `<tr><td>${esc(r.org)}</td><td>${esc(p.n)}</td><td>${r.leaders}</td><td class="num">${fmt(p.p)}</td><td>${status(r.stage)}</td><td>${r.stage!=='Confirmed'?`<button class="btn btn-ok btn-sm" data-act="prconfirm" data-arg="${r.id}">Confirm &amp; invoice</button>`:''}</td></tr>`;}))}`;
  if(tab==='sponsorship') b=`<div class="dash-head"><div><div class="eyebrow">Sponsorship</div><h2>Sponsorship inventory</h2></div></div>
@@ -855,12 +855,12 @@ function adminDash(tab){
   b=`<div class="dash-head"><div><div class="eyebrow">Settings</div><h2>Fees, commissions &amp; partner split</h2></div></div>
   <div class="panel"><h4>Expert plans</h4><div class="settings">${Object.entries(C.plans).map(([n,p])=>f('fee_'+n,n+' fee (৳/month)',p.fee,'Monthly subscription')+f('com_'+n,n+' commission (%)',Math.round(p.com*1000)/10,'On bookings')).join('')}</div>
   <h4 style="margin-top:18px">Other fees</h4><div class="settings">${f('workshopFee','Workshop platform fee (%)',C.workshopFee*100,'Of each ticket')}${f('speakerFee','Speaker agency fee (%)',C.speakerFee*100,'Of speaker fee')}${f('certFee','Certificate fee (৳)',C.certFee,'Per certificate')}${f('boostFee','Featured boost (৳)',C.boostFee,'Per 30 days')}${f('aiShare','AI for Leaders facilitator share (%)',C.aiShare*100,'Rest stays with platform')}</div>
-  <h4 style="margin-top:18px">Partner split</h4><div class="settings">${f('techShare','Tech partner share of platform revenue (%)',C.techShare*100,'Upward / AZAI Labs · rest to Elevra')}</div>
+  <h4 style="margin-top:18px">Partner split</h4><div class="settings">${f('techShare','Tech partner share of platform revenue (%)',C.techShare*100,'Upward / AZAI Labs · rest to Mentora')}</div>
   <div class="err" id="setErr">Percentages must be between 0 and 100.</div>
   <div class="btns"><button class="btn btn-primary" data-act="saveset">Save settings</button><button class="btn btn-ghost" data-act="reset">Reset all demo data</button></div>
   <p class="small muted" style="margin:10px 0 0">New rates apply to new transactions. Past ledger entries keep the rate charged at the time.</p></div>`;
  }
- return dashShell(tabs,tab,b,`<b style="color:var(--ink);font-size:14px">Elevra</b><div class="small muted">Admin</div>`);
+ return dashShell(tabs,tab,b,`<b style="color:var(--ink);font-size:14px">Mentora</b><div class="small muted">Admin</div>`);
 }
 
 /* ---------- modal forms ---------- */
@@ -911,15 +911,15 @@ const ACT={
  spt(t){SPT=t;render(true);}, wsf(t){WSF=t;render(true);}, fmf(t){FMF=t;render(true);},
  need(arg){
   const [eid,pi]=(arg||'').split('|');const e=eid?ex(eid):null;const p=e&&pi!==undefined?pk(e)[+pi]:null;
-  openForm({title:e?`Request a proposal from ${e.n}`:'Post a training need',sub:e?'Goes directly to this expert. Elevra coordinates the contract and payment.':'Matched experts send proposals, usually within 48 hours.',
+  openForm({title:e?`Request a proposal from ${e.n}`:'Post a training need',sub:e?'Goes directly to this expert. Mentora coordinates the contract and payment.':'Matched experts send proposals, usually within 48 hours.',
    fields:[{k:'org',label:'Organization',val:S.role==='org'?S.org.name:''},{k:'email',label:'Work email',type:'email'},{k:'title',label:'What do you need?',val:p?p[0]:''},{k:'detail',label:'Details',type:'textarea',opt:true},{k:'people',label:'Participants',type:'number',val:20},{k:'budget',label:'Budget (৳)',type:'number',min:1000,val:p?p[1]:''},{k:'format',label:'Format',type:'select',opts:['Onsite','Online','Either']}],
    btn:e?'Send request':'Post need',
    submit(v){const n={id:nid('n'),org:v.org,title:v.title,detail:v.detail||'—',people:+v.people,budget:+v.budget,format:v.format,status:'Open',target:e?e.id:null,date:today()};S.needs.unshift(n);
     return {title:'Request sent',msg:`${e?esc(e.n)+' has':'Matched experts have'} been notified. Proposals appear in the organization dashboard.${S.role!=='org'?' Switch “View as” to Organization (or Expert) to follow it.':''}`,link:S.role==='org'?['Open my needs','#/dash/needs']:null};}});
  },
- speaker(id){const s=sp(id);openForm({title:`Check availability: ${s.n}`,sub:'Elevra confirms availability, fee and logistics with the speaker.',
+ speaker(id){const s=sp(id);openForm({title:`Check availability: ${s.n}`,sub:'Mentora confirms availability, fee and logistics with the speaker.',
    fields:[{k:'org',label:'Organization',val:S.role==='org'?S.org.name:''},{k:'email',label:'Work email',type:'email'},{k:'event',label:'Event type',type:'select',opts:['Conference keynote','Leadership retreat','Town hall','Panel discussion','Online session']},{k:'aud',label:'Audience size',type:'number',val:100},{k:'date',label:'Event date',type:'date'}],btn:'Send enquiry',
-   submit(v){S.sreqs.unshift({id:nid('r'),sp:id,org:v.org,event:v.event,aud:+v.aud,date:v.date,stage:'Enquiry',quote:0});return {title:'Enquiry received',msg:'Elevra will confirm availability and fee. In this demo it appears in Admin → Speaker pipeline.'};}});},
+   submit(v){S.sreqs.unshift({id:nid('r'),sp:id,org:v.org,event:v.event,aud:+v.aud,date:v.date,stage:'Enquiry',quote:0});return {title:'Enquiry received',msg:'Mentora will confirm availability and fee. In this demo it appears in Admin → Speaker pipeline.'};}});},
  register(id){const w=ws(id),left=w.seats-w.sold,e=ex(w.ex);
   openForm({title:`Register: ${w.t}`,sub:`${fmt(w.p)} per seat · ${left} seats left`,
    fields:[{k:'name',label:'Full name'},{k:'email',label:'Email',type:'email'},{k:'phone',label:'Mobile number',type:'tel'},{k:'org',label:'Organization',opt:true,val:S.role==='org'?S.org.name:''},{k:'seats',label:'Seats',type:'number',val:1,max:left}],
@@ -927,11 +927,11 @@ const ACT={
    pay:true,btn:'Pay (demo)',
    submit(v){const n=+v.seats;if(n>w.seats-w.sold)return false;const g=n*w.p;w.sold+=n;const tk=nid('TK-');S.tickets.unshift({id:tk,ws:id,name:v.name,seats:n,amt:g});
     rec('Workshop tickets',`${w.t.split(' —')[0]} — ${n} seat${n>1?'s':''}`,g,g*(1-S.config.workshopFee),e.id,v.org||null);
-    return {title:'Seat reserved',msg:`E-ticket <span class="code">${tk}</span> · paid ${fmt(g)} by ${v.pm}. Elevra keeps ${pct(S.config.workshopFee)} (${fmt(g*S.config.workshopFee)}); ${esc(e.n)} receives ${fmt(g*(1-S.config.workshopFee))}.`};}});},
+    return {title:'Seat reserved',msg:`E-ticket <span class="code">${tk}</span> · paid ${fmt(g)} by ${v.pm}. Mentora keeps ${pct(S.config.workshopFee)} (${fmt(g*S.config.workshopFee)}); ${esc(e.n)} receives ${fmt(g*(1-S.config.workshopFee))}.`};}});},
  aireq(i){const p=S.ai[+i];openForm({title:`Request AI for Leaders — ${p.n}`,sub:`${fmt(p.p)} · ${p.d}`,
    fields:[{k:'org',label:'Organization',val:S.role==='org'?S.org.name:''},{k:'email',label:'Work email',type:'email'},{k:'pkg',label:'Package',type:'select',opts:S.ai.filter(x=>!x.ws).map(x=>x.n),val:p.n},{k:'leaders',label:'Number of leaders',type:'number',val:20}],btn:'Send request',
-   submit(v){S.preqs.unshift({id:nid('p'),org:v.org,pkg:S.ai.findIndex(x=>x.n===v.pkg),leaders:+v.leaders,stage:'Requested',date:today()});return {title:'Request received',msg:'Elevra will confirm dates and send an invoice. In this demo, confirm it from Admin → AI for Leaders.'};}});},
- join(plan){openForm({title:`Apply as an expert · ${plan}`,sub:'Elevra reviews every application before listing.',
+   submit(v){S.preqs.unshift({id:nid('p'),org:v.org,pkg:S.ai.findIndex(x=>x.n===v.pkg),leaders:+v.leaders,stage:'Requested',date:today()});return {title:'Request received',msg:'Mentora will confirm dates and send an invoice. In this demo, confirm it from Admin → AI for Leaders.'};}});},
+ join(plan){openForm({title:`Apply as an expert · ${plan}`,sub:'Mentora reviews every application before listing.',
    fields:[{k:'n',label:'Full name'},{k:'email',label:'Email',type:'email'},{k:'r',label:'Role',type:'select',opts:['Trainer','Facilitator','Coach','Consultant']},{k:'topics',label:'Main topics',hint:'Separate with commas'},{k:'plan',label:'Plan',type:'select',opts:Object.keys(S.config.plans),val:plan}],btn:'Submit application',
    submit(v){S.apps.unshift({id:nid('a'),n:v.n,email:v.email,r:v.r,topics:v.topics,plan:v.plan,status:'Pending'});return {title:'Application received',msg:'In this demo, approve it from Admin → Approvals and the expert goes live on the marketplace.'};}});},
  orgplan(n){const f=S.config.orgPlans[n];
@@ -941,7 +941,7 @@ const ACT={
    submit(){S.org.plan=n;rec('Organization plans',`${n} annual — ${S.org.name}`,f,0,null,S.org.name);return {title:`Welcome to ${n}`,msg:'Plan active. Discounted prices now show on proposals.'};}});},
  quote(nidv){const n=S.needs.find(x=>x.id===nidv),e=ex(S.me),c=planOf(e).com;
   openForm({title:`Quote: ${n.title}`,sub:`${esc(n.org)} · budget ${fmt(n.budget)}`,fields:[{k:'amt',label:'Your price (৳)',type:'number',min:1000,val:Math.round(n.budget*.95)},{k:'msg',label:'Proposal summary',type:'textarea'}],
-   summary:v=>{const a=+v.amt||0;return `<div class="sumbox"><div><span>Client pays</span><span>${fmt(a)}</span></div><div><span>Elevra commission (${pct(c)}, ${e.plan})</span><span>−${fmt(a*c)}</span></div><div class="tot"><span>You receive</span><span>${fmt(a*(1-c))}</span></div></div>`;},btn:'Send quote',
+   summary:v=>{const a=+v.amt||0;return `<div class="sumbox"><div><span>Client pays</span><span>${fmt(a)}</span></div><div><span>Mentora commission (${pct(c)}, ${e.plan})</span><span>−${fmt(a*c)}</span></div><div class="tot"><span>You receive</span><span>${fmt(a*(1-c))}</span></div></div>`;},btn:'Send quote',
    submit(v){S.quotes.push({id:nid('q'),need:n.id,ex:e.id,amt:+v.amt,msg:v.msg,status:'Sent'});return {title:'Quote sent',msg:`${esc(n.org)} can now compare and accept it. Switch “View as” to Organization to try.`};}});},
  accept(qid){const q=S.quotes.find(x=>x.id===qid),n=S.needs.find(x=>x.id===q.need),e=ex(q.ex),disc=S.org.plan==='Pay as you go'?0:.10,amt=q.amt*(1-disc),c=planOf(e).com;
   openForm({title:`Accept proposal from ${e.n}`,sub:esc(n.title),fields:[{k:'po',label:'Purchase order reference',opt:true}],
@@ -949,14 +949,14 @@ const ACT={
    submit(){q.status='Accepted';S.quotes.filter(x=>x.need===n.id&&x.id!==q.id).forEach(x=>x.status='Declined');n.status='Booked';
     S.bookings.unshift({id:nid('b'),need:n.id,ex:e.id,org:n.org,title:n.title,amt,status:'Confirmed',date:today()});
     rec('Booking commission',`${n.title} — ${n.org}`,amt,amt*(1-c),e.id,n.org);
-    return {title:'Booking confirmed',msg:`Paid ${fmt(amt)}. ${esc(e.n)} receives ${fmt(amt*(1-c))}; Elevra earns ${fmt(amt*c)} (${pct(c)} commission).`,link:['View bookings','#/dash/bookings']};}});},
- newws(){const e=ex(S.me);openForm({title:'Create a workshop',sub:'Elevra reviews new workshops before they go live.',
+    return {title:'Booking confirmed',msg:`Paid ${fmt(amt)}. ${esc(e.n)} receives ${fmt(amt*(1-c))}; Mentora earns ${fmt(amt*c)} (${pct(c)} commission).`,link:['View bookings','#/dash/bookings']};}});},
+ newws(){const e=ex(S.me);openForm({title:'Create a workshop',sub:'Mentora reviews new workshops before they go live.',
    fields:[{k:'t',label:'Workshop title'},{k:'f',label:'Format',type:'select',opts:['Online','Onsite']},{k:'date',label:'Date',type:'date'},{k:'dur',label:'Duration & place',val:'1 day · Dhaka'},{k:'p',label:'Price per seat (৳)',type:'number',min:500,val:5000},{k:'seats',label:'Seats',type:'number',val:25}],
    summary:v=>{const p=+v.p||0;return `<div class="sumbox"><div><span>Per seat</span><span>${fmt(p)}</span></div><div><span>Platform fee (${pct(S.config.workshopFee)})</span><span>−${fmt(p*S.config.workshopFee)}</span></div><div class="tot"><span>You receive per seat</span><span>${fmt(p*(1-S.config.workshopFee))}</span></div></div>`;},btn:'Submit for review',
    submit(v){S.workshops.push({id:nid('w'),t:v.t,ex:e.id,f:v.f,date:v.date,dur:v.dur,p:+v.p,seats:+v.seats,sold:0,status:'Pending review'});return {title:'Submitted for review',msg:'In this demo, approve it from Admin → Approvals and it appears on the Workshops page.'};}});},
  cert(){const e=ex(S.me);openForm({title:'Issue a certificate',sub:`${fmt(S.config.certFee)} per verified certificate`,
    fields:[{k:'name',label:'Participant name'},{k:'prog',label:'Program',type:'select',opts:[...new Set(['AI for Leaders — One-day Intensive','Certified AI-Ready Leader',...S.workshops.filter(w=>w.ex===e.id).map(w=>w.t)])]},{k:'org',label:'Organization',opt:true}],pay:true,btn:`Issue & pay ${fmt(S.config.certFee)} (demo)`,
-   submit(v){const id='EL-DEMO-2026-'+String(S.seq+1).padStart(4,'0');S.seq++;S.certs.unshift({id,name:v.name,prog:v.prog,org:v.org||null,by:e.id,date:today()});rec('Certificates',`Certificate ${id} — ${v.name}`,S.config.certFee,0,e.id);
+   submit(v){const id='MN-DEMO-2026-'+String(S.seq+1).padStart(4,'0');S.seq++;S.certs.unshift({id,name:v.name,prog:v.prog,org:v.org||null,by:e.id,date:today()});rec('Certificates',`Certificate ${id} — ${v.name}`,S.config.certFee,0,e.id);
     return {title:'Certificate issued',msg:`ID <span class="code">${id}</span> is now publicly verifiable.`,link:['Verify it now','#/certify/'+id]};}});},
  upgrade(n){const e=ex(S.me),p=S.config.plans[n];
   if(!p.fee){e.plan=n;e.verified=false;save();render(true);toast('Switched to '+n);return;}
@@ -965,15 +965,15 @@ const ACT={
  boost(){const e=ex(S.me);openForm({title:'Boost your profile',sub:'Featured placement for 30 days',fields:[],pay:true,btn:`Pay ${fmt(S.config.boostFee)} (demo)`,
    submit(){e.featured=true;rec('Featured listings',`30-day boost — ${e.n}`,S.config.boostFee,0,e.id);return {title:'Boost active',msg:'Your profile now appears first in search and on the home page.',link:['See it in search','#/experts']};}});},
  appok(id){const a=S.apps.find(x=>x.id===id);a.status='Approved';const p=S.config.plans[a.plan];
-  S.experts.push({id:nid('e'),n:a.n,r:a.r,t:a.topics.split(',').map(s=>s.trim()).filter(Boolean).slice(0,3),f:['Online','Onsite'],l:['Bangla','English'],y:5,city:'Dhaka',plan:a.plan,featured:a.plan==='Premier',verified:a.plan!=='Starter',rating:5.0,reviews:0,bio:`${a.n} is a ${a.r.toLowerCase()} newly approved by Elevra.`});
+  S.experts.push({id:nid('e'),n:a.n,r:a.r,t:a.topics.split(',').map(s=>s.trim()).filter(Boolean).slice(0,3),f:['Online','Onsite'],l:['Bangla','English'],y:5,city:'Dhaka',plan:a.plan,featured:a.plan==='Premier',verified:a.plan!=='Starter',rating:5.0,reviews:0,bio:`${a.n} is a ${a.r.toLowerCase()} newly approved by Mentora.`});
   if(p.fee)rec('Expert subscriptions',`${a.plan} plan — ${a.n}`,p.fee,0,S.experts[S.experts.length-1].id);
   save();render(true);toast(`${a.n} approved and listed`);},
  appno(id){S.apps.find(x=>x.id===id).status='Rejected';save();render(true);},
  wsok(id){ws(id).status='Published';save();render(true);toast('Workshop published');},
  spquote(id){const r=S.sreqs.find(x=>x.id===id),s=sp(r.sp);openForm({title:`Quote: ${s.n}`,sub:`${esc(r.org)} · ${esc(r.event)}`,fields:[{k:'q',label:'Speaker fee to client (৳)',type:'number',min:1000,val:s.fee||300000}],
-   summary:v=>{const a=+v.q||0;return `<div class="sumbox"><div><span>Client pays</span><span>${fmt(a)}</span></div><div><span>Elevra agency fee (${pct(S.config.speakerFee)})</span><span>${fmt(a*S.config.speakerFee)}</span></div><div class="tot"><span>Speaker receives</span><span>${fmt(a*(1-S.config.speakerFee))}</span></div></div>`;},btn:'Send quote',
+   summary:v=>{const a=+v.q||0;return `<div class="sumbox"><div><span>Client pays</span><span>${fmt(a)}</span></div><div><span>Mentora agency fee (${pct(S.config.speakerFee)})</span><span>${fmt(a*S.config.speakerFee)}</span></div><div class="tot"><span>Speaker receives</span><span>${fmt(a*(1-S.config.speakerFee))}</span></div></div>`;},btn:'Send quote',
    submit(v){r.quote=+v.q;r.stage='Quoted';return {title:'Quote sent',msg:'Confirm it once the client signs.'};}});},
- spconfirm(id){const r=S.sreqs.find(x=>x.id===id),s=sp(r.sp);r.stage='Confirmed';rec('Speaker fees',`${r.event} — ${s.n} — ${r.org}`,r.quote,r.quote*(1-S.config.speakerFee),null,r.org);save();render(true);toast(`Confirmed · Elevra earns ${fmt(r.quote*S.config.speakerFee)}`);},
+ spconfirm(id){const r=S.sreqs.find(x=>x.id===id),s=sp(r.sp);r.stage='Confirmed';rec('Speaker fees',`${r.event} — ${s.n} — ${r.org}`,r.quote,r.quote*(1-S.config.speakerFee),null,r.org);save();render(true);toast(`Confirmed · Mentora earns ${fmt(r.quote*S.config.speakerFee)}`);},
  prconfirm(id){const r=S.preqs.find(x=>x.id===id),p=S.ai[r.pkg];r.stage='Confirmed';rec('AI for Leaders',`${p.n} — ${r.org}`,p.p,p.p*S.config.aiShare,'aa',r.org);save();render(true);toast(`Confirmed · platform keeps ${fmt(p.p*(1-S.config.aiShare))}`);},
  sponsor(i){const s=S.spons[+i];s.sold=true;rec('Sponsorship',s.n,s.p,0);save();render(true);toast('Sponsorship recorded');},
  payout(id){const earned=sum(S.ledger.filter(t=>t.ex===id),t=>t.payout),paid=sum(S.payouts.filter(x=>x.ex===id),x=>x.amt);S.payouts.push({ex:id,amt:earned-paid,date:today()});save();render(true);toast(`Paid ${fmt(earned-paid)} to ${ex(id).n}`);},
@@ -981,8 +981,8 @@ const ACT={
   const nc={...C,plans:{}};Object.keys(C.plans).forEach(n=>{nc.plans[n]={fee:Math.max(0,g('fee_'+n)||0),com:P('com_'+n)};});
   nc.workshopFee=P('workshopFee');nc.speakerFee=P('speakerFee');nc.aiShare=P('aiShare');nc.techShare=P('techShare');nc.certFee=Math.max(0,g('certFee')||0);nc.boostFee=Math.max(0,g('boostFee')||0);
   $('#setErr').style.display=bad?'block':'none';if(bad)return;S.config=nc;save();toast('Settings saved');render(true);},
- csv(){const rows=[['Date','Stream','Description','Gross','Expert payout','Platform revenue','Elevra share','Tech partner share']].concat(S.ledger.map(t=>[t.date,t.type,t.desc,t.gross,Math.round(t.payout),Math.round(t.platform),Math.round(t.platform*(1-S.config.techShare)),Math.round(t.platform*S.config.techShare)]));
-  const csv=rows.map(r=>r.map(x=>`"${String(x).replace(/"/g,'""')}"`).join(',')).join('\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='elevra-ledger.csv';document.body.appendChild(a);a.click();a.remove();}
+ csv(){const rows=[['Date','Stream','Description','Gross','Expert payout','Platform revenue','Mentora share','Tech partner share']].concat(S.ledger.map(t=>[t.date,t.type,t.desc,t.gross,Math.round(t.payout),Math.round(t.platform),Math.round(t.platform*(1-S.config.techShare)),Math.round(t.platform*S.config.techShare)]));
+  const csv=rows.map(r=>r.map(x=>`"${String(x).replace(/"/g,'""')}"`).join(',')).join('\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='mentora-ledger.csv';document.body.appendChild(a);a.click();a.remove();}
 };
 
 /* ---------- router ---------- */
